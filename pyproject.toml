@@ -1,0 +1,54 @@
+[tool.poetry]
+name = "japanese-lm-fin-harness"
+version = "0.1.0"
+description = ""
+authors = ["Masanori HIRANO <masa.hirano.1996@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "japanese_lm_fin_harness"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.9.1"
+isort = "^5.12.0"
+mypy = "^1.5.1"
+flake8 = "^6.1.0"
+pyproject-flake8 = "^6.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = 'black'
+force_single_line = true
+skip = [
+    ".git",
+    "__pycache__",
+    "docs",
+    "build",
+    "dist",
+    "examples",
+    ".venv",
+    "tests/examples"
+]
+[tool.mypy]
+disallow_untyped_defs = true
+ignore_missing_imports = true
+[tool.flake8]
+ignore = "E203,E231,E501,W503"
+max-line-length = 88
+exclude = [
+    ".git",
+    "__pycache__",
+    "docs",
+    "build",
+    "dist",
+    "examples",
+    ".venv",
+    "__init__.py"
+    ]
+select = "B,B950,C,E,F,W"
