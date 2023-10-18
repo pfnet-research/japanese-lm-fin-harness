@@ -9,6 +9,7 @@ packages = [{include = "japanese_lm_fin_harness"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+lm-eval = "^0.3.0"
 
 
 [tool.poetry.group.dev.dependencies]
