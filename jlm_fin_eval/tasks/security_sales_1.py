@@ -6,13 +6,15 @@ from lm_eval.base import mean
 from lm_eval.base import rf
 from sklearn.metrics import accuracy_score
 
-import jlm_fin_eval.datasets.cma_basics.cma_basics
+import jlm_fin_eval.datasets.security_sales_1.security_sales_1
 
 
-class CmaBasics(MultipleChoiceTask):
+class SecuritySales1(MultipleChoiceTask):
     VERSION = 1
-    DATASET_PATH = inspect.getfile(jlm_fin_eval.datasets.cma_basics.cma_basics)
-    DATASET_NAME = "cma_basics"
+    DATASET_PATH = inspect.getfile(
+        jlm_fin_eval.datasets.security_sales_1.security_sales_1
+    )
+    DATASET_NAME = "security_sales_1"
 
     def has_training_docs(self):
         return False

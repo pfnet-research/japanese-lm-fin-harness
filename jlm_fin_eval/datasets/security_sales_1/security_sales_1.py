@@ -1,4 +1,5 @@
 import json
+
 import datasets
 
 _DESCRIPTION = "TBD"
@@ -7,15 +8,15 @@ _LICENSE = "TBD"
 _HOMEPAGE = "TBD"
 
 
-class CmaBasics(datasets.GeneratorBasedBuilder):
-    """CMA Basics dataset."""
+class SecuritySales1(datasets.GeneratorBasedBuilder):
+    """SecuritySales1 dataset."""
 
     VERSION = datasets.Version("0.0.1")
     BUILDER_CONFIGS = [
         datasets.BuilderConfig(
-            name="cma_basics",
+            name="security_sales_1",
             version=VERSION,
-            description="The CMA basics dataset.",
+            description="The SecuritySales1 dataset.",
         ),
     ]
 
@@ -78,4 +79,4 @@ class CmaBasics(datasets.GeneratorBasedBuilder):
 
 
 if __name__ == "__main__":
-    CmaBasics().download_and_prepare()
+    SecuritySales1().download_and_prepare()

@@ -5,11 +5,20 @@ description = ""
 authors = ["Masanori HIRANO <masa.hirano.1996@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "japanese_lm_fin_harness"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-lm-eval = "^0.3.0"
+lm-eval = {git = "https://github.com/Stability-AI/lm-evaluation-harness", rev = "jp-stable"}
+emoji = "^2.8.0"
+fugashi = "1.2.1"
+neologdn = ">=0.5.2"
+unidic-lite = "1.0.8"
+torch = "2.1.0"
+accelerate = "^0.24.0"
+bitsandbytes = "^0.41.1"
+sentencepiece = "^0.1.99"
+einops = "^0.7.0"
+protobuf = "^4.24.4"
 
 
 [tool.poetry.group.dev.dependencies]
