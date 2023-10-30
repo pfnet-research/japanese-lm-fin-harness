@@ -62,15 +62,16 @@ class Chabsa(MultipleChoiceTask):
         return lls
 
     def process_results(self, doc, results):
-        gold = doc["answer"]
+        gold = doc["polarity"]
+        pred = ["positive", "negative"][np.array(results).argmax()]
 
         out = {
             "acc": (
-                results,
+                pred,
                 gold,
             ),
             "f1": (
-                results,
+                pred,
                 gold,
             ),
         }
@@ -81,7 +82,7 @@ class Chabsa(MultipleChoiceTask):
 
     def aggregation(self):
         return {
-            "exact_match": partial(self._chabsa_agg, "exact_match"),
+            "acc": partial(self._chabsa_agg, "acc"),
             "f1": partial(self._chabsa_agg, "f1"),
         }
 

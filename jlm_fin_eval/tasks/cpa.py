@@ -33,7 +33,9 @@ class CPA(MultipleChoiceTask):
         return self.dataset["test"]
 
     def doc_to_text(self, doc):
-        doc_text = "以下の問題の答えとして適切な記号の組み合わせを選択肢から選んでアルファベットで答えなさい。\n" + doc["question"] + "\n"
+        doc_text = (
+            "以下の問題の答えとして適切な記号の組み合わせを選択肢から選んでアルファベットで答えなさい。\n" + doc["question"] + "\n"
+        )
         if doc["context"] and doc["context"] != "":
             doc_text += doc["context"] + "\n"
         doc_text += "\n【選択肢】\n"
