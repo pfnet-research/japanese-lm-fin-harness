@@ -7,12 +7,14 @@ import lm_eval.base
 
 from . import chabsa
 from . import cma_basics
+from . import cpa
 from . import security_sales_1
 
 TASK_REGISTRY = {
     "cma_basics": cma_basics.CmaBasics,
     "security_sales_1": security_sales_1.SecuritySales1,
     "chabsa": chabsa.Chabsa,
+    "cpa": cpa.CPA,
 }
 
 ALL_TASKS = sorted(list(TASK_REGISTRY))
