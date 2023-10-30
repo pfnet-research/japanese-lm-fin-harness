@@ -1,15 +1,18 @@
+from calendar import c
 from pprint import pprint
 from typing import List
 from typing import Union
 
 import lm_eval.base
 
+from . import chabsa
 from . import cma_basics
 from . import security_sales_1
 
 TASK_REGISTRY = {
     "cma_basics": cma_basics.CmaBasics,
     "security_sales_1": security_sales_1.SecuritySales1,
+    "chabsa": chabsa.Chabsa,
 }
 
 ALL_TASKS = sorted(list(TASK_REGISTRY))
