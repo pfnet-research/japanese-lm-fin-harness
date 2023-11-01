@@ -11,9 +11,9 @@ from . import cpa
 from . import security_sales_1
 
 TASK_REGISTRY = {
-    "cma_basics": cma_basics.CmaBasics,
+    **cma_basics.construct_tasks(),
     "security_sales_1": security_sales_1.SecuritySales1,
-    "chabsa": chabsa.Chabsa,
+    **chabsa.construct_tasks(),
     "cpa": cpa.CPA,
 }
 

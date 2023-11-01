@@ -61,7 +61,7 @@ class SecuritySales1(MultipleChoiceTask):
 
     def construct_requests(self, doc, ctx):
         lls = [
-            rf.loglikelihood(ctx, " {}".format(chr(choice + 65)))[0]
+            rf.loglikelihood(ctx, "{}".format(chr(choice + 65)))[0]
             for choice in doc["choices"]["id"]
         ]
 
