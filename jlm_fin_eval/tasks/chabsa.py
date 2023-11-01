@@ -1,11 +1,9 @@
 import inspect
 import os
 from functools import partial
-from unittest import result
 
 import numpy as np
 from lm_eval.base import MultipleChoiceTask
-from lm_eval.base import mean
 from lm_eval.base import rf
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
@@ -143,8 +141,7 @@ class ChabsaWithAlpacaPrompt(Chabsa):
 class ChabsaWithRinnaInstructionSFT(Chabsa):
     PROMPT_VERSION = 0.4
     DESCRIPTION = (
-        f"ユーザー: センテンスにおける、ターゲットのセンチメントをpositiveかnegativeで答えてください。<NL>"
-        f"システム: 分かりました。<NL>"
+        "ユーザー: センテンスにおける、ターゲットのセンチメントをpositiveかnegativeで答えてください。<NL>システム: 分かりました。<NL>"
     )
     SEP = "<NL>"
     FEWSHOT_SEP = "<NL>"
