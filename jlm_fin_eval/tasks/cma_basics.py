@@ -1,4 +1,5 @@
 import inspect
+import os
 
 import numpy as np
 from lm_eval.base import MultipleChoiceTask
@@ -135,9 +136,7 @@ class CmaBasicsWithAnlpPromptAlphabet(CmaBasics):
 
 class CmaBasicsWithFintanPrompt(CmaBasics):
     PROMPT_VERSION = 0.2
-    DESCRIPTION = (
-        "質問と回答の選択肢を入力として受け取り、選択肢から回答を選択してください。なお、回答は選択肢の番号(例:0)でするものとします。 \n\n"
-    )
+    DESCRIPTION = "質問と回答の選択肢を入力として受け取り、選択肢から回答を選択してください。なお、回答は選択肢の番号(例:0)でするものとします。\n\n"
 
     def doc_to_text(self, doc):
         q_doc_text = doc["question"] + "\n"
@@ -166,7 +165,7 @@ class CmaBasicsWithFintanPrompt(CmaBasics):
 
 class CmaBasicsWithFintanPromptV1(CmaBasicsWithAnlpPrompt):
     PROMPT_VERSION = "0.2.1"
-    DESCRIPTION = "与えられた選択肢の中から、最適な答えを選んでください。 \n\n"
+    DESCRIPTION = "与えられた選択肢の中から、最適な答えを選んでください。\n\n"
 
     def doc_to_text(self, doc):
         q_doc_text = doc["question"] + "\n"
@@ -176,15 +175,72 @@ class CmaBasicsWithFintanPromptV1(CmaBasicsWithAnlpPrompt):
         return f"質問:{q_doc_text}" f"選択肢:{choices}\n" "回答:"
 
 
+class CmaBasicsWithAlpacaPrompt(CmaBasicsWithAnlpPrompt):
+    PROMPT_VERSION = 0.3
+    DESCRIPTION = """以下は、タスクを説明する指示と、文脈のある入力の組み合わせです。要求を適切に満たす応答を書きなさい。
+
+### 指示:
+与えられた選択肢の中から、最適な答えを選んでください。
+
+"""
+
+    def doc_to_text(self, doc):
+        q_doc_text = doc["question"] + "\n"
+        if doc["context"] and doc["context"] != "":
+            q_doc_text += doc["context"] + "\n"
+        choices = "\n".join([f"- {choice}" for choice in doc["choices"]["text"]])
+        input_text = f"{q_doc_text}" + f"出力は以下から選択してください：\n{choices}"
+        return f"### 入力:\n{input_text}\n\n### 応答:\n"
+
+
+class CmaBasicsWithRinnaInstructionSFT(CmaBasicsWithAnlpPrompt):
+    PROMPT_VERSION = 0.4
+    DESCRIPTION = "ユーザー: 与えられた選択肢の中から、最適な答えを選んでください。<NL>システム: 分かりました。<NL>"
+    SEP = "<NL>"
+    FEWSHOT_SEP = "<NL>"
+
+    def doc_to_text(self, doc):
+        q_doc_text = doc["question"]
+        if doc["context"] and doc["context"] != "":
+            q_doc_text += "\n" + doc["context"]
+        choices = self.SEP.join([f"- {choice}" for choice in doc["choices"]["text"]])
+        input_text = f"質問：{q_doc_text}{self.SEP}" + f"選択肢：{self.SEP}{choices}"
+        return f"ユーザー: {input_text}{self.SEP}システム: "
+
+
+class CmaBasicsWithRinnaBilingualInstructionSFT(CmaBasicsWithRinnaInstructionSFT):
+    PROMPT_VERSION = 0.5
+    DESCRIPTION = "ユーザー: 与えられた選択肢の中から、最適な答えを選んでください。\nシステム: 分かりました。\n"
+    SEP = "\n"
+    FEWSHOT_SEP = "\n"
+
+
+class CmaBasicsWithLlama2(CmaBasicsWithAnlpPrompt):
+    PROMPT_VERSION = 0.6
+    DEFAULT_SYSTEM_PROMPT = """You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.\n\nIf a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information."""
+    SYSTEM_PROMPT = os.getenv("SYSTEM_PROMPT", DEFAULT_SYSTEM_PROMPT)
+    DESCRIPTION = f"<s>[INST] <<SYS>>\n{SYSTEM_PROMPT}\n<</SYS>>\n\n"
+    INSTRUCTION = "与えられた選択肢の中から、最適な答えを選んでください。"
+    FEWSHOT_SEP = " </s><s>[INST] "
+
+    def doc_to_text(self, doc):
+        q_doc_text = doc["question"]
+        if doc["context"] and doc["context"] != "":
+            q_doc_text += "\n" + doc["context"]
+        choices = "\n".join([f"- {choice}" for choice in doc["choices"]["text"]])
+        input_text = f"質問：{q_doc_text}" + f"出力は以下から選択してください：\n{choices}"
+        return f"{self.INSTRUCTION}\n\n{input_text} [/INST] "
+
+
 VERSIONS = [
     CmaBasicsWithAnlpPrompt,
     CmaBasicsWithAnlpPromptAlphabet,
     CmaBasicsWithFintanPrompt,
     CmaBasicsWithFintanPromptV1,
-    # CmaBasicsWithAlpacaPrompt,
-    # CmaBasicsWithRinnaInstructionSFT,
-    # CmaBasicsWithRinnaBilingualInstructionSFT,
-    # CmaBasicsWithLlama2,
+    CmaBasicsWithAlpacaPrompt,
+    CmaBasicsWithRinnaInstructionSFT,
+    CmaBasicsWithRinnaBilingualInstructionSFT,
+    CmaBasicsWithLlama2,
 ]
 
 
