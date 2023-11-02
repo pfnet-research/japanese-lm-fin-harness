@@ -14,7 +14,7 @@ class CmaBasics(MultipleChoiceTask):
     VERSION = 1.0
     DATASET_PATH = inspect.getfile(jlm_fin_eval.datasets.cma_basics.cma_basics)
     DATASET_NAME = "cma_basics"
-    DESCRIPTION = "[問題]に対する[答え]を[選択肢]の中から選んでください。\n\n"
+    DESCRIPTION = "以下の問題の適切な答えを選択肢から選んでアルファベットで答えなさい。\n\n"
 
     def has_training_docs(self):
         return False
@@ -35,7 +35,7 @@ class CmaBasics(MultipleChoiceTask):
         return self.dataset["test"]
 
     def doc_to_text(self, doc):
-        doc_text = doc["question"] + "\n"
+        doc_text = "【問題】\n" + doc["question"] + "\n"
         if doc["context"] and doc["context"] != "":
             doc_text += doc["context"] + "\n"
         doc_text += "\n【選択肢】\n"
@@ -131,7 +131,7 @@ class CmaBasicsWithAnlpPromptAlphabet(CmaBasics):
         choice_doc_text = []
         for choice_id, choice_text in zip(doc["choices"]["id"], doc["choices"]["text"]):
             choice_doc_text.append(chr(choice_id + 65) + ":" + choice_text)
-        return f"[問題]:{q_doc_text}[選択肢]:[{', '.join(doc['choices']['text'])}]\n[答え]:"
+        return f"[問題]:{q_doc_text}[選択肢]:[{', '.join(choice_doc_text)}]\n[答え]:"
 
 
 class CmaBasicsWithFintanPrompt(CmaBasics):
@@ -172,7 +172,7 @@ class CmaBasicsWithFintanPromptV1(CmaBasicsWithAnlpPrompt):
         if doc["context"] and doc["context"] != "":
             q_doc_text += doc["context"] + "\n"
         choices = "\n".join([f"- {choice}" for choice in doc["choices"]["text"]])
-        return f"質問:{q_doc_text}" f"選択肢:{choices}\n" "回答:"
+        return f"質問:{q_doc_text}選択肢:\n{choices}\n回答:"
 
 
 class CmaBasicsWithAlpacaPrompt(CmaBasicsWithAnlpPrompt):

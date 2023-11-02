@@ -1,4 +1,3 @@
-from calendar import c
 from pprint import pprint
 from typing import List
 from typing import Union
@@ -12,9 +11,9 @@ from . import security_sales_1
 
 TASK_REGISTRY = {
     **cma_basics.construct_tasks(),
-    "security_sales_1": security_sales_1.SecuritySales1,
+    **security_sales_1.construct_tasks(),
     **chabsa.construct_tasks(),
-    "cpa": cpa.CPA,
+    **cpa.construct_tasks(),
 }
 
 ALL_TASKS = sorted(list(TASK_REGISTRY))

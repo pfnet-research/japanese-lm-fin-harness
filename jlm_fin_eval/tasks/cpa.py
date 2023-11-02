@@ -1,4 +1,5 @@
 import inspect
+import os
 
 import numpy as np
 from lm_eval.base import MultipleChoiceTask
@@ -10,9 +11,10 @@ import jlm_fin_eval.datasets.cpa.cpa
 
 
 class CPA(MultipleChoiceTask):
-    VERSION = 1
+    VERSION = 1.0
     DATASET_PATH = inspect.getfile(jlm_fin_eval.datasets.cpa.cpa)
     DATASET_NAME = "CPA"
+    DESCRIPTION = "以下の問題の答えとして適切な記号の組み合わせを選択肢から選んでアルファベットで答えなさい。\n\n"
 
     def has_training_docs(self):
         return False
@@ -33,9 +35,8 @@ class CPA(MultipleChoiceTask):
         return self.dataset["test"]
 
     def doc_to_text(self, doc):
-        doc_text = (
-            "以下の問題の答えとして適切な記号の組み合わせを選択肢から選んでアルファベットで答えなさい。\n" + doc["question"] + "\n"
-        )
+        doc_text = "【問題】\n" + doc["question"] + "\n"
+
         if doc["context"] and doc["context"] != "":
             doc_text += doc["context"] + "\n"
         doc_text += "\n【選択肢】\n"
@@ -97,3 +98,162 @@ class CPA(MultipleChoiceTask):
             "map_3": mean,
             "map_4": mean,
         }
+
+
+class CPAWithAnlpPrompt(CPA):
+    PROMPT_VERSION = 0.1
+    DESCRIPTION = "[問題]に対する[答え]をとして適切な記号の組み合わせを[選択肢]の中から選んでください。\n\n"
+
+    def doc_to_text(self, doc):
+        q_doc_text = doc["question"] + "\n"
+        if doc["context"] and doc["context"] != "":
+            q_doc_text += doc["context"] + "\n"
+        return f"[問題]:{q_doc_text}[選択肢]:[{', '.join(doc['choices']['text'])}]\n[答え]:"
+
+    def doc_to_target(self, doc):
+        return [
+            choice_text
+            for choice_id, choice_text in zip(
+                doc["choices"]["id"], doc["choices"]["text"]
+            )
+            if choice_id == doc["answer"]
+        ][0]
+
+    def construct_requests(self, doc, ctx):
+        lls = [rf.loglikelihood(ctx, choice)[0] for choice in doc["choices"]["text"]]
+
+        return lls
+
+
+class CPAWithAnlpPromptAlphabet(CPA):
+    PROMPT_VERSION = "0.1.2"
+    DESCRIPTION = "[問題]に対する[答え]として適切な記号の組み合わせを[選択肢]の中からアルファベットで選んでください。\n\n"
+
+    def doc_to_text(self, doc):
+        q_doc_text = doc["question"] + "\n"
+        if doc["context"] and doc["context"] != "":
+            q_doc_text += doc["context"] + "\n"
+        choice_doc_text = []
+        for choice_id, choice_text in zip(doc["choices"]["id"], doc["choices"]["text"]):
+            choice_doc_text.append(chr(choice_id + 65) + ":" + choice_text)
+        return f"[問題]:{q_doc_text}[選択肢]:[{', '.join(choice_doc_text)}]\n[答え]:"
+
+
+class CPAWithFintanPrompt(CPA):
+    PROMPT_VERSION = 0.2
+    DESCRIPTION = "質問とその答えとして適切な記号の組み合わせの選択肢を入力として受け取り、選択肢から回答を選択してください。なお、回答は選択肢の番号(例:0)でするものとします。\n\n"
+
+    def doc_to_text(self, doc):
+        q_doc_text = doc["question"] + "\n"
+        if doc["context"] and doc["context"] != "":
+            q_doc_text += doc["context"] + "\n"
+        choices = ",".join(
+            [
+                f"{idx}.{choice}"
+                for idx, choice in zip(doc["choices"]["id"], doc["choices"]["text"])
+            ]
+        )
+        return f"質問:{q_doc_text}" f"選択肢:{choices}\n" "回答:"
+
+    def doc_to_target(self, doc):
+        return [
+            str(choice_id)
+            for choice_id in doc["choices"]["id"]
+            if choice_id == doc["answer"]
+        ][0]
+
+    def construct_requests(self, doc, ctx):
+        lls = [rf.loglikelihood(ctx, str(choice))[0] for choice in doc["choices"]["id"]]
+
+        return lls
+
+
+class CPAWithFintanPromptV1(CPAWithAnlpPrompt):
+    PROMPT_VERSION = "0.2.1"
+    DESCRIPTION = "与えられた答えの組み合わせの選択肢の中から、最適な選択肢を選んでください。\n\n"
+
+    def doc_to_text(self, doc):
+        q_doc_text = doc["question"] + "\n"
+        if doc["context"] and doc["context"] != "":
+            q_doc_text += doc["context"] + "\n"
+        choices = "\n".join([f"- {choice}" for choice in doc["choices"]["text"]])
+        return f"質問:{q_doc_text}選択肢:\n{choices}\n回答:"
+
+
+class CPAWithAlpacaPrompt(CPAWithAnlpPrompt):
+    PROMPT_VERSION = 0.3
+    DESCRIPTION = """以下は、タスクを説明する指示と、文脈のある入力の組み合わせです。要求を適切に満たす応答を書きなさい。
+
+### 指示:
+与えられた答えの組み合わせの選択肢の中から、最適な選択肢を選んでください。
+
+"""
+
+    def doc_to_text(self, doc):
+        q_doc_text = doc["question"] + "\n"
+        if doc["context"] and doc["context"] != "":
+            q_doc_text += doc["context"] + "\n"
+        choices = "\n".join([f"- {choice}" for choice in doc["choices"]["text"]])
+        input_text = f"{q_doc_text}" + f"出力は以下から選択してください：\n{choices}"
+        return f"### 入力:\n{input_text}\n\n### 応答:\n"
+
+
+class CPAWithRinnaInstructionSFT(CPAWithAnlpPrompt):
+    PROMPT_VERSION = 0.4
+    DESCRIPTION = "ユーザー: 与えられた答えの組み合わせの選択肢の中から、最適な選択肢を選んでください。<NL>システム: 分かりました。<NL>"
+    SEP = "<NL>"
+    FEWSHOT_SEP = "<NL>"
+
+    def doc_to_text(self, doc):
+        q_doc_text = doc["question"]
+        if doc["context"] and doc["context"] != "":
+            q_doc_text += "\n" + doc["context"]
+        choices = self.SEP.join([f"- {choice}" for choice in doc["choices"]["text"]])
+        input_text = f"質問：{q_doc_text}{self.SEP}" + f"選択肢：{self.SEP}{choices}"
+        return f"ユーザー: {input_text}{self.SEP}システム: "
+
+
+class CPAWithRinnaBilingualInstructionSFT(CPAWithRinnaInstructionSFT):
+    PROMPT_VERSION = 0.5
+    DESCRIPTION = "ユーザー: 与えられた答えの組み合わせの選択肢の中から、最適な選択肢を選んでください。\nシステム: 分かりました。\n"
+    SEP = "\n"
+    FEWSHOT_SEP = "\n"
+
+
+class CPAWithLlama2(CPAWithAnlpPrompt):
+    PROMPT_VERSION = 0.6
+    DEFAULT_SYSTEM_PROMPT = """You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.\n\nIf a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information."""
+    SYSTEM_PROMPT = os.getenv("SYSTEM_PROMPT", DEFAULT_SYSTEM_PROMPT)
+    DESCRIPTION = f"<s>[INST] <<SYS>>\n{SYSTEM_PROMPT}\n<</SYS>>\n\n"
+    INSTRUCTION = "与えられた答えの組み合わせの選択肢の中から、最適な選択肢を選んでください。"
+    FEWSHOT_SEP = " </s><s>[INST] "
+
+    def doc_to_text(self, doc):
+        q_doc_text = doc["question"]
+        if doc["context"] and doc["context"] != "":
+            q_doc_text += "\n" + doc["context"]
+        choices = "\n".join([f"- {choice}" for choice in doc["choices"]["text"]])
+        input_text = f"質問：{q_doc_text}" + f"出力は以下から選択してください：\n{choices}"
+        return f"{self.INSTRUCTION}\n\n{input_text} [/INST] "
+
+
+VERSIONS = [
+    CPAWithAnlpPrompt,
+    CPAWithAnlpPromptAlphabet,
+    CPAWithFintanPrompt,
+    CPAWithFintanPromptV1,
+    CPAWithAlpacaPrompt,
+    CPAWithRinnaInstructionSFT,
+    CPAWithRinnaBilingualInstructionSFT,
+    CPAWithLlama2,
+]
+
+
+def construct_tasks():
+    tasks = {}
+    for version_class in VERSIONS:
+        tasks[
+            f"cpa-{version_class.VERSION}-{version_class.PROMPT_VERSION}"
+        ] = version_class
+    tasks["cpa"] = CPA
+    return tasks

@@ -73,19 +73,20 @@ class CPA(datasets.GeneratorBasedBuilder):
             id = i_count
             i_count += 1
             question = row["question"]
-            context = ""
+            contexts = []
             if "ア" in row and row["ア"] != "" and row["ア"] != "nan":
-                context += "ア: " + row["ア"] + "\n"
+                contexts.append("ア: " + row["ア"])
             if "イ" in row and row["イ"] != "" and row["イ"] != "nan":
-                context += "イ: " + row["イ"] + "\n"
+                contexts.append("イ: " + row["イ"])
             if "ウ" in row and row["ウ"] != "" and row["ウ"] != "nan":
-                context += "ウ: " + row["ウ"] + "\n"
+                contexts.append("ウ: " + row["ウ"])
             if "エ" in row and row["エ"] != "" and row["エ"] != "nan":
-                context += "エ: " + row["エ"] + "\n"
+                contexts.append("エ: " + row["エ"])
             if "オ" in row and row["オ"] != "" and row["オ"] != "nan":
-                context += "オ: " + row["オ"] + "\n"
+                contexts.append("オ: " + row["オ"])
             if "カ" in row and row["カ"] != "" and row["カ"] != "nan":
-                context += "カ: " + row["カ"] + "\n"
+                contexts.append("カ: " + row["カ"])
+            context = "\n".join(contexts)
             choices = [{"id": i, "text": row[i + 1]} for i in range(6)]
             answer = row["a_no"] - 1
             yield id, {
