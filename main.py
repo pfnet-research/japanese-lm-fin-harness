@@ -32,7 +32,7 @@ def parse_args():
     parser.add_argument("--model_args", default="")
     parser.add_argument("--tasks", default=None, choices=MultiChoice(tasks.ALL_TASKS))
     parser.add_argument("--provide_description", action="store_true")
-    parser.add_argument("--num_fewshot", type=int, default=0)
+    parser.add_argument("--num_fewshot", type=str, default="0")
     parser.add_argument("--batch_size", type=int, default=None)
     parser.add_argument("--device", type=str, default=None)
     parser.add_argument("--output_path", default=None)
@@ -71,6 +71,9 @@ def main():
         task_names = pattern_match(args.tasks.split(","), tasks.ALL_TASKS)
 
     print(f"Selected Tasks: {task_names}")
+    
+    if args.num_fewshot is not None:
+        args.num_fewshot = [int(n) for n in args.num_fewshot.split(",")]
 
     description_dict = {}
     if args.description_dict_path:

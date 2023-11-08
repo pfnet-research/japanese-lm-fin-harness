@@ -163,3 +163,4 @@ cython_debug/
 .env
 poetry.lock
 lm_cache
+results
