@@ -71,9 +71,11 @@ def main():
         task_names = pattern_match(args.tasks.split(","), tasks.ALL_TASKS)
 
     print(f"Selected Tasks: {task_names}")
-    
+
     if args.num_fewshot is not None:
         args.num_fewshot = [int(n) for n in args.num_fewshot.split(",")]
+        if len(args.num_fewshot) == 1:
+            args.num_fewshot = [args.num_fewshot[0] for _ in task_names]
 
     description_dict = {}
     if args.description_dict_path:
