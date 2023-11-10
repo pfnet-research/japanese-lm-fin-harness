@@ -1,0 +1,3 @@
+MODEL_ARGS="pretrained=stabilityai/japanese-stablelm-instruct-alpha-7b-v2,trust_remote_code=True,load_in_8bit=True,tokenizer=novelai/nerdstash-tokenizer-v"
+TASK="chabsa-1.0-0.1,cma_basics-1.0-0.4,cpa-1.0-0.1.2,security_sales_1-1.0-0.6"
+python main.py --model hf --model_args $MODEL_ARGS --tasks $TASK --num_fewshot "4,3,2,2" --device "cuda" --output_path "models/line-corporation/japanese-large-lm-3.6b/result.json"
