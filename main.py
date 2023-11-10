@@ -75,7 +75,7 @@ def main():
     if args.num_fewshot is not None:
         num_fewshot = [int(n) for n in args.num_fewshot.split(",")]
         if len(args.num_fewshot) == 1:
-            num_fewshot = [args.num_fewshot[0] for _ in task_names]
+            num_fewshot = [num_fewshot[0] for _ in task_names]
     else:
         num_fewshot = [0 for _ in task_names]
 
