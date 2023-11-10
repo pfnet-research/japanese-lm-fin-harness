@@ -73,9 +73,11 @@ def main():
     print(f"Selected Tasks: {task_names}")
 
     if args.num_fewshot is not None:
-        args.num_fewshot = [int(n) for n in args.num_fewshot.split(",")]
+        num_fewshot = [int(n) for n in args.num_fewshot.split(",")]
         if len(args.num_fewshot) == 1:
-            args.num_fewshot = [args.num_fewshot[0] for _ in task_names]
+            num_fewshot = [args.num_fewshot[0] for _ in task_names]
+    else:
+        num_fewshot = [0 for _ in task_names]
 
     description_dict = {}
     if args.description_dict_path:
@@ -86,7 +88,7 @@ def main():
         model=args.model,
         model_args=args.model_args,
         tasks=task_names,
-        num_fewshot=args.num_fewshot,
+        num_fewshot=num_fewshot,
         batch_size=args.batch_size,
         device=args.device,
         no_cache=args.no_cache,

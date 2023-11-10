@@ -1,11 +1,20 @@
 import collections
 import itertools
 import random
+from typing import Any
+from typing import Dict
+from typing import List
+from typing import Optional
+from typing import Union
+from typing import cast
 
 import lm_eval.base
 import lm_eval.metrics
 import lm_eval.models
 import numpy as np
+from lm_eval.base import LM
+from lm_eval.base import CachingLM
+from lm_eval.base import Task
 from lm_eval.utils import positional_deprecated
 from lm_eval.utils import run_task_tests
 
@@ -14,19 +23,19 @@ import jlm_fin_eval.tasks
 
 @positional_deprecated
 def simple_evaluate(
-    model,
-    model_args=None,
-    tasks=[],
-    num_fewshot=0,
-    batch_size=None,
-    device=None,
-    no_cache=False,
-    limit=None,
-    bootstrap_iters=100000,
-    description_dict=None,
-    check_integrity=False,
-    decontamination_ngrams_path=None,
-    verbose=False,
+    model: Union[str, LM],
+    model_args: Optional[str] = None,
+    tasks: List[Union[str, Task]] = [],
+    num_fewshot: Union[List[int], int] = 0,
+    batch_size: Optional[int] = None,
+    device: Optional[str] = None,
+    no_cache: bool = False,
+    limit: Union[int, List[int | None], None] = None,
+    bootstrap_iters: int = 100000,
+    description_dict: Optional[Dict[str, str]] = None,
+    check_integrity: bool = False,
+    decontamination_ngrams_path: Optional[Dict[str, str]] = None,
+    verbose: bool = False,
 ):
     """Instantiate and evaluate a model on a list of tasks.
 
@@ -72,10 +81,12 @@ def simple_evaluate(
         lm = model
 
     if not no_cache:
+        if model_args is None:
+            model_args = ""
         lm = lm_eval.base.CachingLM(
             lm,
             "lm_cache/"
-            + model
+            + str(model)
             + "_"
             + model_args.replace("=", "-").replace(",", "_").replace("/", "-")
             + ".db",
@@ -84,9 +95,9 @@ def simple_evaluate(
     task_dict = jlm_fin_eval.tasks.get_task_dict(tasks)
 
     if check_integrity:
-        run_task_tests(task_list=tasks)
+        run_task_tests(task_list=[str(task) for task in tasks])
 
-    results = evaluate(
+    results: Dict[str, Any] = evaluate(
         lm=lm,
         task_dict=task_dict,
         num_fewshot=num_fewshot,
@@ -118,15 +129,15 @@ decontaminate_suffix = "_decontaminate"
 
 @positional_deprecated
 def evaluate(
-    lm,
-    task_dict,
-    provide_description=None,
-    num_fewshot=0,
-    limit=None,
-    bootstrap_iters=100000,
-    description_dict=None,
-    decontamination_ngrams_path=None,
-    verbose=False,
+    lm: Union[LM, CachingLM],
+    task_dict: Dict[str, Task],
+    provide_description: Optional[bool] = None,
+    num_fewshot: Union[List[int], int] = 0,
+    limit: Union[int, List[int | None], None] = None,
+    bootstrap_iters: int = 100000,
+    description_dict: Optional[Dict[str, str]] = None,
+    decontamination_ngrams_path: Optional[Dict[str, str]] = None,
+    verbose: bool = False,
 ):
     """Instantiate and evaluate a model on a list of tasks.
 
@@ -199,7 +210,7 @@ def evaluate(
 
     # get lists of each type of request
     for idx, (task_name, task) in enumerate(task_dict_items):
-        versions[task_name] = task.VERSION
+        versions[task_name] = task.VERSION  # type: ignore
         # default to test doc, fall back to val doc if validation unavailable
         # TODO: the test-fallback-to-val system isn't final, we should revisit it at some point
         if task.has_test_docs():
@@ -227,17 +238,17 @@ def evaluate(
             if isinstance(lm, lm_eval.base.CachingLM):
                 task.set_tokenizer(lm.lm.tokenizer)
             else:
-                task.set_tokenizer(lm.tokenizer)
+                task.set_tokenizer(lm.tokenizer)  # type: ignore
         # set max_length to task object
-        task.max_length = (
+        task.max_length = (  # type: ignore
             lm.lm.max_length
             if isinstance(lm, lm_eval.base.CachingLM)
-            else lm.max_length
+            else lm.max_length  # type: ignore
         )
-        task.max_gen_toks = (
+        task.max_gen_toks = (  # type: ignore
             lm.lm.max_gen_toks
             if isinstance(lm, lm_eval.base.CachingLM)
-            else lm.max_gen_toks
+            else lm.max_gen_toks  # type: ignore
         )
 
         limit_local = limit[idx]
@@ -260,10 +271,10 @@ def evaluate(
             if not isinstance(reqs, (list, tuple)):
                 reqs = [reqs]
             for i, req in enumerate(reqs):
-                requests[req.request_type].append(req)
+                requests[req.request_type].append(req)  # type: ignore
                 # i: index in requests for a single task instance
                 # doc_id: unique id that we can get back to a doc using `docs`
-                requests_origin[req.request_type].append((i, task_name, doc, doc_id))
+                requests_origin[req.request_type].append((i, task_name, doc, doc_id))  # type: ignore
 
     # Compare all tasks/sets at once to ensure a single training set scan
     if decontaminate:
@@ -305,7 +316,9 @@ def evaluate(
         task = task_dict[task_name]
         doc = docs[(task_name, doc_id)]
 
-        metrics = task.process_results(doc, requests)
+        metrics: Dict[str, Any] = cast(
+            Dict[str, Any], task.process_results(doc, requests)
+        )
         if "details" in metrics:
             details[task_name].append(metrics["details"])
             del metrics["details"]
@@ -319,19 +332,19 @@ def evaluate(
 
     # aggregate results
     for (task_name, metric), items in vals.items():
-        task = task_dict[task_name]
+        task: Task = task_dict[task_name]
         real_metric = metric  # key when looking up the metric with task.aggregation
         if metric.endswith(decontaminate_suffix):
             real_metric = metric.replace(
                 decontaminate_suffix, ""
             )  # decontaminated still uses the same metric
-        results[task_name][metric] = task.aggregation()[real_metric](items)
+        results[task_name][metric] = cast(Dict, task.aggregation())[real_metric](items)
 
         # hotfix: bleu, chrf, ter seem to be really expensive to bootstrap
         # so we run them less iterations. still looking for a cleaner way to do this
 
         stderr = lm_eval.metrics.stderr_for_metric(
-            metric=task.aggregation()[real_metric],
+            metric=cast(Dict, task.aggregation())[real_metric],
             bootstrap_iters=min(bootstrap_iters, 1000)
             if metric in ["bleu", "chrf", "ter"]
             else bootstrap_iters,
