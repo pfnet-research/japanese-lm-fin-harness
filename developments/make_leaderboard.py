@@ -18,14 +18,14 @@ for file_name in glob.glob("models/*/*/result.json"):
         if result:
             results_sum += result
             count += 1
-    result_dict.setdefault(company_model, {})['Ave'] = results_sum / count if count > 0 else 0
+    result_dict.setdefault(company_model, {})['Ave.'] = results_sum / count if count > 0 else 0
 
-sorted_results = sorted(result_dict.items(), key=lambda x: x[1].get('Ave', 0), reverse=True)
+sorted_results = sorted(result_dict.items(), key=lambda x: x[1].get('Ave.', 0), reverse=True)
 
-first_row = "| Model | " + ' | '.join(sorted(next(iter(result_dict.values())))) + " |\n| --- | --- | " + ' | '.join(['---'] * len(next(iter(result_dict.values())))) + " |\n"
+first_row = "| Model | " + ' | '.join(sorted(next(iter(result_dict.values())))) + " |\n| --- | " + ' | '.join(['---'] * len(next(iter(result_dict.values())))) + " |\n"
 md_table = first_row
 for company_model, results in sorted_results:
-    md_table += "| [" + company_model + "](https://huggingface.co/" + company_model.replace("/", "/") + ") | " + "{:.2f}".format(results.pop('Ave')) + " | " + ' | '.join("{:.2f}".format(results.get(task_name, "N/A")) for task_name in sorted(results)) + " |\n"
+    md_table += "| [" + company_model + "](https://huggingface.co/" + company_model.replace("/", "/") + ") | " + "{:.2f}".format(results.pop('Ave.')) + " | " + ' | '.join("{:.2f}".format(results.get(task_name, "N/A")) for task_name in sorted(results)) + " |\n"
 
 with open("README.md", "r") as f:
     readme_content = f.read()
