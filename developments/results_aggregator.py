@@ -26,9 +26,7 @@ def get_best_metric(
     results_data: Dict[
         str, List[Dict[str, Union[int, str, Dict[str, float]]]]
     ] = defaultdict(list)
-    json_files = glob.glob(
-        f"{results_path}-*.json"
-    )  # Read all json files with the given prefix
+    json_files = [f"{results_path}-{i}.json" for i in range(5)]
     for json_file in json_files:
         with open(json_file, "r") as f:
             data = json.load(f)  # Load the data
