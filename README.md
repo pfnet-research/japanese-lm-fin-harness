@@ -2,7 +2,7 @@
 
 ## Leaderboard
 <!-- lb start -->
-| Model | Ave | ave | chabsa | cma_basics | cpa | security_sales_1 |
+| Model | Ave. | chabsa | cma_basics | cpa | security_sales_1 |
 | --- | --- | --- | --- | --- | --- | --- |
 | [stabilityai/japanese-stablelm-instruct-alpha-7b-v2](https://huggingface.co/stabilityai/japanese-stablelm-instruct-alpha-7b-v2) | 39.29 | 50.85 | 36.84 | 18.59 | 50.88 |
 | [pfnet/plamo-13b](https://huggingface.co/pfnet/plamo-13b) | 35.78 | 50.97 | 28.95 | 15.83 | 47.37 |
