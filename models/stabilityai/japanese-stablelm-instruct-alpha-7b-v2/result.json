@@ -1,0 +1,66 @@
+{
+  "results": {
+    "security_sales_1-1.0-0.6": {
+      "acc": 0.5087719298245614,
+      "acc_stderr": 0.06680502724442025,
+      "map": 0.7251461988304094,
+      "map_stderr": 0.03846089253557023,
+      "map_2": 0.6842105263157895,
+      "map_2_stderr": 0.047873938583691884,
+      "map_3": 0.7076023391812866,
+      "map_3_stderr": 0.043009016623285067,
+      "map_4": 0.7251461988304094,
+      "map_4_stderr": 0.03846089253557023
+    },
+    "cma_basics-1.0-0.4": {
+      "acc": 0.3684210526315789,
+      "acc_stderr": 0.0793021898421983,
+      "map": 0.5942982456140351,
+      "map_stderr": 0.052514143126429234,
+      "map_2": 0.4605263157894737,
+      "map_2_stderr": 0.07395930156875366,
+      "map_3": 0.5482456140350876,
+      "map_3_stderr": 0.06219850458437157,
+      "map_4": 0.5942982456140351,
+      "map_4_stderr": 0.052514143126429234
+    },
+    "cpa-1.0-0.1.2": {
+      "acc": 0.18592964824120603,
+      "acc_stderr": 0.01952585408370161,
+      "map": 0.4157453936348404,
+      "map_stderr": 0.015097541534479245,
+      "map_2": 0.2638190954773869,
+      "map_2_stderr": 0.01985654712678027,
+      "map_3": 0.30569514237855927,
+      "map_3_stderr": 0.019218996132072556,
+      "map_4": 0.34966499162479053,
+      "map_4_stderr": 0.018013162799215006
+    },
+    "chabsa-1.0-0.1": {
+      "acc": 0.7565712805904441,
+      "f1": 0.5084733680469649
+    }
+  },
+  "versions": {
+    "security_sales_1-1.0-0.6": 1.0,
+    "cma_basics-1.0-0.4": 1.0,
+    "cpa-1.0-0.1.2": 1.0,
+    "chabsa-1.0-0.1": 1.0
+  },
+  "config": {
+    "model": "hf",
+    "model_args": "pretrained=stabilityai/japanese-stablelm-instruct-alpha-7b-v2,trust_remote_code=True,load_in_8bit=True,tokenizer=novelai/nerdstash-tokenizer-v1",
+    "num_fewshot": [
+      4,
+      3,
+      2,
+      2
+    ],
+    "batch_size": null,
+    "device": "cuda",
+    "no_cache": false,
+    "limit": null,
+    "bootstrap_iters": 100000,
+    "description_dict": {}
+  }
+}
