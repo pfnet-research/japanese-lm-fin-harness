@@ -8,8 +8,6 @@ from typing import List
 from typing import Union
 from typing import cast
 
-from sklearn import base
-
 
 def get_best_metric(
     results_path: str = "results/gpt-neox-japanese",
