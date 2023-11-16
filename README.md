@@ -8,11 +8,14 @@
 | [stabilityai/japanese-stablelm-instruct-alpha-7b-v2](https://huggingface.co/stabilityai/japanese-stablelm-instruct-alpha-7b-v2) | 39.29 | 50.85 | 36.84 | 18.59 | 50.88 |
 | [meta-llama/Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) | 37.32 | 51.63 | 34.21 | 14.32 | 49.12 |
 | [pfnet/plamo-13b](https://huggingface.co/pfnet/plamo-13b) | 35.78 | 50.97 | 28.95 | 15.83 | 47.37 |
+| [meta-llama/Llama-2-13b-hf](https://huggingface.co/meta-llama/Llama-2-13b-hf) | 35.63 | 45.24 | 31.58 | 13.07 | 52.63 |
 | [line-corporation/japanese-large-lm-1.7b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-1.7b-instruction-sft) | 35.49 | 37.04 | 34.21 | 18.09 | 52.63 |
 | [matsuo-lab/weblab-10b](https://huggingface.co/matsuo-lab/weblab-10b) | 35.29 | 39.97 | 34.21 | 16.08 | 50.88 |
 | [cyberagent/open-calm-medium](https://huggingface.co/cyberagent/open-calm-medium) | 34.05 | 33.14 | 42.11 | 17.09 | 43.86 |
+| [meta-llama/Llama-2-70b-hf](https://huggingface.co/meta-llama/Llama-2-70b-hf) | 33.12 | 48.99 | 21.05 | 15.08 | 47.37 |
 | [rinna/japanese-gpt-neox-3.6b-instruction-sft-v2](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-sft-v2) | 33.04 | 38.12 | 21.05 | 20.35 | 52.63 |
 | [rinna/japanese-gpt-neox-3.6b-instruction-sft](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-sft) | 32.81 | 48.39 | 34.21 | 11.81 | 36.84 |
+| [rinna/youri-7b](https://huggingface.co/rinna/youri-7b) | 32.48 | 36.28 | 23.68 | 19.10 | 50.88 |
 | [cyberagent/open-calm-1b](https://huggingface.co/cyberagent/open-calm-1b) | 32.15 | 37.06 | 26.32 | 21.36 | 43.86 |
 | [cyberagent/calm2-7b](https://huggingface.co/cyberagent/calm2-7b) | 32.00 | 44.13 | 23.68 | 14.57 | 45.61 |
 | [line-corporation/japanese-large-lm-1.7b](https://huggingface.co/line-corporation/japanese-large-lm-1.7b) | 31.96 | 33.67 | 28.95 | 17.84 | 47.37 |
