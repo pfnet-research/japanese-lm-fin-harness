@@ -7,6 +7,7 @@ import lm_eval.base
 from . import chabsa
 from . import cma_basics
 from . import cpa
+from . import fp2
 from . import security_sales_1
 
 TASK_REGISTRY = {
@@ -14,6 +15,7 @@ TASK_REGISTRY = {
     **security_sales_1.construct_tasks(),
     **chabsa.construct_tasks(),
     **cpa.construct_tasks(),
+    **fp2.construct_tasks(),
 }
 
 ALL_TASKS = sorted(list(TASK_REGISTRY))
