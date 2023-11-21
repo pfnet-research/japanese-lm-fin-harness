@@ -7,13 +7,13 @@ from lm_eval.base import mean
 from lm_eval.base import rf
 from sklearn.metrics import accuracy_score
 
-import jlm_fin_eval.datasets.cpa.cpa
+import jlm_fin_eval.datasets.cpa.cpa_audit
 
 
-class CPA(MultipleChoiceTask):
+class CpaAudit(MultipleChoiceTask):
     VERSION = 1.0
-    DATASET_PATH = inspect.getfile(jlm_fin_eval.datasets.cpa.cpa)
-    DATASET_NAME = "CPA"
+    DATASET_PATH = inspect.getfile(jlm_fin_eval.datasets.cpa.cpa_audit)
+    DATASET_NAME = "cpa_audit"
     DESCRIPTION = "以下の問題の答えとして適切な記号の組み合わせを選択肢から選んでアルファベットで答えなさい。\n\n"
 
     def has_training_docs(self):
@@ -100,7 +100,7 @@ class CPA(MultipleChoiceTask):
         }
 
 
-class CPAWithAnlpPrompt(CPA):
+class CpaAuditWithAnlpPrompt(CpaAudit):
     PROMPT_VERSION = 0.1
     DESCRIPTION = "[問題]に対する[答え]をとして適切な記号の組み合わせを[選択肢]の中から選んでください。\n\n"
 
@@ -125,7 +125,7 @@ class CPAWithAnlpPrompt(CPA):
         return lls
 
 
-class CPAWithAnlpPromptAlphabet(CPA):
+class CpaAuditWithAnlpPromptAlphabet(CpaAudit):
     PROMPT_VERSION = "0.1.2"
     DESCRIPTION = "[問題]に対する[答え]として適切な記号の組み合わせを[選択肢]の中からアルファベットで選んでください。\n\n"
 
@@ -139,7 +139,7 @@ class CPAWithAnlpPromptAlphabet(CPA):
         return f"[問題]:{q_doc_text}[選択肢]:[{', '.join(choice_doc_text)}]\n[答え]:"
 
 
-class CPAWithFintanPrompt(CPA):
+class CpaAuditWithFintanPrompt(CpaAudit):
     PROMPT_VERSION = 0.2
     DESCRIPTION = "質問とその答えとして適切な記号の組み合わせの選択肢を入力として受け取り、選択肢から回答を選択してください。なお、回答は選択肢の番号(例:0)でするものとします。\n\n"
 
@@ -168,7 +168,7 @@ class CPAWithFintanPrompt(CPA):
         return lls
 
 
-class CPAWithFintanPromptV1(CPAWithAnlpPrompt):
+class CpaAuditWithFintanPromptV1(CpaAuditWithAnlpPrompt):
     PROMPT_VERSION = "0.2.1"
     DESCRIPTION = "与えられた答えの組み合わせの選択肢の中から、最適な選択肢を選んでください。\n\n"
 
@@ -180,7 +180,7 @@ class CPAWithFintanPromptV1(CPAWithAnlpPrompt):
         return f"質問:{q_doc_text}選択肢:\n{choices}\n回答:"
 
 
-class CPAWithAlpacaPrompt(CPAWithAnlpPrompt):
+class CpaAuditWithAlpacaPrompt(CpaAuditWithAnlpPrompt):
     PROMPT_VERSION = 0.3
     DESCRIPTION = """以下は、タスクを説明する指示と、文脈のある入力の組み合わせです。要求を適切に満たす応答を書きなさい。
 
@@ -198,7 +198,7 @@ class CPAWithAlpacaPrompt(CPAWithAnlpPrompt):
         return f"### 入力:\n{input_text}\n\n### 応答:\n"
 
 
-class CPAWithRinnaInstructionSFT(CPAWithAnlpPrompt):
+class CpaAuditWithRinnaInstructionSFT(CpaAuditWithAnlpPrompt):
     PROMPT_VERSION = 0.4
     DESCRIPTION = "ユーザー: 与えられた答えの組み合わせの選択肢の中から、最適な選択肢を選んでください。<NL>システム: 分かりました。<NL>"
     SEP = "<NL>"
@@ -213,14 +213,14 @@ class CPAWithRinnaInstructionSFT(CPAWithAnlpPrompt):
         return f"ユーザー: {input_text}{self.SEP}システム: "
 
 
-class CPAWithRinnaBilingualInstructionSFT(CPAWithRinnaInstructionSFT):
+class CpaAuditWithRinnaBilingualInstructionSFT(CpaAuditWithRinnaInstructionSFT):
     PROMPT_VERSION = 0.5
     DESCRIPTION = "ユーザー: 与えられた答えの組み合わせの選択肢の中から、最適な選択肢を選んでください。\nシステム: 分かりました。\n"
     SEP = "\n"
     FEWSHOT_SEP = "\n"
 
 
-class CPAWithLlama2(CPAWithAnlpPrompt):
+class CpaAuditWithLlama2(CpaAuditWithAnlpPrompt):
     PROMPT_VERSION = 0.6
     DEFAULT_SYSTEM_PROMPT = """You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.\n\nIf a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information."""
     SYSTEM_PROMPT = os.getenv("SYSTEM_PROMPT", DEFAULT_SYSTEM_PROMPT)
@@ -238,14 +238,14 @@ class CPAWithLlama2(CPAWithAnlpPrompt):
 
 
 VERSIONS = [
-    CPAWithAnlpPrompt,
-    CPAWithAnlpPromptAlphabet,
-    CPAWithFintanPrompt,
-    CPAWithFintanPromptV1,
-    CPAWithAlpacaPrompt,
-    CPAWithRinnaInstructionSFT,
-    CPAWithRinnaBilingualInstructionSFT,
-    CPAWithLlama2,
+    CpaAuditWithAnlpPrompt,
+    CpaAuditWithAnlpPromptAlphabet,
+    CpaAuditWithFintanPrompt,
+    CpaAuditWithFintanPromptV1,
+    CpaAuditWithAlpacaPrompt,
+    CpaAuditWithRinnaInstructionSFT,
+    CpaAuditWithRinnaBilingualInstructionSFT,
+    CpaAuditWithLlama2,
 ]
 
 
@@ -253,7 +253,7 @@ def construct_tasks():
     tasks = {}
     for version_class in VERSIONS:
         tasks[
-            f"cpa-{version_class.VERSION}-{version_class.PROMPT_VERSION}"
+            f"cpa_audit-{version_class.VERSION}-{version_class.PROMPT_VERSION}"
         ] = version_class
-    tasks["cpa"] = CPA
+    tasks["cpa_audit"] = CpaAudit
     return tasks

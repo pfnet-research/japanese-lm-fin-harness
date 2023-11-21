@@ -6,7 +6,7 @@ import lm_eval.base
 
 from . import chabsa
 from . import cma_basics
-from . import cpa
+from . import cpa_audit
 from . import fp2
 from . import security_sales_1
 
@@ -14,7 +14,7 @@ TASK_REGISTRY = {
     **cma_basics.construct_tasks(),
     **security_sales_1.construct_tasks(),
     **chabsa.construct_tasks(),
-    **cpa.construct_tasks(),
+    **cpa_audit.construct_tasks(),
     **fp2.construct_tasks(),
 }
 

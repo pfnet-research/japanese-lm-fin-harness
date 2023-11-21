@@ -7,15 +7,15 @@ _LICENSE = "TBD"
 _HOMEPAGE = "TBD"
 
 
-class CPA(datasets.GeneratorBasedBuilder):
-    """CPA dataset."""
+class CpaAudit(datasets.GeneratorBasedBuilder):
+    """CPA Audit dataset."""
 
     VERSION = datasets.Version("0.0.1")
     BUILDER_CONFIGS = [
         datasets.BuilderConfig(
-            name="CPA",
+            name="cpa_audit",
             version=VERSION,
-            description="The CPAdataset.",
+            description="The CPA Auditdataset.",
         ),
     ]
 
@@ -99,4 +99,4 @@ class CPA(datasets.GeneratorBasedBuilder):
 
 
 if __name__ == "__main__":
-    CPA().download_and_prepare()
+    CpaAudit().download_and_prepare()
