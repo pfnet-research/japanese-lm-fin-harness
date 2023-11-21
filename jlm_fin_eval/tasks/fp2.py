@@ -127,6 +127,18 @@ class FP2WithAnlpPromptAlphabet(FP2):
             choice_doc_text.append(chr(choice_id + 65) + ":" + choice_text)
         return f"[問題]:{q_doc_text}[選択肢]:[{', '.join(choice_doc_text)}]\n[答え]:"
 
+    def doc_to_target(self, doc):
+        answer = chr(doc["choices"]["id"].index(doc["answer"]) + 65)
+        return answer
+
+    def construct_requests(self, doc, ctx):
+        lls = [
+            rf.loglikelihood(ctx, chr(i + 65))[0]
+            for i, _ in enumerate(doc["choices"]["id"])
+        ]
+
+        return lls
+
 
 class FP2WithFintanPrompt(FP2):
     PROMPT_VERSION = 0.2
@@ -165,8 +177,7 @@ class FP2WithFintanPromptV1(FP2WithAnlpPrompt):
         q_doc_text = doc["question"] + "\n"
         if doc["context"] and doc["context"] != "":
             q_doc_text += doc["context"] + "\n"
-        choices = "\n".join([f"- {choice}" for choice in doc["choices"]["text"]])
-        return f"質問:{q_doc_text}選択肢:\n{choices}\n回答:"
+        return f"質問:{q_doc_text}\n回答:"
 
 
 class FP2WithAlpacaPrompt(FP2WithAnlpPrompt):
@@ -182,9 +193,8 @@ class FP2WithAlpacaPrompt(FP2WithAnlpPrompt):
         q_doc_text = doc["question"] + "\n"
         if doc["context"] and doc["context"] != "":
             q_doc_text += doc["context"] + "\n"
-        choices = "\n".join([f"- {choice}" for choice in doc["choices"]["text"]])
-        input_text = f"{q_doc_text}" + f"出力は以下から選択してください：\n{choices}"
-        return f"### 入力:\n{input_text}\n\n### 応答:\n"
+        input_text = f"{q_doc_text}"
+        return f"### 入力:\n{input_text}\n### 応答:\n"
 
 
 class FP2WithRinnaInstructionSFT(FP2WithAnlpPrompt):
@@ -197,8 +207,7 @@ class FP2WithRinnaInstructionSFT(FP2WithAnlpPrompt):
         q_doc_text = doc["question"]
         if doc["context"] and doc["context"] != "":
             q_doc_text += "\n" + doc["context"]
-        choices = self.SEP.join([f"- {choice}" for choice in doc["choices"]["text"]])
-        input_text = f"質問：{q_doc_text}{self.SEP}" + f"選択肢：{self.SEP}{choices}"
+        input_text = f"{q_doc_text}"
         return f"ユーザー: {input_text}{self.SEP}システム: "
 
 
@@ -221,8 +230,7 @@ class FP2WithLlama2(FP2WithAnlpPrompt):
         q_doc_text = doc["question"]
         if doc["context"] and doc["context"] != "":
             q_doc_text += "\n" + doc["context"]
-        choices = "\n".join([f"- {choice}" for choice in doc["choices"]["text"]])
-        input_text = f"質問：{q_doc_text}" + f"出力は以下から選択してください：\n{choices}"
+        input_text = f"質問：{q_doc_text}"
         return f"{self.INSTRUCTION}\n\n{input_text} [/INST] "
 
 
