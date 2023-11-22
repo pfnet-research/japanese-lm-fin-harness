@@ -26,6 +26,7 @@ def get_task_sets() -> List[List[str]]:
         for _, value in task_dict.items()
     ]
     task_sets = list(zip(*task_temp))
+    task_sets = [sorted(x) for x in task_sets]
     return task_sets
 
 
@@ -87,7 +88,7 @@ def main() -> None:
                         work_dir,
                         f"results/{model_setting['model']}-{n_fewshot}-{task_hash}.json",
                     )
-                    if os.path.exist(result_path):
+                    if os.path.exists(result_path):
                         continue
                     command = (
                         cast(str, run_settings["preprocess"])
