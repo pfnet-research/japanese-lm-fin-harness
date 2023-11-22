@@ -5,5 +5,7 @@
     },
     "work_dir": "you can set workdir or leave blank",
     "preprocess": "you can use ${env} ${model_name} ${n_fewshot} ${n_gpu} ${memory} ${gpu_vram} ${work_dir} ${task_hash} ${repo}",
-    "postprocess": "same as the above"
+    "postprocess": "same as the above",
+    "preprocess_harness": "you can use ${env} ${model_name} ${n_gpu} ${memory} ${gpu_vram} ${work_dir} ${repo}",
+    "postprocess_harness": "same as the above"
 }

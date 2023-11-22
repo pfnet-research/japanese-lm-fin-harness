@@ -9,8 +9,8 @@ from typing import List
 from typing import Union
 from typing import cast
 
-from .make_run_commands import get_model_settings
-from .make_run_commands import get_task_sets
+from developments.make_run_commands import get_model_settings
+from developments.make_run_commands import get_task_sets
 
 
 def get_best_metric(
