@@ -85,7 +85,7 @@ def main() -> None:
                         work_dir = os.getcwd()
                     command = (
                         cast(str, run_settings["preprocess"])
-                        + f"poetry run python main.py --model hf --model_args {','.join(model_args)} --task {','.join(task)} --output_path results/{model_setting['model']}-{n_fewshot}-{task_hash}.json"
+                        + f"poetry run python main.py --model hf --model_args {','.join(model_args)} --task {','.join(task)} --no_cache --output_path results/{model_setting['model']}-{n_fewshot}-{task_hash}.json"
                         + cast(str, run_settings["postprocess"])
                     )
                     command = (
