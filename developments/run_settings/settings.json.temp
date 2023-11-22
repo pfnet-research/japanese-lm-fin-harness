@@ -4,6 +4,6 @@
         "HF_HOME": "~/.cache/huggingface"
     },
     "work_dir": "you can set workdir or leave blank",
-    "preprocess": "you can use ${env} ${model_name} ${n_fewshot} ${n_gpu} ${memory} ${gpu_vram} ${work_dir} ${task_hash}",
+    "preprocess": "you can use ${env} ${model_name} ${n_fewshot} ${n_gpu} ${memory} ${gpu_vram} ${work_dir} ${task_hash} ${repo}",
     "postprocess": "same as the above"
 }

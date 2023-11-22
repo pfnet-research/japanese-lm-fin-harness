@@ -100,6 +100,7 @@ def main() -> None:
                         .replace("${env}", env_var_str)
                         .replace("${work_dir}", work_dir)
                         .replace("${task_hash}", task_hash)
+                        .replace("${repo}", cast(str, model_setting["model"]))
                     )
                     commands.append(command)
                 except Exception as e:
