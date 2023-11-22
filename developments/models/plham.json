@@ -1,0 +1,35 @@
+[
+    {
+        "model": "pfnet/plamo-13b",
+        "model_args": [
+            "trust_remote_code=True",
+            "load_in_8bit=True"
+        ],
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    },
+    {
+        "model": "pfnet/plamo-13b-instruc",
+        "model_args": [
+            "trust_remote_code=True",
+            "load_in_8bit=True"
+        ],
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    },
+    {
+        "model": "pfnet/plamo-13b-instruc-nc",
+        "model_args": [
+            "trust_remote_code=True",
+            "load_in_8bit=True"
+        ],
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    }
+]

@@ -1,0 +1,12 @@
+{
+    "model": "huggingface/repo",
+    "model_args": [
+        "trust_remote_code=True"
+    ],
+    "memory_Gi": 64,
+    "n_gpu": 1,
+    "gpu_vram_gp": 16,
+    "memory_Gi: "like 32Gi or blank",
+    "gpu_vram_gb": "select from 16,24,32,80",
+    "require_hf_login": false
+}

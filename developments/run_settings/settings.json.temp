@@ -1,0 +1,9 @@
+{
+    "env_var": {
+        "HF_TOKEN": "hf_xxxxxx",
+        "HF_HOME": "~/.cache/huggingface"
+    },
+    "work_dir": "you can set workdir or leave blank",
+    "preprocess": "you can use ${env} ${model_name} ${n_fewshot} ${n_gpu} ${memory} ${gpu_vram} ${work_dir} ${task_hash}",
+    "postprocess": "same as the above"
+}
