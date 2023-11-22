@@ -2,6 +2,7 @@ import glob
 import hashlib
 import json
 import os
+import warnings
 from typing import Dict
 from typing import List
 from typing import Union
@@ -72,34 +73,38 @@ def main() -> None:
     for model_setting in model_settings:
         for n_fewshot in range(5):
             for task in task_sets:
-                model_args = [f"pretrained={model_setting['model']}"]
-                if "model_args" in model_setting:
-                    model_args.extend(cast(List[str], model_setting["model_args"]))
-                task_hash = hashlib.sha256("".join(task).encode("utf-8")).hexdigest()[
-                    -8:
-                ]
-                work_dir = str(run_settings["work_dir"])
-                if work_dir == "":
-                    work_dir = os.getcwd()
-                command = (
-                    cast(str, run_settings["preprocess"])
-                    + f"poetry run python main.py --model hf --model_args {','.join(model_args)} --task {','.join(task)} --output_path results/{model_setting['model']}-{n_fewshot}-{task_hash}.json"
-                    + cast(str, run_settings["postprocess"])
-                )
-                command = (
-                    command.replace(
-                        "${model_name}",
-                        cast(str, model_setting["model"]).split("/")[-1],
+                try:
+                    model_args = [f"pretrained={model_setting['model']}"]
+                    if "model_args" in model_setting:
+                        model_args.extend(cast(List[str], model_setting["model_args"]))
+                    task_hash = hashlib.sha256(
+                        "".join(task).encode("utf-8")
+                    ).hexdigest()[-8:]
+                    work_dir = str(run_settings["work_dir"])
+                    if work_dir == "":
+                        work_dir = os.getcwd()
+                    command = (
+                        cast(str, run_settings["preprocess"])
+                        + f"poetry run python main.py --model hf --model_args {','.join(model_args)} --task {','.join(task)} --output_path results/{model_setting['model']}-{n_fewshot}-{task_hash}.json"
+                        + cast(str, run_settings["postprocess"])
                     )
-                    .replace("${n_fewshot}", str(n_fewshot))
-                    .replace("${n_gpu}", str(model_setting["n_gpu"]))
-                    .replace("${memory}", str(model_setting["memory_Gi"]))
-                    .replace("${gpu_vram}", str(model_setting["gpu_vram_gb"]))
-                    .replace("${env}", env_var_str)
-                    .replace("${work_dir}", work_dir)
-                    .replace("${task_hash}", task_hash)
-                )
-                commands.append(command)
+                    command = (
+                        command.replace(
+                            "${model_name}",
+                            cast(str, model_setting["model"]).split("/")[-1],
+                        )
+                        .replace("${n_fewshot}", str(n_fewshot))
+                        .replace("${n_gpu}", str(model_setting["n_gpu"]))
+                        .replace("${memory}", str(model_setting["memory_Gi"]))
+                        .replace("${gpu_vram}", str(model_setting["gpu_vram_gb"]))
+                        .replace("${env}", env_var_str)
+                        .replace("${work_dir}", work_dir)
+                        .replace("${task_hash}", task_hash)
+                    )
+                    commands.append(command)
+                except Exception as e:
+                    warnings.warn(str(model_setting))
+                    raise e
     print("\n".join(commands))
 
 
