@@ -2,7 +2,6 @@ import argparse
 import hashlib
 import json
 import os
-import warnings
 from collections import defaultdict
 from typing import Any
 from typing import Dict
@@ -101,8 +100,8 @@ def main() -> None:
     ]
 
     for model_setting in model_settings:
-        model_name = model_setting["model"]
-        json_files = sum(
+        model_name = cast(str, model_setting["model"])
+        json_files: List[str] = sum(
             [
                 [
                     os.path.join(
@@ -123,17 +122,20 @@ def main() -> None:
             continue
 
         best_metrics = get_best_metric(json_files=json_files)
-        os.makedirs(os.path.join(args.outputs_path, *model_name), exist_ok=True)
+        os.makedirs(os.path.join(args.outputs_path, model_name), exist_ok=True)
 
         model_args = [f"pretrained={model_setting['model']}"]
         if "model_args" in model_setting:
             model_args.extend(cast(List[str], model_setting["model_args"]))
-        task = ",".join([str(best_metrics[prefix]["key"]) for prefix in prefix_list])
+        task = ",".join([str(values["key"]) for _, values in best_metrics.items()])
         num_fewshots = ",".join(
-            [str(best_metrics[prefix]["n"]) for prefix in prefix_list]
+            [str(values["n"]) for _, values in best_metrics.items()]
         )
         values = ",".join(
-            [str(best_metrics[prefix]["metric_values"]) for prefix in prefix_list]
+            [
+                prefix + ":" + str(values["metric_values"])
+                for prefix, values in best_metrics.items()
+            ]
         )
         harness_command = f"""MODEL_ARGS="{','.join(model_args)}"
 TASK="{task}"
@@ -142,7 +144,7 @@ python main.py --model hf --model_args $MODEL_ARGS --tasks $TASK --num_fewshot "
 """
         save_path = os.path.join(args.outputs_path, model_name, "harness.sh")
         with open(save_path, mode="w", encoding="utf-8") as f:
-            f.writelines(haeness_command)
+            f.writelines(harness_command)
 
 
 if __name__ == "__main__":
