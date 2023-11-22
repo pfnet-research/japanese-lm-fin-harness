@@ -83,9 +83,15 @@ def main() -> None:
                     work_dir = str(run_settings["work_dir"])
                     if work_dir == "":
                         work_dir = os.getcwd()
+                    result_path = os.path.join(
+                        work_dir,
+                        f"results/{model_setting['model']}-{n_fewshot}-{task_hash}.json",
+                    )
+                    if os.path.exist(result_path):
+                        continue
                     command = (
                         cast(str, run_settings["preprocess"])
-                        + f"poetry run python main.py --model hf --model_args {','.join(model_args)} --task {','.join(task)} --no_cache --output_path results/{model_setting['model']}-{n_fewshot}-{task_hash}.json"
+                        + f"poetry run python main.py --model hf --model_args {','.join(model_args)} --task {','.join(task)} --no_cache --output_path {result_path}"
                         + cast(str, run_settings["postprocess"])
                     )
                     command = (

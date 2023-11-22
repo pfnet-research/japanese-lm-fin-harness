@@ -1,6 +1,8 @@
 import argparse
-import glob
+import hashlib
 import json
+import os
+import warnings
 from collections import defaultdict
 from typing import Any
 from typing import Dict
@@ -8,15 +10,25 @@ from typing import List
 from typing import Union
 from typing import cast
 
+from .make_run_commands import get_model_settings
+from .make_run_commands import get_task_sets
+
 
 def get_best_metric(
-    results_path: str = "results/gpt-neox-japanese",
-    prefix_list: List[str] = ["chabsa", "cma_basics", "cpa", "security_sales_1"],
+    json_files: List[str],
+    prefix_list: List[str] = [
+        "chabsa",
+        "cma_basics",
+        "cpa_audit",
+        "security_sales_1",
+        "fp2",
+    ],
     metric_dict: Dict[str, List[str]] = {
         "chabsa": ["f1", "acc"],
         "cma_basics": ["acc", "map", "map_2", "map_3", "map_4"],
-        "cpa": ["acc", "map", "map_2", "map_3", "map_4"],
+        "cpa_audit": ["acc", "map", "map_2", "map_3", "map_4"],
         "security_sales_1": ["acc", "map", "map_2", "map_3", "map_4"],
+        "fp2": ["acc", "map", "map_2", "map_3", "map_4"],
     },
     order_dict: Dict[str, Dict[str, str]] = {},
 ) -> Dict:
@@ -26,7 +38,6 @@ def get_best_metric(
     results_data: Dict[
         str, List[Dict[str, Union[int, str, Dict[str, float]]]]
     ] = defaultdict(list)
-    json_files = [f"{results_path}-{i}.json" for i in range(5)]
     for json_file in json_files:
         with open(json_file, "r") as f:
             data = json.load(f)  # Load the data
@@ -71,33 +82,67 @@ def main() -> None:
     parser.add_argument(
         "--results_path",
         type=str,
-        default="results/gpt-neox-japanese",
+        default="results",
         help="Path to the results",
     )
     parser.add_argument(
-        "--prefix_list",
+        "--outputs_path",
         type=str,
-        default="chabsa,cma_basics,cpa,security_sales_1",
-        help="The list of prefixes",
+        default="models",
+        help="Path to the results",
     )
     args = parser.parse_args()
 
-    prefix_list: List[str] = args.prefix_list.split(",")
+    model_settings = get_model_settings()
+    task_sets: List[List[str]] = get_task_sets()
+    task_hashes: List[str] = [
+        hashlib.sha256("".join(task).encode("utf-8")).hexdigest()[-8:]
+        for task in task_sets
+    ]
 
-    best_metrics = get_best_metric(
-        results_path=args.results_path, prefix_list=prefix_list
-    )
+    for model_setting in model_settings:
+        model_name = model_setting["model"]
+        json_files = sum(
+            [
+                [
+                    os.path.join(
+                        args.results_path, f"{model_name}-{n_fewshot}-{task_hash}.json"
+                    )
+                    for task_hash in task_hashes
+                ]
+                for n_fewshot in range(5)
+            ],
+            [],
+        )
+        has_missing = False
+        for json_file in json_files:
+            if not os.path.exists(json_file):
+                has_missing = True
+                print(f"{json_file} is missing")
+        if has_missing:
+            continue
 
-    # Parse best metrics into output format
-    task = ",".join([str(best_metrics[prefix]["key"]) for prefix in prefix_list])
-    num_fewshot = ",".join([str(best_metrics[prefix]["n"]) for prefix in prefix_list])
-    values = ",".join(
-        [str(best_metrics[prefix]["metric_values"]) for prefix in prefix_list]
-    )
+        best_metrics = get_best_metric(json_files=json_files)
+        os.makedirs(os.path.join(args.outputs_path, *model_name), exist_ok=True)
 
-    print(f'TASK="{task}"')
-    print(f'--num_fewshot "{num_fewshot}"')
-    print(f"{values}")
+        model_args = [f"pretrained={model_setting['model']}"]
+        if "model_args" in model_setting:
+            model_args.extend(cast(List[str], model_setting["model_args"]))
+        task = ",".join([str(best_metrics[prefix]["key"]) for prefix in prefix_list])
+        num_fewshots = ",".join(
+            [str(best_metrics[prefix]["n"]) for prefix in prefix_list]
+        )
+        values = ",".join(
+            [str(best_metrics[prefix]["metric_values"]) for prefix in prefix_list]
+        )
+        harness_command = f"""MODEL_ARGS="{','.join(model_args)}"
+TASK="{task}"
+python main.py --model hf --model_args $MODEL_ARGS --tasks $TASK --num_fewshot "{num_fewshots}" --device "cuda" --output_path "models/abeja/abeja-gpt-neox-japanese-2.7b/result.json"
+# Estimated results: {values}
+"""
+        save_path = os.path.join(args.outputs_path, model_name, "harness.sh")
+        with open(save_path, mode="w", encoding="utf-8") as f:
+            f.writelines(haeness_command)
 
 
 if __name__ == "__main__":
