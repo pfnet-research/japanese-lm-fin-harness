@@ -11,7 +11,7 @@
         "require_hf_login": false
     },
     {
-        "model": "pfnet/plamo-13b-instruc",
+        "model": "pfnet/plamo-13b-instruct",
         "model_args": [
             "trust_remote_code=True",
             "load_in_8bit=True"
@@ -22,7 +22,7 @@
         "require_hf_login": false
     },
     {
-        "model": "pfnet/plamo-13b-instruc-nc",
+        "model": "pfnet/plamo-13b-instruct-nc",
         "model_args": [
             "trust_remote_code=True",
             "load_in_8bit=True"
