@@ -10,7 +10,7 @@
         "require_hf_login": false
     },
     {
-        "model": "rinna/japanese-gpt-neox-3.6b-instruction-sf",
+        "model": "rinna/japanese-gpt-neox-3.6b-instruction-sft",
         "model_args": [
             "load_in_8bit=True"
         ],
