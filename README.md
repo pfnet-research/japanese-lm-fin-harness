@@ -13,6 +13,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [stabilityai/japanese-stablelm-base-alpha-7b](https://huggingface.co/stabilityai/japanese-stablelm-base-alpha-7b) | 33.94 | 44.73 | 28.95 | 17.34 | 27.79 | 50.88 |
 | [matsuo-lab/weblab-10b](https://huggingface.co/matsuo-lab/weblab-10b) | 33.93 | 51.84 | 31.58 | 17.09 | 25.26 | 43.86 |
 | [stabilityai/japanese-stablelm-instruct-alpha-7b](https://huggingface.co/stabilityai/japanese-stablelm-instruct-alpha-7b) | 33.78 | 48.39 | 28.95 | 18.09 | 26.11 | 47.37 |
+| [stabilityai/japanese-stablelm-instruct-alpha-7b-v2](https://huggingface.co/stabilityai/japanese-stablelm-instruct-alpha-7b-v2) | 33.51 | 47.03 | 31.58 | 18.34 | 26.74 | 43.86 |
 | [cyberagent/open-calm-3b](https://huggingface.co/cyberagent/open-calm-3b) | 32.56 | 32.15 | 31.58 | 18.09 | 24.84 | 56.14 |
 | [line-corporation/japanese-large-lm-3.6b](https://huggingface.co/line-corporation/japanese-large-lm-3.6b) | 31.61 | 43.25 | 26.32 | 17.59 | 25.26 | 45.61 |
 | [line-corporation/japanese-large-lm-1.7b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-1.7b-instruction-sft) | 31.10 | 36.99 | 28.95 | 15.58 | 24.84 | 49.12 |
