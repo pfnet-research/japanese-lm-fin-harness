@@ -50,11 +50,10 @@ This is a harness for Japanese language model evaluation in the financial domain
  3. Choose your prompt template based on docs/prompt_templates.md and num_fewshots (In this official leaderboard, we use prompt template peforming the best score.)
  4. Replace `TEMPLATE` to the version and change `MODEL_PATH` . And, save the script as harness.sh
     ```
-    MODEL_ARGS="pretrained=MODEL_PATH,load_in_8bit=True,other_options"
+    MODEL_ARGS="pretrained=MODEL_PATH,other_options"
     TASK="chabsa-1.0-TEMPLATE,cma_basics-1.0-TEMPLATE,cpa_audit-1.0-TEMPLATE,security_sales_1-1.0-0.2,fp2-1.0-TEMPLATE"
     python main.py --model hf --model_args $MODEL_ARGS --tasks $TASK --num_fewshot "0,0,0,0,0" --device "cuda" --output_path "result.json"
     ```
-    For reducing the computational burden, our leaderboard uses the 8bit calculation.
  5. Run the script
     ```
     poetry run bash harness.sh
