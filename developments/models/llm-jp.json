@@ -6,7 +6,7 @@
         ],
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
+        "gpu_vram_gb": 32,
         "require_hf_login": false
     },
     {
@@ -26,7 +26,7 @@
         ],
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
+        "gpu_vram_gb": 32,
         "require_hf_login": false
     },
     {
@@ -36,7 +36,7 @@
         ],
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
+        "gpu_vram_gb": 32,
         "require_hf_login": false
     },
     {
@@ -46,7 +46,7 @@
         ],
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
+        "gpu_vram_gb": 32,
         "require_hf_login": false
     }
 ]

@@ -139,7 +139,7 @@ def main() -> None:
         )
         harness_command = f"""MODEL_ARGS="{','.join(model_args)}"
 TASK="{task}"
-python main.py --model hf --model_args $MODEL_ARGS --tasks $TASK --num_fewshot "{num_fewshots}" --device "cuda" --output_path "models/{model_name}/result.json"
+python main.py --model {'hf-causal' if cast(str, model_setting['model']).startswith('pfnet/plamo') else 'hf-causal-experimental'} --model_args $MODEL_ARGS --tasks $TASK --num_fewshot "{num_fewshots}" --device "cuda" --output_path "models/{model_name}/result.json"
 # Estimated results: {values}
 """
         save_path = os.path.join(args.outputs_path, model_name, "harness.sh")

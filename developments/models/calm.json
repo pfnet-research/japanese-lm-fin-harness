@@ -4,9 +4,9 @@
         "model_args": [
             "use_fast=True"
         ],
-        "memory_Gi": 64,
+        "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 32,
+        "gpu_vram_gb": 16,
         "require_hf_login": false
     },
     {
@@ -64,9 +64,9 @@
         "model_args": [
             "use_fast=True"
         ],
-        "memory_Gi": 64,
+        "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 32,
+        "gpu_vram_gb": 16,
         "require_hf_login": false
     },
     {
@@ -74,9 +74,9 @@
         "model_args": [
             "use_fast=True"
         ],
-        "memory_Gi": 64,
+        "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 32,
+        "gpu_vram_gb": 16,
         "require_hf_login": false
     }
 ]

@@ -34,49 +34,49 @@
     {
         "model": "rinna/bilingual-gpt-neox-4b",
         "model_args": [],
-        "memory_Gi": 48,
+        "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
+        "gpu_vram_gb": 16,
         "require_hf_login": false
     },
     {
         "model": "rinna/bilingual-gpt-neox-4b-instruction-sft",
         "model_args": [],
-        "memory_Gi": 48,
+        "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
+        "gpu_vram_gb": 16,
         "require_hf_login": false
     },
     {
         "model": "rinna/bilingual-gpt-neox-4b-instruction-ppo",
         "model_args": [],
-        "memory_Gi": 48,
+        "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
+        "gpu_vram_gb": 16,
         "require_hf_login": false
     },
     {
         "model": "rinna/youri-7b",
         "model_args": [],
-        "memory_Gi": 64,
+        "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 32,
+        "gpu_vram_gb": 16,
         "require_hf_login": false
     },
     {
         "model": "rinna/youri-7b-instruction",
         "model_args": [],
-        "memory_Gi": 64,
+        "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 32,
+        "gpu_vram_gb": 16,
         "require_hf_login": false
     },
     {
         "model": "rinna/youri-7b-chat",
         "model_args": [],
-        "memory_Gi": 64,
+        "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 32,
+        "gpu_vram_gb": 16,
         "require_hf_login": false
     }
 ]

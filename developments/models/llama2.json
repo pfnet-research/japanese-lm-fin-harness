@@ -2,17 +2,17 @@
     {
         "model": "meta-llama/Llama-2-7b-hf",
         "model_args": [],
-        "memory_Gi": 48,
+        "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 32,
+        "gpu_vram_gb": 16,
         "require_hf_login": true
     },
     {
         "model": "meta-llama/Llama-2-7b-chat-hf",
         "model_args": [],
-        "memory_Gi": 48,
+        "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 32,
+        "gpu_vram_gb": 16,
         "require_hf_login": true
     },
     {
@@ -20,7 +20,7 @@
         "model_args": [],
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
+        "gpu_vram_gb": 32,
         "require_hf_login": true
     },
     {
@@ -28,16 +28,16 @@
         "model_args": [],
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
+        "gpu_vram_gb": 32,
         "require_hf_login": true
     },
     {
         "model": "meta-llama/Llama-2-70b-hf",
         "model_args": [
-            "load_in_8bit=True",
-            "device_map=auto"
+            "use_accelerate=True",
+            "device_map_option=auto"
         ],
-        "memory_Gi": 512,
+        "memory_Gi": 378,
         "n_gpu": 2,
         "gpu_vram_gb": 80,
         "require_hf_login": true
@@ -45,10 +45,10 @@
     {
         "model": "meta-llama/Llama-2-70b-chat-hf",
         "model_args": [
-            "load_in_8bit=True",
-            "device_map=auto"
+            "use_accelerate=True",
+            "device_map_option=auto"
         ],
-        "memory_Gi": 128,
+        "memory_Gi": 378,
         "n_gpu": 2,
         "gpu_vram_gb": 80,
         "require_hf_login": true
