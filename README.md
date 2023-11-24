@@ -5,6 +5,8 @@ This is a harness for Japanese language model evaluation in the financial domain
 <!-- lb start -->
 | Model | Ave. | chabsa | cma_basics | cpa_audit | fp2 | security_sales_1 |
 | --- | --- | --- | --- | --- | --- | --- |
+| [meta-llama/Llama-2-70b-hf](https://huggingface.co/meta-llama/Llama-2-70b-hf) | 41.68 | 54.05 | 47.37 | 18.84 | 32.00 | 56.14 |
+| [meta-llama/Llama-2-70b-chat-hf](https://huggingface.co/meta-llama/Llama-2-70b-chat-hf) | 41.58 | 58.81 | 42.11 | 19.35 | 28.00 | 59.65 |
 | [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf) | 39.08 | 55.77 | 42.11 | 19.35 | 29.05 | 49.12 |
 | [rinna/youri-7b-instruction](https://huggingface.co/rinna/youri-7b-instruction) | 37.89 | 56.26 | 31.58 | 20.35 | 28.63 | 52.63 |
 | [rinna/japanese-gpt-neox-3.6b-instruction-ppo](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-ppo) | 35.88 | 49.70 | 39.47 | 18.84 | 24.00 | 47.37 |
@@ -16,6 +18,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [rinna/youri-7b](https://huggingface.co/rinna/youri-7b) | 34.68 | 48.70 | 34.21 | 14.57 | 25.05 | 50.88 |
 | [llm-jp/llm-jp-13b-instruct-full-dolly-oasst-v1.0](https://huggingface.co/llm-jp/llm-jp-13b-instruct-full-dolly-oasst-v1.0) | 34.67 | 53.50 | 31.58 | 16.08 | 24.84 | 47.37 |
 | [llm-jp/llm-jp-1.3b-v1.0](https://huggingface.co/llm-jp/llm-jp-1.3b-v1.0) | 34.57 | 41.65 | 36.84 | 18.34 | 23.37 | 52.63 |
+| [meta-llama/Llama-2-13b-hf](https://huggingface.co/meta-llama/Llama-2-13b-hf) | 34.42 | 45.27 | 31.58 | 11.31 | 27.79 | 56.14 |
 | [stabilityai/japanese-stablelm-base-alpha-7b](https://huggingface.co/stabilityai/japanese-stablelm-base-alpha-7b) | 33.94 | 44.73 | 28.95 | 17.34 | 27.79 | 50.88 |
 | [matsuo-lab/weblab-10b](https://huggingface.co/matsuo-lab/weblab-10b) | 33.93 | 51.84 | 31.58 | 17.09 | 25.26 | 43.86 |
 | [stabilityai/japanese-stablelm-instruct-alpha-7b](https://huggingface.co/stabilityai/japanese-stablelm-instruct-alpha-7b) | 33.78 | 48.39 | 28.95 | 18.09 | 26.11 | 47.37 |
