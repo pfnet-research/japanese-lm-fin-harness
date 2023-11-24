@@ -1,34 +1,46 @@
-# japanese-lm-fin-harness
+# Japanese Language Model Financial Evaluation Harness
+This is a harness for Japanese language model evaluation in the financial domain.
 
 ## Leaderboard
 <!-- lb start -->
-| Model | Ave. | chabsa | cma_basics | cpa | security_sales_1 |
-| --- | --- | --- | --- | --- | --- |
-| [rinna/japanese-gpt-neox-3.6b-instruction-ppo](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-ppo) | 39.97 | 49.69 | 39.47 | 16.33 | 54.39 |
-| [stabilityai/japanese-stablelm-instruct-alpha-7b-v2](https://huggingface.co/stabilityai/japanese-stablelm-instruct-alpha-7b-v2) | 39.29 | 50.85 | 36.84 | 18.59 | 50.88 |
-| [meta-llama/Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) | 37.32 | 51.63 | 34.21 | 14.32 | 49.12 |
-| [pfnet/plamo-13b](https://huggingface.co/pfnet/plamo-13b) | 35.78 | 50.97 | 28.95 | 15.83 | 47.37 |
-| [meta-llama/Llama-2-13b-hf](https://huggingface.co/meta-llama/Llama-2-13b-hf) | 35.63 | 45.24 | 31.58 | 13.07 | 52.63 |
-| [line-corporation/japanese-large-lm-1.7b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-1.7b-instruction-sft) | 35.49 | 37.04 | 34.21 | 18.09 | 52.63 |
-| [matsuo-lab/weblab-10b](https://huggingface.co/matsuo-lab/weblab-10b) | 35.29 | 39.97 | 34.21 | 16.08 | 50.88 |
-| [cyberagent/open-calm-medium](https://huggingface.co/cyberagent/open-calm-medium) | 34.05 | 33.14 | 42.11 | 17.09 | 43.86 |
-| [meta-llama/Llama-2-70b-hf](https://huggingface.co/meta-llama/Llama-2-70b-hf) | 33.12 | 48.99 | 21.05 | 15.08 | 47.37 |
-| [rinna/japanese-gpt-neox-3.6b-instruction-sft-v2](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-sft-v2) | 33.04 | 38.12 | 21.05 | 20.35 | 52.63 |
-| [rinna/japanese-gpt-neox-3.6b-instruction-sft](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-sft) | 32.81 | 48.39 | 34.21 | 11.81 | 36.84 |
-| [rinna/youri-7b](https://huggingface.co/rinna/youri-7b) | 32.48 | 36.28 | 23.68 | 19.10 | 50.88 |
-| [cyberagent/open-calm-1b](https://huggingface.co/cyberagent/open-calm-1b) | 32.15 | 37.06 | 26.32 | 21.36 | 43.86 |
-| [cyberagent/calm2-7b](https://huggingface.co/cyberagent/calm2-7b) | 32.00 | 44.13 | 23.68 | 14.57 | 45.61 |
-| [line-corporation/japanese-large-lm-1.7b](https://huggingface.co/line-corporation/japanese-large-lm-1.7b) | 31.96 | 33.67 | 28.95 | 17.84 | 47.37 |
-| [cyberagent/open-calm-3b](https://huggingface.co/cyberagent/open-calm-3b) | 31.79 | 35.52 | 23.68 | 17.09 | 50.88 |
-| [cyberagent/open-calm-large](https://huggingface.co/cyberagent/open-calm-large) | 31.72 | 30.71 | 28.95 | 19.85 | 47.37 |
-| [line-corporation/japanese-large-lm-3.6b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-3.6b-instruction-sft) | 29.70 | 24.15 | 34.21 | 20.10 | 40.35 |
-| [abeja/abeja-gpt-neox-japanese-2.7b](https://huggingface.co/abeja/abeja-gpt-neox-japanese-2.7b) | 29.60 | 32.74 | 23.68 | 19.85 | 42.11 |
-| [line-corporation/japanese-large-lm-3.6b](https://huggingface.co/line-corporation/japanese-large-lm-3.6b) | 28.68 | 38.25 | 26.32 | 16.83 | 33.33 |
-| [cyberagent/open-calm-7b](https://huggingface.co/cyberagent/open-calm-7b) | 26.55 | 23.96 | 26.32 | 13.82 | 42.11 |
-| [rinna/bilingual-gpt-neox-4b-instruction-sft](https://huggingface.co/rinna/bilingual-gpt-neox-4b-instruction-sft) | 26.55 | 23.96 | 26.32 | 13.82 | 42.11 |
-| [rinna/japanese-gpt-neox-3.6b](https://huggingface.co/rinna/japanese-gpt-neox-3.6b) | 26.55 | 23.96 | 26.32 | 13.82 | 42.11 |
-| [rinna/bilingual-gpt-neox-4b-instruction-ppo](https://huggingface.co/rinna/bilingual-gpt-neox-4b-instruction-ppo) | 26.55 | 23.96 | 26.32 | 13.82 | 42.11 |
-| [rinna/bilingual-gpt-neox-4b](https://huggingface.co/rinna/bilingual-gpt-neox-4b) | 26.55 | 23.96 | 26.32 | 13.82 | 42.11 |
-| [llm-jp/llm-jp-13b-v1.0](https://huggingface.co/llm-jp/llm-jp-13b-v1.0) | 26.55 | 23.96 | 26.32 | 13.82 | 42.11 |
-| [cyberagent/calm2-7b-chat](https://huggingface.co/cyberagent/calm2-7b-chat) | 26.55 | 23.96 | 26.32 | 13.82 | 42.11 |
 <!-- lb end -->
+
+# How to evaluate your model
+ 1. git clone this repository
+ 2. Install the requirements
+    ```
+    poetry install
+    ```
+ 3. Choose your prompt template based on docs/prompt_templates.md and num_fewshots (In this official leaderboard, we use prompt template peforming the best score.)
+ 4. Replace `TEMPLATE` to the version and change `MODEL_PATH` . And, save the script as harness.sh
+    ```
+    MODEL_ARGS="pretrained=MODEL_PATH,load_in_8bit=True,other_options"
+    TASK="chabsa-1.0-TEMPLATE,cma_basics-1.0-TEMPLATE,cpa_audit-1.0-TEMPLATE,security_sales_1-1.0-0.2,fp2-1.0-TEMPLATE"
+    python main.py --model hf --model_args $MODEL_ARGS --tasks $TASK --num_fewshot "0,0,0,0,0" --device "cuda" --output_path "result.json"
+    ```
+    For reducing the computational burden, our leaderboard uses the 8bit calculation.
+ 5. Run the script
+    ```
+    poetry run bash harness.sh
+    ```
+
+Note: if you want to check the actual prompt, you can chack using the following command:
+```
+poetry run python check_prompt.py
+```
+
+# Citation
+If you use this repository, please cite the following paper:
+```
+TBD
+```
+
+Or cite directory this repository:
+```
+@misc{Hirano2023-jlfh
+    title={{Japanese Language Model Financial Evaluation Harness}},
+    autors={Masanori Hirano},
+    year={2024},
+    url = {https://github.com/pfnet-research/japanese-lm-fin-harness}
+}
+```
