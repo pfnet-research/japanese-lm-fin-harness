@@ -5,7 +5,14 @@ This is a harness for Japanese language model evaluation in the financial domain
 <!-- lb start -->
 | Model | Ave. | chabsa | cma_basics | cpa_audit | fp2 | security_sales_1 |
 | --- | --- | --- | --- | --- | --- | --- |
+| [rinna/japanese-gpt-neox-3.6b-instruction-ppo](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-ppo) | 35.88 | 49.70 | 39.47 | 18.84 | 24.00 | 47.37 |
+| [rinna/japanese-gpt-neox-3.6b-instruction-sft](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-sft) | 34.78 | 48.02 | 34.21 | 18.59 | 25.68 | 47.37 |
+| [rinna/japanese-gpt-neox-3.6b-instruction-sft-v2](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-sft-v2) | 34.76 | 50.21 | 28.95 | 18.59 | 26.95 | 49.12 |
+| [llm-jp/llm-jp-13b-instruct-full-dolly-oasst-v1.0](https://huggingface.co/llm-jp/llm-jp-13b-instruct-full-dolly-oasst-v1.0) | 34.67 | 53.50 | 31.58 | 16.08 | 24.84 | 47.37 |
 | [llm-jp/llm-jp-1.3b-v1.0](https://huggingface.co/llm-jp/llm-jp-1.3b-v1.0) | 34.57 | 41.65 | 36.84 | 18.34 | 23.37 | 52.63 |
+| [stabilityai/japanese-stablelm-base-alpha-7b](https://huggingface.co/stabilityai/japanese-stablelm-base-alpha-7b) | 33.94 | 44.73 | 28.95 | 17.34 | 27.79 | 50.88 |
+| [matsuo-lab/weblab-10b](https://huggingface.co/matsuo-lab/weblab-10b) | 33.93 | 51.84 | 31.58 | 17.09 | 25.26 | 43.86 |
+| [stabilityai/japanese-stablelm-instruct-alpha-7b](https://huggingface.co/stabilityai/japanese-stablelm-instruct-alpha-7b) | 33.78 | 48.39 | 28.95 | 18.09 | 26.11 | 47.37 |
 | [cyberagent/open-calm-3b](https://huggingface.co/cyberagent/open-calm-3b) | 32.56 | 32.15 | 31.58 | 18.09 | 24.84 | 56.14 |
 | [line-corporation/japanese-large-lm-3.6b](https://huggingface.co/line-corporation/japanese-large-lm-3.6b) | 31.61 | 43.25 | 26.32 | 17.59 | 25.26 | 45.61 |
 | [line-corporation/japanese-large-lm-1.7b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-1.7b-instruction-sft) | 31.10 | 36.99 | 28.95 | 15.58 | 24.84 | 49.12 |
@@ -16,6 +23,9 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [cyberagent/open-calm-1b](https://huggingface.co/cyberagent/open-calm-1b) | 30.01 | 36.17 | 23.68 | 18.84 | 24.00 | 47.37 |
 | [line-corporation/japanese-large-lm-1.7b](https://huggingface.co/line-corporation/japanese-large-lm-1.7b) | 29.44 | 34.97 | 26.32 | 17.84 | 24.21 | 43.86 |
 | [cyberagent/open-calm-7b](https://huggingface.co/cyberagent/open-calm-7b) | 26.04 | 23.96 | 26.32 | 13.82 | 24.00 | 42.11 |
+| [rinna/bilingual-gpt-neox-4b-instruction-ppo](https://huggingface.co/rinna/bilingual-gpt-neox-4b-instruction-ppo) | 26.04 | 23.96 | 26.32 | 13.82 | 24.00 | 42.11 |
+| [rinna/bilingual-gpt-neox-4b-instruction-sft](https://huggingface.co/rinna/bilingual-gpt-neox-4b-instruction-sft) | 26.04 | 23.96 | 26.32 | 13.82 | 24.00 | 42.11 |
+| [rinna/japanese-gpt-neox-3.6b](https://huggingface.co/rinna/japanese-gpt-neox-3.6b) | 26.04 | 23.96 | 26.32 | 13.82 | 24.00 | 42.11 |
 <!-- lb end -->
 
 # How to evaluate your model
