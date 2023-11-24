@@ -2,10 +2,10 @@ import json
 
 import datasets
 
-_DESCRIPTION = "TBD"
-_CITATION = "TBD"
-_LICENSE = "TBD"
-_HOMEPAGE = "TBD"
+_DESCRIPTION = "This data is a collection of Japanese Security Sales 1st grade exam questions and answers."
+_CITATION = "https://www.bks.co.jp/layout_design/gaimuin/1111shintoku1_mogi.pdf https://www.bks.co.jp/layout_design/gaimuin/tokukai1_1110.pdf"
+_LICENSE = "MIT"
+_HOMEPAGE = "https://www.bks.co.jp/layout_design/gaimuin/1111shintoku1_mogi.pdf https://www.bks.co.jp/layout_design/gaimuin/tokukai1_1110.pdf"
 
 
 class SecuritySales1(datasets.GeneratorBasedBuilder):

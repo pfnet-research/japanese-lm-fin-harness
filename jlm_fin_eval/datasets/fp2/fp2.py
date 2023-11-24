@@ -2,10 +2,10 @@ import json
 
 import datasets
 
-_DESCRIPTION = "TBD"
-_CITATION = "TBD"
-_LICENSE = "TBD"
-_HOMEPAGE = "TBD"
+_DESCRIPTION = "This data is a collection of Japanese Financial Planner 2nd grade exam questions and answers. This data containes the 2nd grade exam questions and answers for 2021/5,9,2022/1,5,9,2023/1,5,9."
+_CITATION = "https://www.jafp.or.jp/exam/mohan/"
+_LICENSE = "MIT"
+_HOMEPAGE = "https://www.jafp.or.jp/exam/mohan/"
 
 
 class FP2(datasets.GeneratorBasedBuilder):

@@ -2,10 +2,10 @@ import json
 
 import datasets
 
-_DESCRIPTION = "TBD"
-_CITATION = "TBD"
-_LICENSE = "TBD"
-_HOMEPAGE = "TBD"
+_DESCRIPTION = "Basics sample questions for CMA (Certiﬁed Member Analyst of the Securities Analysts Association of Japan). Crawled from https://www.saa.or.jp/curriculum/foundation/pdf/sample_qa.pdf and modified it. Please note that this is not the same as the 1st and 2nd grade of the CMA exam."
+_CITATION = "https://www.saa.or.jp/curriculum/foundation/pdf/sample_qa.pdf"
+_LICENSE = "MIT"
+_HOMEPAGE = "https://www.saa.or.jp/curriculum/foundation/pdf/sample_qa.pdf"
 
 
 class CmaBasics(datasets.GeneratorBasedBuilder):

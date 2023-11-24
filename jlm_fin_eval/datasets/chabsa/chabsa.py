@@ -4,10 +4,10 @@ import os
 
 import datasets
 
-_DESCRIPTION = "TBD"
-_CITATION = "TBD"
-_LICENSE = "TBD"
-_HOMEPAGE = "TBD"
+_DESCRIPTION = "Aspect-Based Sentiment Analysis dataset, named chABSA dataset."
+_CITATION = "https://github.com/chakki-works/chABSA-dataset"
+_LICENSE = "Creative Commons Attribution 4.0 License"
+_HOMEPAGE = "https://github.com/chakki-works/chABSA-dataset"
 
 
 class Chabsa(datasets.GeneratorBasedBuilder):
