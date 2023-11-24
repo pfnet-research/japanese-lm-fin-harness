@@ -33,7 +33,7 @@
         "require_hf_login": false
     },
     {
-        "model": "llm-jp-13b-instruct-full-jaster-dolly-oasst-v1.0",
+        "model": "llm-jp/llm-jp-13b-instruct-full-jaster-dolly-oasst-v1.0",
         "model_args": [
             "trust_remote_code=True",
             "load_in_8bit=True"
@@ -44,7 +44,7 @@
         "require_hf_login": false
     },
     {
-        "model": "llm-jp-13b-instruct-full-dolly-oasst-v1.0",
+        "model": "llm-jp/llm-jp-13b-instruct-full-dolly-oasst-v1.0",
         "model_args": [
             "trust_remote_code=True",
             "load_in_8bit=True"
