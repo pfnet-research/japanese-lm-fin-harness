@@ -3,6 +3,18 @@ This is a harness for Japanese language model evaluation in the financial domain
 
 ## Leaderboard
 <!-- lb start -->
+| Model | Ave. | chabsa | cma_basics | cpa_audit | fp2 | security_sales_1 |
+| --- | --- | --- | --- | --- | --- | --- |
+| [llm-jp/llm-jp-1.3b-v1.0](https://huggingface.co/llm-jp/llm-jp-1.3b-v1.0) | 34.57 | 41.65 | 36.84 | 18.34 | 23.37 | 52.63 |
+| [line-corporation/japanese-large-lm-3.6b](https://huggingface.co/line-corporation/japanese-large-lm-3.6b) | 31.61 | 43.25 | 26.32 | 17.59 | 25.26 | 45.61 |
+| [line-corporation/japanese-large-lm-1.7b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-1.7b-instruction-sft) | 31.10 | 36.99 | 28.95 | 15.58 | 24.84 | 49.12 |
+| [line-corporation/japanese-large-lm-3.6b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-3.6b-instruction-sft) | 31.08 | 37.89 | 28.95 | 17.84 | 28.63 | 42.11 |
+| [cyberagent/open-calm-large](https://huggingface.co/cyberagent/open-calm-large) | 30.82 | 34.67 | 31.58 | 17.59 | 24.63 | 45.61 |
+| [cyberagent/open-calm-medium](https://huggingface.co/cyberagent/open-calm-medium) | 30.64 | 32.39 | 28.95 | 18.34 | 24.42 | 49.12 |
+| [cyberagent/open-calm-small](https://huggingface.co/cyberagent/open-calm-small) | 30.21 | 33.50 | 26.32 | 17.09 | 25.05 | 49.12 |
+| [cyberagent/open-calm-1b](https://huggingface.co/cyberagent/open-calm-1b) | 30.01 | 36.17 | 23.68 | 18.84 | 24.00 | 47.37 |
+| [line-corporation/japanese-large-lm-1.7b](https://huggingface.co/line-corporation/japanese-large-lm-1.7b) | 29.44 | 34.97 | 26.32 | 17.84 | 24.21 | 43.86 |
+| [cyberagent/open-calm-7b](https://huggingface.co/cyberagent/open-calm-7b) | 26.04 | 23.96 | 26.32 | 13.82 | 24.00 | 42.11 |
 <!-- lb end -->
 
 # How to evaluate your model

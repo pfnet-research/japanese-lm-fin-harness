@@ -1,12 +1,17 @@
 import argparse
 import fnmatch
 import json
-import logging
+import os
+
+import openai
 
 from jlm_fin_eval import evaluator
 from jlm_fin_eval import tasks
 
-logging.getLogger("openai").setLevel(logging.WARNING)
+openai.api_type = os.environ["OPENAI_API_TYPE"]
+openai.api_base = os.environ["OPENAI_API_BASE"]
+openai.api_version = os.environ["OPENAI_API_VERSION"]
+openai.api_key = os.environ["OPENAI_API_SECRET_KEY"]
 
 
 class MultiChoice:
