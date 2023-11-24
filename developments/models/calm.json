@@ -2,21 +2,19 @@
     {
         "model": "cyberagent/open-calm-7b",
         "model_args": [
-            "use_fast=True",
-            "load_in_8bit=True"
+            "use_fast=True"
         ],
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 16,
+        "gpu_vram_gb": 32,
         "require_hf_login": false
     },
     {
         "model": "cyberagent/open-calm-3b",
         "model_args": [
-            "use_fast=True",
-            "load_in_8bit=True"
+            "use_fast=True"
         ],
-        "memory_Gi": 64,
+        "memory_Gi": 32,
         "n_gpu": 1,
         "gpu_vram_gb": 16,
         "require_hf_login": false
@@ -24,10 +22,9 @@
     {
         "model": "cyberagent/open-calm-1b",
         "model_args": [
-            "use_fast=True",
-            "load_in_8bit=True"
+            "use_fast=True"
         ],
-        "memory_Gi": 64,
+        "memory_Gi": 24,
         "n_gpu": 1,
         "gpu_vram_gb": 16,
         "require_hf_login": false
@@ -35,10 +32,9 @@
     {
         "model": "cyberagent/open-calm-large",
         "model_args": [
-            "use_fast=True",
-            "load_in_8bit=True"
+            "use_fast=True"
         ],
-        "memory_Gi": 64,
+        "memory_Gi": 24,
         "n_gpu": 1,
         "gpu_vram_gb": 16,
         "require_hf_login": false
@@ -46,10 +42,9 @@
     {
         "model": "cyberagent/open-calm-medium",
         "model_args": [
-            "use_fast=True",
-            "load_in_8bit=True"
+            "use_fast=True"
         ],
-        "memory_Gi": 64,
+        "memory_Gi": 16,
         "n_gpu": 1,
         "gpu_vram_gb": 16,
         "require_hf_login": false
@@ -57,10 +52,9 @@
     {
         "model": "cyberagent/open-calm-small",
         "model_args": [
-            "use_fast=True",
-            "load_in_8bit=True"
+            "use_fast=True"
         ],
-        "memory_Gi": 64,
+        "memory_Gi": 16,
         "n_gpu": 1,
         "gpu_vram_gb": 16,
         "require_hf_login": false
@@ -68,23 +62,21 @@
     {
         "model": "cyberagent/calm2-7b",
         "model_args": [
-            "use_fast=True",
-            "load_in_8bit=True"
+            "use_fast=True"
         ],
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 16,
+        "gpu_vram_gb": 32,
         "require_hf_login": false
     },
     {
         "model": "cyberagent/calm2-7b-chat",
         "model_args": [
-            "use_fast=True",
-            "load_in_8bit=True"
+            "use_fast=True"
         ],
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 16,
+        "gpu_vram_gb": 32,
         "require_hf_login": false
     }
 ]
