@@ -5,9 +5,15 @@ This is a harness for Japanese language model evaluation in the financial domain
 <!-- lb start -->
 | Model | Ave. | chabsa | cma_basics | cpa_audit | fp2 | security_sales_1 |
 | --- | --- | --- | --- | --- | --- | --- |
+| [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf) | 39.08 | 55.77 | 42.11 | 19.35 | 29.05 | 49.12 |
+| [rinna/youri-7b-instruction](https://huggingface.co/rinna/youri-7b-instruction) | 37.89 | 56.26 | 31.58 | 20.35 | 28.63 | 52.63 |
 | [rinna/japanese-gpt-neox-3.6b-instruction-ppo](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-ppo) | 35.88 | 49.70 | 39.47 | 18.84 | 24.00 | 47.37 |
+| [meta-llama/Llama-2-7b-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) | 34.87 | 51.59 | 34.21 | 13.32 | 26.11 | 49.12 |
+| [pfnet/plamo-13b](https://huggingface.co/pfnet/plamo-13b) | 34.79 | 51.41 | 34.21 | 14.57 | 24.63 | 49.12 |
+| [meta-llama/Llama-2-13b-chat-hf](https://huggingface.co/meta-llama/Llama-2-13b-chat-hf) | 34.78 | 45.40 | 39.47 | 17.09 | 26.32 | 45.61 |
 | [rinna/japanese-gpt-neox-3.6b-instruction-sft](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-sft) | 34.78 | 48.02 | 34.21 | 18.59 | 25.68 | 47.37 |
 | [rinna/japanese-gpt-neox-3.6b-instruction-sft-v2](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-sft-v2) | 34.76 | 50.21 | 28.95 | 18.59 | 26.95 | 49.12 |
+| [rinna/youri-7b](https://huggingface.co/rinna/youri-7b) | 34.68 | 48.70 | 34.21 | 14.57 | 25.05 | 50.88 |
 | [llm-jp/llm-jp-13b-instruct-full-dolly-oasst-v1.0](https://huggingface.co/llm-jp/llm-jp-13b-instruct-full-dolly-oasst-v1.0) | 34.67 | 53.50 | 31.58 | 16.08 | 24.84 | 47.37 |
 | [llm-jp/llm-jp-1.3b-v1.0](https://huggingface.co/llm-jp/llm-jp-1.3b-v1.0) | 34.57 | 41.65 | 36.84 | 18.34 | 23.37 | 52.63 |
 | [stabilityai/japanese-stablelm-base-alpha-7b](https://huggingface.co/stabilityai/japanese-stablelm-base-alpha-7b) | 33.94 | 44.73 | 28.95 | 17.34 | 27.79 | 50.88 |
@@ -15,6 +21,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [stabilityai/japanese-stablelm-instruct-alpha-7b](https://huggingface.co/stabilityai/japanese-stablelm-instruct-alpha-7b) | 33.78 | 48.39 | 28.95 | 18.09 | 26.11 | 47.37 |
 | [stabilityai/japanese-stablelm-instruct-alpha-7b-v2](https://huggingface.co/stabilityai/japanese-stablelm-instruct-alpha-7b-v2) | 33.51 | 47.03 | 31.58 | 18.34 | 26.74 | 43.86 |
 | [cyberagent/open-calm-3b](https://huggingface.co/cyberagent/open-calm-3b) | 32.56 | 32.15 | 31.58 | 18.09 | 24.84 | 56.14 |
+| [cyberagent/calm2-7b](https://huggingface.co/cyberagent/calm2-7b) | 32.53 | 50.91 | 26.32 | 16.08 | 25.47 | 43.86 |
 | [line-corporation/japanese-large-lm-3.6b](https://huggingface.co/line-corporation/japanese-large-lm-3.6b) | 31.61 | 43.25 | 26.32 | 17.59 | 25.26 | 45.61 |
 | [line-corporation/japanese-large-lm-1.7b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-1.7b-instruction-sft) | 31.10 | 36.99 | 28.95 | 15.58 | 24.84 | 49.12 |
 | [line-corporation/japanese-large-lm-3.6b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-3.6b-instruction-sft) | 31.08 | 37.89 | 28.95 | 17.84 | 28.63 | 42.11 |
@@ -24,9 +31,11 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [cyberagent/open-calm-1b](https://huggingface.co/cyberagent/open-calm-1b) | 30.01 | 36.17 | 23.68 | 18.84 | 24.00 | 47.37 |
 | [line-corporation/japanese-large-lm-1.7b](https://huggingface.co/line-corporation/japanese-large-lm-1.7b) | 29.44 | 34.97 | 26.32 | 17.84 | 24.21 | 43.86 |
 | [cyberagent/open-calm-7b](https://huggingface.co/cyberagent/open-calm-7b) | 26.04 | 23.96 | 26.32 | 13.82 | 24.00 | 42.11 |
+| [cyberagent/calm2-7b-chat](https://huggingface.co/cyberagent/calm2-7b-chat) | 26.04 | 23.96 | 26.32 | 13.82 | 24.00 | 42.11 |
 | [rinna/bilingual-gpt-neox-4b-instruction-ppo](https://huggingface.co/rinna/bilingual-gpt-neox-4b-instruction-ppo) | 26.04 | 23.96 | 26.32 | 13.82 | 24.00 | 42.11 |
 | [rinna/bilingual-gpt-neox-4b-instruction-sft](https://huggingface.co/rinna/bilingual-gpt-neox-4b-instruction-sft) | 26.04 | 23.96 | 26.32 | 13.82 | 24.00 | 42.11 |
 | [rinna/japanese-gpt-neox-3.6b](https://huggingface.co/rinna/japanese-gpt-neox-3.6b) | 26.04 | 23.96 | 26.32 | 13.82 | 24.00 | 42.11 |
+| [llm-jp/llm-jp-13b-v1.0](https://huggingface.co/llm-jp/llm-jp-13b-v1.0) | 26.04 | 23.96 | 26.32 | 13.82 | 24.00 | 42.11 |
 <!-- lb end -->
 
 # How to evaluate your model

@@ -92,7 +92,7 @@ def main() -> None:
                         continue
                     command = (
                         cast(str, run_settings["preprocess"])
-                        + f"poetry run python main.py --model hf --model_args {','.join(model_args)} --task {','.join(task)} --no_cache --output_path {result_path}"
+                        + f"poetry run python main.py --model hf --model_args {','.join(model_args)} --task {','.join(task)} --num_fewshot {n_fewshot} --no_cache --output_path {result_path}"
                         + cast(str, run_settings["postprocess"])
                     )
                     command = (

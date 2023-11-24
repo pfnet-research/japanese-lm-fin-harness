@@ -8,10 +8,10 @@ import openai
 from jlm_fin_eval import evaluator
 from jlm_fin_eval import tasks
 
-openai.api_type = os.environ["OPENAI_API_TYPE"]
-openai.api_base = os.environ["OPENAI_API_BASE"]
-openai.api_version = os.environ["OPENAI_API_VERSION"]
-openai.api_key = os.environ["OPENAI_API_SECRET_KEY"]
+openai.api_type = os.environ.get("OPENAI_API_TYPE")
+openai.api_base = os.environ.get("OPENAI_API_BASE")
+openai.api_version = os.environ.get("OPENAI_API_VERSION")
+openai.api_key = os.environ.get("OPENAI_API_SECRET_KEY")
 
 
 class MultiChoice:
