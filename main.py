@@ -62,7 +62,7 @@ def pattern_match(patterns, source_list):
     for pattern in patterns:
         for matching in fnmatch.filter(source_list, pattern):
             task_names.add(matching)
-    return list(task_names)
+    return sorted(list(task_names))
 
 
 def _loglikelihood_tokens(self, requests, disable_tqdm=False):
