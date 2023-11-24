@@ -37,7 +37,7 @@
             "use_accelerate=True",
             "device_map_option=auto"
         ],
-        "memory_Gi": 378,
+        "memory_Gi": 128,
         "n_gpu": 2,
         "gpu_vram_gb": 80,
         "require_hf_login": true
@@ -48,7 +48,7 @@
             "use_accelerate=True",
             "device_map_option=auto"
         ],
-        "memory_Gi": 378,
+        "memory_Gi": 128,
         "n_gpu": 2,
         "gpu_vram_gb": 80,
         "require_hf_login": true
