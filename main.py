@@ -4,12 +4,17 @@ import json
 import os
 
 import openai
+from lm_eval import utils
+from lm_eval.models.gpt3 import GPT3LM
+from lm_eval.models.gpt3 import get_result
+from lm_eval.models.gpt3 import oa_completion
+from tqdm import tqdm
 
 from jlm_fin_eval import evaluator
 from jlm_fin_eval import tasks
 
-openai.api_type = os.environ.get("OPENAI_API_TYPE")
-openai.api_base = os.environ.get("OPENAI_API_BASE")
+openai.api_type = os.environ.get("OPENAI_API_TYPE", "open_ai")
+openai.api_base = os.environ.get("OPENAI_API_BASE", "https://api.openai.com/v1")
 openai.api_version = os.environ.get("OPENAI_API_VERSION")
 openai.api_key = os.environ.get("OPENAI_API_SECRET_KEY")
 
@@ -31,7 +36,7 @@ class MultiChoice:
             yield choice
 
 
-def parse_args():
+def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", required=True)
     parser.add_argument("--model_args", default="")
@@ -58,6 +63,61 @@ def pattern_match(patterns, source_list):
         for matching in fnmatch.filter(source_list, pattern):
             task_names.add(matching)
     return list(task_names)
+
+
+def _loglikelihood_tokens(self, requests, disable_tqdm=False):
+    res = []
+
+    def _collate(x):
+        # this doesn't efficiently handle last-token differences yet, but those are kinda annoying because
+        # it's not guaranteed that the 100 or so logprobs we get to see actually contain all the continuations
+        # we care about and so we need some kind of backup for when it isn't
+        toks = x[1] + x[2]
+        return -len(toks), tuple(toks)
+
+    re_ord = utils.Reorderer(requests, _collate)
+
+    for chunk in tqdm(
+        list(utils.chunks(re_ord.get_reordered(), self.REQ_CHUNK_SIZE)),
+        disable=disable_tqdm,
+    ):
+        inps = []
+        ctxlens = []
+        for cache_key, context_enc, continuation_enc in chunk:
+            # max_length+1 because the API takes up to 2049 tokens, including the first context token
+            inp = (context_enc + continuation_enc)[-(self.max_length + 1) :]
+            # TODO: the logic is much simpler if we just look at the length of continuation tokens
+            ctxlen = len(context_enc) - max(
+                0, len(context_enc) + len(continuation_enc) - (self.max_length + 1)
+            )
+
+            inps.append(inp)
+            ctxlens.append(ctxlen)
+
+        response = oa_completion(
+            engine=self.engine,
+            prompt=[self.tok_decode(inp) for inp in inps],
+            echo=True,
+            max_tokens=0,
+            temperature=0.0,
+            logprobs=10,
+        )
+
+        for resp, ctxlen, (cache_key, context_enc, continuation_enc) in zip(
+            response.choices, ctxlens, chunk
+        ):
+            answer = get_result(resp, ctxlen)
+
+            res.append(answer)
+
+            # partial caching
+            if cache_key is not None:
+                self.cache_hook.add_partial("loglikelihood", cache_key, answer)
+
+    return re_ord.get_original(res)
+
+
+GPT3LM._loglikelihood_tokens = _loglikelihood_tokens
 
 
 def main():
