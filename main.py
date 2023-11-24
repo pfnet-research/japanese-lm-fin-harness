@@ -2,6 +2,8 @@ import argparse
 import fnmatch
 import json
 import os
+from typing import Iterator
+from typing import List
 
 import openai
 from lm_eval import utils
@@ -20,18 +22,18 @@ openai.api_key = os.environ.get("OPENAI_API_SECRET_KEY")
 
 
 class MultiChoice:
-    def __init__(self, choices):
+    def __init__(self, choices: List[str]) -> None:
         self.choices = choices
 
     # Simple wildcard support (linux filename patterns)
-    def __contains__(self, values):
+    def __contains__(self, values: str) -> bool:
         for value in values.split(","):
             if len(fnmatch.filter(self.choices, value)) == 0:
                 return False
 
         return True
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[str]:
         for choice in self.choices:
             yield choice
 
@@ -57,7 +59,7 @@ def parse_args() -> argparse.Namespace:
 
 # Returns a list containing all values of the source_list that
 # match at least one of the patterns
-def pattern_match(patterns, source_list):
+def pattern_match(patterns: List[str], source_list: List[str]) -> List[str]:
     task_names = set()
     for pattern in patterns:
         for matching in fnmatch.filter(source_list, pattern):
@@ -120,7 +122,7 @@ def _loglikelihood_tokens(self, requests, disable_tqdm=False):
 GPT3LM._loglikelihood_tokens = _loglikelihood_tokens
 
 
-def main():
+def main() -> None:
     args = parse_args()
 
     assert not args.provide_description  # not implemented

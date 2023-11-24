@@ -1,30 +1,16 @@
 import argparse
 import collections
-import fnmatch
 import itertools
 import random
+from typing import List
+from typing import cast
 
 import jlm_fin_eval.tasks
+from main import MultiChoice
+from main import pattern_match
 
 
-class MultiChoice:
-    def __init__(self, choices):
-        self.choices = choices
-
-    # Simple wildcard support (linux filename patterns)
-    def __contains__(self, values):
-        for value in values.split(","):
-            if len(fnmatch.filter(self.choices, value)) == 0:
-                return False
-
-        return True
-
-    def __iter__(self):
-        for choice in self.choices:
-            yield choice
-
-
-def parse_args():
+def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--tasks", default=None, choices=MultiChoice(jlm_fin_eval.tasks.ALL_TASKS)
@@ -34,17 +20,7 @@ def parse_args():
     return parser.parse_args()
 
 
-# Returns a list containing all values of the source_list that
-# match at least one of the patterns
-def pattern_match(patterns, source_list):
-    task_names = set()
-    for pattern in patterns:
-        for matching in fnmatch.filter(source_list, pattern):
-            task_names.add(matching)
-    return list(task_names)
-
-
-def main():
+def main() -> None:
     args = parse_args()
 
     if args.tasks is None:
@@ -54,10 +30,10 @@ def main():
 
     print(f"Selected Tasks: {task_names}")
 
-    tasks = task_names
+    tasks: List[str] = task_names
     num_fewshot = args.num_fewshot
 
-    task_dict = jlm_fin_eval.tasks.get_task_dict(tasks)
+    task_dict = jlm_fin_eval.tasks.get_task_dict(tasks)  # type: ignore
 
     task_dict_items = [
         (name, task)
