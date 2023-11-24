@@ -122,7 +122,10 @@ def main():
         answer = task.doc_to_target(doc)
         results = [0.0 if x.args[1] == answer else -1.0 for x in requests]
         try:
-            answer_index = results.index(0.0)
+            if task_name.startswith("chabsa") and 0.0 not in results:
+                answer_index = 0
+            else:
+                answer_index = results.index(0.0)
         except Exception as e:
             print(f"error in {task_name}: \n{requests}\n{answer}")
             raise e
