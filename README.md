@@ -6,6 +6,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | Model | Ave. | chabsa | cma_basics | cpa_audit | fp2 | security_sales_1 |
 | --- | --- | --- | --- | --- | --- | --- |
 | [llm-jp/llm-jp-1.3b-v1.0](https://huggingface.co/llm-jp/llm-jp-1.3b-v1.0) | 34.57 | 41.65 | 36.84 | 18.34 | 23.37 | 52.63 |
+| [cyberagent/open-calm-3b](https://huggingface.co/cyberagent/open-calm-3b) | 32.56 | 32.15 | 31.58 | 18.09 | 24.84 | 56.14 |
 | [line-corporation/japanese-large-lm-3.6b](https://huggingface.co/line-corporation/japanese-large-lm-3.6b) | 31.61 | 43.25 | 26.32 | 17.59 | 25.26 | 45.61 |
 | [line-corporation/japanese-large-lm-1.7b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-1.7b-instruction-sft) | 31.10 | 36.99 | 28.95 | 15.58 | 24.84 | 49.12 |
 | [line-corporation/japanese-large-lm-3.6b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-3.6b-instruction-sft) | 31.08 | 37.89 | 28.95 | 17.84 | 28.63 | 42.11 |
