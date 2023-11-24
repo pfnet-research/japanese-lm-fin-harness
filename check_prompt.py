@@ -2,12 +2,9 @@ import argparse
 import collections
 import fnmatch
 import itertools
-import logging
 import random
 
 import jlm_fin_eval.tasks
-
-logging.getLogger("openai").setLevel(logging.WARNING)
 
 
 class MultiChoice:
