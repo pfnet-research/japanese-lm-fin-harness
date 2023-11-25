@@ -14,6 +14,8 @@ for file_name in glob.glob("models/*/*/result.json"):
         task_name = task.split("-")[0]
         result = results.get("f1", results.get("acc"))
         result = 100 * (result if result else 0)
+        if task_name == "chabsa":
+            result *= 1.5
         result_dict.setdefault(company_model, {})[task_name] = result
         if result:
             results_sum += result
