@@ -7,6 +7,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | --- | --- | --- | --- | --- | --- | --- |
 | openai/gpt-4-32k | 60.06 | 62.11 | 81.58 | 37.44 | 50.74 | 68.42 |
 | openai/gpt-4 | 59.85 | 62.13 | 78.95 | 37.69 | 50.32 | 70.18 |
+| openai/gpt-4-turbo | 58.40 | 61.91 | 76.32 | 36.18 | 50.95 | 66.67 |
 | openai/gpt-35-turbo | 44.28 | 59.99 | 52.63 | 18.09 | 29.26 | 61.40 |
 | [meta-llama/Llama-2-70b-hf](https://huggingface.co/meta-llama/Llama-2-70b-hf) | 41.68 | 54.05 | 47.37 | 18.84 | 32.00 | 56.14 |
 | [meta-llama/Llama-2-70b-chat-hf](https://huggingface.co/meta-llama/Llama-2-70b-chat-hf) | 41.58 | 58.81 | 42.11 | 19.35 | 28.00 | 59.65 |
