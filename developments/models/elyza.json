@@ -1,0 +1,34 @@
+[
+    {
+        "model": "elyza/ELYZA-japanese-Llama-2-7b",
+        "model_args": [],
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    },
+    {
+        "model": "elyza/ELYZA-japanese-Llama-2-7b-instruct",
+        "model_args": [],
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    },
+    {
+        "model": "elyza/ELYZA-japanese-Llama-2-7b-fast",
+        "model_args": [],
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    },
+    {
+        "model": "elyza/ELYZA-japanese-Llama-2-7b-fast-instruct",
+        "model_args": [],
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    }
+]

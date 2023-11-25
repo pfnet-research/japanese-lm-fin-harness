@@ -1,0 +1,35 @@
+[
+    {
+        "model": "Xwin-LM/Xwin-LM-70B-V0.1",
+        "model_args": [
+            "use_accelerate=True",
+            "device_map_option=auto"
+        ],
+        "memory_Gi": 128,
+        "n_gpu": 2,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    },
+    {
+        "model": "Xwin-LM/Xwin-LM-13B-V0.2",
+        "model_args": [
+            "use_accelerate=True",
+            "device_map_option=auto"
+        ],
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    },
+    {
+        "model": "Xwin-LM/Xwin-LM-7B-V0.2",
+        "model_args": [
+            "use_accelerate=True",
+            "device_map_option=auto"
+        ],
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    }
+]

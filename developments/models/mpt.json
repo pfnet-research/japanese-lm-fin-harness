@@ -1,0 +1,38 @@
+[
+    {
+        "model": "mosaicml/mpt-30b",
+        "model_args": [
+            "use_accelerate=True",
+            "device_map_option=auto",
+            "trust_remote_code=True"
+        ],
+        "memory_Gi": 128,
+        "n_gpu": 2,
+        "gpu_vram_gb": 80,
+        "require_hf_login": true
+    },
+    {
+        "model": "mosaicml/mpt-30b-chat",
+        "model_args": [
+            "use_accelerate=True",
+            "device_map_option=auto",
+            "trust_remote_code=True"
+        ],
+        "memory_Gi": 128,
+        "n_gpu": 2,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    },
+    {
+        "model": "mosaicml/mpt-30b-instruct",
+        "model_args": [
+            "use_accelerate=True",
+            "device_map_option=auto",
+            "trust_remote_code=True"
+        ],
+        "memory_Gi": 128,
+        "n_gpu": 2,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    }
+]

@@ -1,0 +1,29 @@
+[
+    {
+        "model": "lmsys/vicuna-33b-v1.3",
+        "model_args": [
+            "use_accelerate=True",
+            "device_map_option=auto"
+        ],
+        "memory_Gi": 128,
+        "n_gpu": 2,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    },
+    {
+        "model": "lmsys/vicuna-13b-v1.5-16k",
+        "model_args": [],
+        "memory_Gi": 128,
+        "n_gpu": 1,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    },
+    {
+        "model": "lmsys/vicuna-7b-v1.5-16k",
+        "model_args": [],
+        "memory_Gi": 128,
+        "n_gpu": 1,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    }
+]
