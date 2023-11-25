@@ -43,7 +43,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [rinna/japanese-gpt-neox-3.6b](https://huggingface.co/rinna/japanese-gpt-neox-3.6b) | 26.04 | 23.96 | 26.32 | 13.82 | 24.00 | 42.11 |
 | [llm-jp/llm-jp-13b-v1.0](https://huggingface.co/llm-jp/llm-jp-13b-v1.0) | 26.04 | 23.96 | 26.32 | 13.82 | 24.00 | 42.11 |
 <!-- lb end -->
-Note: Prompt selection is not performed only for Open AI models. For Open AI models, azure 2023-03-15-preview is used and results are counted as wrong when the content filter is applied.
+Note: Prompt selection is not performed only for Open AI models. For Open AI models, results are counted as wrong when the content filter is applied.
 
 # How to evaluate your model
  1. git clone this repository
