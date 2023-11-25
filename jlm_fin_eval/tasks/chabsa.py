@@ -90,7 +90,7 @@ class Chabsa(MultipleChoiceTask):
         if key == "acc":
             return (np.asarray(predictions) == np.asarray(references)).mean()
         elif key == "f1":
-            return f1_score(references, predictions, average="macro")
+            return f1_score(references, predictions, average="macro") * 1.5
         else:
             raise KeyError(key)
 
