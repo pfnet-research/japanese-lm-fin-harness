@@ -5,6 +5,8 @@ This is a harness for Japanese language model evaluation in the financial domain
 <!-- lb start -->
 | Model | Ave. | chabsa | cma_basics | cpa_audit | fp2 | security_sales_1 |
 | --- | --- | --- | --- | --- | --- | --- |
+| openai/gpt-4 | 59.85 | 62.13 | 78.95 | 37.69 | 50.32 | 70.18 |
+| openai/gpt-35-turbo | 44.28 | 59.99 | 52.63 | 18.09 | 29.26 | 61.40 |
 | [meta-llama/Llama-2-70b-hf](https://huggingface.co/meta-llama/Llama-2-70b-hf) | 41.68 | 54.05 | 47.37 | 18.84 | 32.00 | 56.14 |
 | [meta-llama/Llama-2-70b-chat-hf](https://huggingface.co/meta-llama/Llama-2-70b-chat-hf) | 41.58 | 58.81 | 42.11 | 19.35 | 28.00 | 59.65 |
 | [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf) | 39.08 | 55.77 | 42.11 | 19.35 | 29.05 | 49.12 |
@@ -25,6 +27,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [stabilityai/japanese-stablelm-instruct-alpha-7b-v2](https://huggingface.co/stabilityai/japanese-stablelm-instruct-alpha-7b-v2) | 33.51 | 47.03 | 31.58 | 18.34 | 26.74 | 43.86 |
 | [cyberagent/open-calm-3b](https://huggingface.co/cyberagent/open-calm-3b) | 32.56 | 32.15 | 31.58 | 18.09 | 24.84 | 56.14 |
 | [cyberagent/calm2-7b](https://huggingface.co/cyberagent/calm2-7b) | 32.53 | 50.91 | 26.32 | 16.08 | 25.47 | 43.86 |
+| openai/gpt3 | 31.69 | 23.96 | 44.74 | 17.59 | 26.53 | 45.61 |
 | [line-corporation/japanese-large-lm-3.6b](https://huggingface.co/line-corporation/japanese-large-lm-3.6b) | 31.61 | 43.25 | 26.32 | 17.59 | 25.26 | 45.61 |
 | [line-corporation/japanese-large-lm-1.7b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-1.7b-instruction-sft) | 31.10 | 36.99 | 28.95 | 15.58 | 24.84 | 49.12 |
 | [line-corporation/japanese-large-lm-3.6b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-3.6b-instruction-sft) | 31.08 | 37.89 | 28.95 | 17.84 | 28.63 | 42.11 |
@@ -40,6 +43,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [rinna/japanese-gpt-neox-3.6b](https://huggingface.co/rinna/japanese-gpt-neox-3.6b) | 26.04 | 23.96 | 26.32 | 13.82 | 24.00 | 42.11 |
 | [llm-jp/llm-jp-13b-v1.0](https://huggingface.co/llm-jp/llm-jp-13b-v1.0) | 26.04 | 23.96 | 26.32 | 13.82 | 24.00 | 42.11 |
 <!-- lb end -->
+Note: Prompt selection is not performed only for Open AI models. For Open AI models, azure 2023-03-15-preview is used and results are counted as wrong when the content filter is applied.
 
 # How to evaluate your model
  1. git clone this repository
@@ -75,7 +79,7 @@ Or cite directory this repository:
 @misc{Hirano2023-jlfh
     title={{Japanese Language Model Financial Evaluation Harness}},
     autors={Masanori Hirano},
-    year={2024},
+    year={2023},
     url = {https://github.com/pfnet-research/japanese-lm-fin-harness}
 }
 ```

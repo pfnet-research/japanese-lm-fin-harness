@@ -36,11 +36,15 @@ first_row = (
 md_table = first_row
 for company_model, results in sorted_results:
     md_table += (
-        "| ["
+        "| "
+        + ("[" if not company_model.startswith("openai/") else "")
         + company_model
-        + "](https://huggingface.co/"
-        + company_model.replace("/", "/")
-        + ") | "
+        + (
+            ("](https://huggingface.co/" + company_model.replace("/", "/") + ")")
+            if not company_model.startswith("openai/")
+            else ""
+        )
+        + " | "
         + "{:.2f}".format(results.pop("Ave."))
         + " | "
         + " | ".join(
