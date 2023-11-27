@@ -60,7 +60,7 @@
         "model_args": [],
         "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 16,
+        "gpu_vram_gb": 24,
         "require_hf_login": false
     },
     {
@@ -68,7 +68,7 @@
         "model_args": [],
         "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 16,
+        "gpu_vram_gb": 24,
         "require_hf_login": false
     },
     {
@@ -76,7 +76,7 @@
         "model_args": [],
         "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 16,
+        "gpu_vram_gb": 24,
         "require_hf_login": false
     }
 ]
