@@ -75,6 +75,10 @@ Note: if you want to check the actual prompt, you can chack using the following 
 poetry run python check_prompt.py
 ```
 
+# Model Regulation
+ - Training/Tuning data of the model must not include this evaluation dataset
+   - Japanese annual reports included in chabsa is allowed to be used only if chabsa's sentiment data is not used for training/tuning.
+
 # Citation
 If you use this repository, please cite the following paper:
 ```
