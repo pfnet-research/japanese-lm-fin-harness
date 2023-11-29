@@ -43,7 +43,7 @@ def main() -> None:
         model_name = cast(str, model_setting["model"])
         model_dir = os.path.join(work_dir, model_root_dir, model_name)
 
-        result_json = os.path.join(model_dir, "results.json")
+        result_json = os.path.join(model_dir, "result.json")
         harness_sh = os.path.join(model_dir, "harness.sh")
 
         if not os.path.exists(harness_sh):
