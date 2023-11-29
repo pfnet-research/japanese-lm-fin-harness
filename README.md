@@ -27,6 +27,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [elyza/ELYZA-japanese-Llama-2-7b](https://huggingface.co/elyza/ELYZA-japanese-Llama-2-7b) | 42.99 | 83.48 | 42.11 | 19.60 | 25.89 | 43.86 |
 | [pfnet/plamo-13b](https://huggingface.co/pfnet/plamo-13b) | 42.87 | 76.97 | 39.47 | 21.61 | 27.16 | 49.12 |
 | [stabilityai/japanese-stablelm-base-alpha-7b](https://huggingface.co/stabilityai/japanese-stablelm-base-alpha-7b) | 42.73 | 78.74 | 34.21 | 19.10 | 30.74 | 50.88 |
+| [Xwin-LM/Xwin-LM-7B-V0.2](https://huggingface.co/Xwin-LM/Xwin-LM-7B-V0.2) | 42.73 | 82.79 | 42.11 | 19.85 | 25.05 | 43.86 |
 | [llm-jp/llm-jp-13b-v1.0](https://huggingface.co/llm-jp/llm-jp-13b-v1.0) | 42.39 | 81.24 | 39.47 | 19.10 | 26.53 | 45.61 |
 | [cyberagent/calm2-7b](https://huggingface.co/cyberagent/calm2-7b) | 41.96 | 80.02 | 42.11 | 17.84 | 24.21 | 45.61 |
 | [rinna/japanese-gpt-neox-3.6b-instruction-ppo](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-ppo) | 41.89 | 74.71 | 44.74 | 20.60 | 23.79 | 45.61 |
