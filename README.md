@@ -103,3 +103,8 @@ Or cite directory this repository:
     url = {https://github.com/pfnet-research/japanese-lm-fin-harness}
 }
 ```
+
+# Contribution
+This project is owned by [Preferred Networks](https://www.preferred.jp) and maintained by [Masanori Hirano](https://mhirano.jp).
+
+If you want to add models or evaluation dataset, please let me know via issues or pull requests.
