@@ -6,7 +6,7 @@
             "device_map_option=auto"
         ],
         "memory_Gi": 128,
-        "n_gpu": 2,
+        "n_gpu": 3,
         "gpu_vram_gb": 80,
         "require_hf_login": false
     },
@@ -29,7 +29,7 @@
         ],
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
+        "gpu_vram_gb": 32,
         "require_hf_login": false
     }
 ]

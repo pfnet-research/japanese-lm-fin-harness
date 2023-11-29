@@ -1,0 +1,4 @@
+MODEL_ARGS="pretrained=cyberagent/calm2-7b-chat,use_fast=True"
+TASK="chabsa-1.0-0.1,cma_basics-1.0-0.1,cpa_audit-1.0-0.4,security_sales_1-1.0-0.1.2,fp2-1.0-0.2.1"
+python main.py --model hf-causal-experimental --model_args $MODEL_ARGS --tasks $TASK --num_fewshot "0,4,1,0,0" --no_cache --output_path "models/cyberagent/calm2-7b-chat/result.json"
+# Estimated results: chabsa:0.8087540746463169,cma_basics:0.3684210526315789,cpa_audit:0.18341708542713567,security_sales_1:0.5263157894736842,fp2:0.29894736842105263
