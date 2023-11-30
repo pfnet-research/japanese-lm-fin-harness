@@ -15,6 +15,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [meta-llama/Llama-2-13b-chat-hf](https://huggingface.co/meta-llama/Llama-2-13b-chat-hf) | 46.98 | 87.95 | 52.63 | 19.60 | 27.37 | 47.37 |
 | [elyza/ELYZA-japanese-Llama-2-7b-fast](https://huggingface.co/elyza/ELYZA-japanese-Llama-2-7b-fast) | 46.04 | 82.52 | 44.74 | 17.84 | 30.74 | 54.39 |
 | [lmsys/vicuna-13b-v1.5-16k](https://huggingface.co/lmsys/vicuna-13b-v1.5-16k) | 45.57 | 85.81 | 52.63 | 19.10 | 28.21 | 42.11 |
+| [mosaicml/mpt-30b-instruct](https://huggingface.co/mosaicml/mpt-30b-instruct) | 45.18 | 83.27 | 42.11 | 21.36 | 26.53 | 52.63 |
 | [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf) | 44.86 | 83.70 | 39.47 | 20.35 | 29.89 | 50.88 |
 | [llm-jp/llm-jp-13b-instruct-full-jaster-v1.0](https://huggingface.co/llm-jp/llm-jp-13b-instruct-full-jaster-v1.0) | 44.66 | 85.91 | 39.47 | 20.10 | 26.95 | 50.88 |
 | [meta-llama/Llama-2-13b-hf](https://huggingface.co/meta-llama/Llama-2-13b-hf) | 44.19 | 82.04 | 36.84 | 20.85 | 30.32 | 50.88 |
@@ -25,8 +26,10 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [llm-jp/llm-jp-13b-instruct-full-jaster-dolly-oasst-v1.0](https://huggingface.co/llm-jp/llm-jp-13b-instruct-full-jaster-dolly-oasst-v1.0) | 43.60 | 86.83 | 39.47 | 18.59 | 24.00 | 49.12 |
 | [lmsys/vicuna-33b-v1.3](https://huggingface.co/lmsys/vicuna-33b-v1.3) | 43.44 | 87.81 | 34.21 | 19.60 | 28.21 | 47.37 |
 | [lmsys/vicuna-7b-v1.5-16k](https://huggingface.co/lmsys/vicuna-7b-v1.5-16k) | 43.21 | 84.78 | 39.47 | 19.60 | 24.84 | 47.37 |
+| [mosaicml/mpt-30b-chat](https://huggingface.co/mosaicml/mpt-30b-chat) | 43.10 | 86.40 | 39.47 | 21.36 | 24.42 | 43.86 |
 | [elyza/ELYZA-japanese-Llama-2-7b](https://huggingface.co/elyza/ELYZA-japanese-Llama-2-7b) | 42.99 | 83.48 | 42.11 | 19.60 | 25.89 | 43.86 |
 | [pfnet/plamo-13b](https://huggingface.co/pfnet/plamo-13b) | 42.87 | 76.97 | 39.47 | 21.61 | 27.16 | 49.12 |
+| [mosaicml/mpt-30b](https://huggingface.co/mosaicml/mpt-30b) | 42.80 | 83.44 | 36.84 | 19.60 | 26.74 | 47.37 |
 | [stabilityai/japanese-stablelm-base-alpha-7b](https://huggingface.co/stabilityai/japanese-stablelm-base-alpha-7b) | 42.73 | 78.74 | 34.21 | 19.10 | 30.74 | 50.88 |
 | [Xwin-LM/Xwin-LM-7B-V0.2](https://huggingface.co/Xwin-LM/Xwin-LM-7B-V0.2) | 42.73 | 82.79 | 42.11 | 19.85 | 25.05 | 43.86 |
 | [llm-jp/llm-jp-13b-v1.0](https://huggingface.co/llm-jp/llm-jp-13b-v1.0) | 42.39 | 81.24 | 39.47 | 19.10 | 26.53 | 45.61 |
@@ -42,6 +45,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [rinna/bilingual-gpt-neox-4b-instruction-ppo](https://huggingface.co/rinna/bilingual-gpt-neox-4b-instruction-ppo) | 40.71 | 78.38 | 31.58 | 20.60 | 27.37 | 45.61 |
 | [rinna/bilingual-gpt-neox-4b-instruction-sft](https://huggingface.co/rinna/bilingual-gpt-neox-4b-instruction-sft) | 40.31 | 78.23 | 34.21 | 19.35 | 25.89 | 43.86 |
 | [llm-jp/llm-jp-1.3b-v1.0](https://huggingface.co/llm-jp/llm-jp-1.3b-v1.0) | 39.70 | 75.48 | 36.84 | 19.85 | 24.21 | 42.11 |
+| [elyza/ELYZA-japanese-Llama-2-7b-instruct](https://huggingface.co/elyza/ELYZA-japanese-Llama-2-7b-instruct) | 39.65 | 85.71 | 39.47 | 18.59 | 24.63 | 29.82 |
 | [rinna/japanese-gpt-neox-3.6b](https://huggingface.co/rinna/japanese-gpt-neox-3.6b) | 39.33 | 53.75 | 39.47 | 22.11 | 26.95 | 54.39 |
 | [line-corporation/japanese-large-lm-3.6b](https://huggingface.co/line-corporation/japanese-large-lm-3.6b) | 39.06 | 65.01 | 34.21 | 20.85 | 26.11 | 49.12 |
 | [line-corporation/japanese-large-lm-1.7b](https://huggingface.co/line-corporation/japanese-large-lm-1.7b) | 39.06 | 54.30 | 42.11 | 19.60 | 28.42 | 50.88 |
