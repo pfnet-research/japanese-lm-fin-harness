@@ -18,6 +18,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [meta-llama/Llama-2-7b-chat-hf](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf) | 44.86 | 83.70 | 39.47 | 20.35 | 29.89 | 50.88 |
 | [llm-jp/llm-jp-13b-instruct-full-jaster-v1.0](https://huggingface.co/llm-jp/llm-jp-13b-instruct-full-jaster-v1.0) | 44.66 | 85.91 | 39.47 | 20.10 | 26.95 | 50.88 |
 | [meta-llama/Llama-2-13b-hf](https://huggingface.co/meta-llama/Llama-2-13b-hf) | 44.19 | 82.04 | 36.84 | 20.85 | 30.32 | 50.88 |
+| [rinna/youri-7b-instruction](https://huggingface.co/rinna/youri-7b-instruction) | 43.84 | 86.88 | 34.21 | 21.61 | 27.37 | 49.12 |
 | [llm-jp/llm-jp-13b-instruct-full-dolly-oasst-v1.0](https://huggingface.co/llm-jp/llm-jp-13b-instruct-full-dolly-oasst-v1.0) | 43.76 | 83.23 | 39.47 | 19.60 | 27.37 | 49.12 |
 | [rinna/youri-7b-chat](https://huggingface.co/rinna/youri-7b-chat) | 43.67 | 86.67 | 36.84 | 19.60 | 26.11 | 49.12 |
 | [cyberagent/calm2-7b-chat](https://huggingface.co/cyberagent/calm2-7b-chat) | 43.67 | 81.09 | 36.84 | 18.09 | 29.68 | 52.63 |
