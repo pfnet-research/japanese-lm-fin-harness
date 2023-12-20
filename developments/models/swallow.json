@@ -8,7 +8,7 @@
         "require_hf_login": false
     },
     {
-        "model": "tokyotech-llm/Swallow-7b-chat-hf",
+        "model": "tokyotech-llm/Swallow-7b-instruct-hf",
         "model_args": [],
         "memory_Gi": 32,
         "n_gpu": 1,
@@ -24,7 +24,7 @@
         "require_hf_login": false
     },
     {
-        "model": "tokyotech-llm/Swallow-13b-chat-hf",
+        "model": "tokyotech-llm/Swallow-13b-instruct-hf",
         "model_args": [],
         "memory_Gi": 64,
         "n_gpu": 1,
@@ -37,18 +37,18 @@
             "use_accelerate=false",
             "device_map_option=auto"
         ],
-        "memory_Gi": 128,
+        "memory_Gi": 256,
         "n_gpu": 2,
         "gpu_vram_gb": 80,
         "require_hf_login": false
     },
     {
-        "model": "tokyotech-llm/Swallow-70b-chat-hf",
+        "model": "tokyotech-llm/Swallow-70b-instruct-hf",
         "model_args": [
             "use_accelerate=false",
             "device_map_option=auto"
         ],
-        "memory_Gi": 128,
+        "memory_Gi": 256,
         "n_gpu": 2,
         "gpu_vram_gb": 80,
         "require_hf_login": false
