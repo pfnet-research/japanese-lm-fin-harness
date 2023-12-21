@@ -35,11 +35,10 @@
         "model": "tokyotech-llm/Swallow-70b-hf",
         "model_args": [
             "use_accelerate=false",
-            "device_map_option=auto",
-            "low_cpu_mem_usage=True"
+            "device_map_option=auto"
         ],
         "memory_Gi": 256,
-        "n_gpu": 2,
+        "n_gpu": 4,
         "gpu_vram_gb": 80,
         "require_hf_login": false
     },
@@ -47,11 +46,10 @@
         "model": "tokyotech-llm/Swallow-70b-instruct-hf",
         "model_args": [
             "use_accelerate=false",
-            "device_map_option=auto",
-            "low_cpu_mem_usage=True"
+            "device_map_option=auto"
         ],
         "memory_Gi": 256,
-        "n_gpu": 2,
+        "n_gpu": 4,
         "gpu_vram_gb": 80,
         "require_hf_login": false
     }

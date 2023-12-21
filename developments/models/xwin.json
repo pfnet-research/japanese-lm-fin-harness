@@ -5,8 +5,8 @@
             "use_accelerate=True",
             "device_map_option=auto"
         ],
-        "memory_Gi": 128,
-        "n_gpu": 3,
+        "memory_Gi": 256,
+        "n_gpu": 4,
         "gpu_vram_gb": 80,
         "require_hf_login": false
     },
