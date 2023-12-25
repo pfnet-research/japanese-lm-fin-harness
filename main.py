@@ -11,6 +11,7 @@ from lm_eval.models.gpt3 import GPT3LM
 from lm_eval.models.gpt3 import get_result
 from lm_eval.models.gpt3 import oa_completion
 from tqdm import tqdm
+from transformers.models.auto.tokenization_auto import AutoTokenizer
 
 from jlm_fin_eval import evaluator
 from jlm_fin_eval import tasks
@@ -19,6 +20,16 @@ openai.api_type = os.environ.get("OPENAI_API_TYPE", "open_ai")
 openai.api_base = os.environ.get("OPENAI_API_BASE", "https://api.openai.com/v1")
 openai.api_version = os.environ.get("OPENAI_API_VERSION")
 openai.api_key = os.environ.get("OPENAI_API_SECRET_KEY")
+
+# QWenTokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
+# transformers.models.QWenTokenizer = QWenTokenizer
+# TOKENIZER_MAPPING_NAMES["QWenTokenizer"] = (None, "QWenTokenizer")
+
+
+def from_pretrained(pretrained_model_name_or_path, *inputs, **kwargs):
+    return AutoTokenizer._from_pretrained(
+        pretrained_model_name_or_path, *inputs, trust_remote_code=True, **kwargs
+    )
 
 
 class MultiChoice:
@@ -126,6 +137,10 @@ def main() -> None:
     args = parse_args()
 
     assert not args.provide_description  # not implemented
+
+    if "trust_remote_code=True" in args.model_args:
+        AutoTokenizer._from_pretrained = AutoTokenizer.from_pretrained
+        AutoTokenizer.from_pretrained = from_pretrained
 
     if args.limit:
         print(
