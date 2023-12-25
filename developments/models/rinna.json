@@ -78,5 +78,45 @@
         "n_gpu": 1,
         "gpu_vram_gb": 24,
         "require_hf_login": false
+    },
+    {
+        "model": "rinna/nekomata-14b",
+        "model_args": [
+            "trust_remote_code=True"
+        ],
+        "memory_Gi": 128,
+        "n_gpu": 1,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    },
+    {
+        "model": "rinna/nekomata-14b-instruction",
+        "model_args": [
+            "trust_remote_code=True"
+        ],
+        "memory_Gi": 128,
+        "n_gpu": 1,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    },
+    {
+        "model": "rinna/nekomata-7b",
+        "model_args": [
+            "trust_remote_code=True"
+        ],
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    },
+    {
+        "model": "rinna/nekomata-7b-instruction",
+        "model_args": [
+            "trust_remote_code=True"
+        ],
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
     }
 ]

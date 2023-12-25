@@ -13,7 +13,6 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [meta-llama/Llama-2-70b-chat-hf](https://huggingface.co/meta-llama/Llama-2-70b-chat-hf) | 49.53 | 90.29 | 52.63 | 18.84 | 28.00 | 57.89 |
 | [Xwin-LM/Xwin-LM-13B-V0.2](https://huggingface.co/Xwin-LM/Xwin-LM-13B-V0.2) | 47.53 | 88.11 | 52.63 | 22.11 | 25.68 | 49.12 |
 | [meta-llama/Llama-2-13b-chat-hf](https://huggingface.co/meta-llama/Llama-2-13b-chat-hf) | 46.98 | 87.95 | 52.63 | 19.60 | 27.37 | 47.37 |
-| [tokyotech-llm/Swallow-13b-instruct-hf](https://huggingface.co/tokyotech-llm/Swallow-13b-instruct-hf) | 46.47 | 58.53 | 60.53 | 19.60 | 35.79 | 57.89 |
 | [elyza/ELYZA-japanese-Llama-2-7b-fast](https://huggingface.co/elyza/ELYZA-japanese-Llama-2-7b-fast) | 46.04 | 82.52 | 44.74 | 17.84 | 30.74 | 54.39 |
 | [lmsys/vicuna-13b-v1.5-16k](https://huggingface.co/lmsys/vicuna-13b-v1.5-16k) | 45.57 | 85.81 | 52.63 | 19.10 | 28.21 | 42.11 |
 | [mosaicml/mpt-30b-instruct](https://huggingface.co/mosaicml/mpt-30b-instruct) | 45.18 | 83.27 | 42.11 | 21.36 | 26.53 | 52.63 |
@@ -33,7 +32,6 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [mosaicml/mpt-30b](https://huggingface.co/mosaicml/mpt-30b) | 42.80 | 83.44 | 36.84 | 19.60 | 26.74 | 47.37 |
 | [stabilityai/japanese-stablelm-base-alpha-7b](https://huggingface.co/stabilityai/japanese-stablelm-base-alpha-7b) | 42.73 | 78.74 | 34.21 | 19.10 | 30.74 | 50.88 |
 | [Xwin-LM/Xwin-LM-7B-V0.2](https://huggingface.co/Xwin-LM/Xwin-LM-7B-V0.2) | 42.73 | 82.79 | 42.11 | 19.85 | 25.05 | 43.86 |
-| [tokyotech-llm/Swallow-13b-hf](https://huggingface.co/tokyotech-llm/Swallow-13b-hf) | 42.47 | 58.39 | 52.63 | 19.60 | 32.63 | 49.12 |
 | [llm-jp/llm-jp-13b-v1.0](https://huggingface.co/llm-jp/llm-jp-13b-v1.0) | 42.39 | 81.24 | 39.47 | 19.10 | 26.53 | 45.61 |
 | [cyberagent/calm2-7b](https://huggingface.co/cyberagent/calm2-7b) | 41.96 | 80.02 | 42.11 | 17.84 | 24.21 | 45.61 |
 | [rinna/japanese-gpt-neox-3.6b-instruction-ppo](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-ppo) | 41.89 | 74.71 | 44.74 | 20.60 | 23.79 | 45.61 |
@@ -54,14 +52,12 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [pfnet/plamo-13b-instruct-nc](https://huggingface.co/pfnet/plamo-13b-instruct-nc) | 39.03 | 73.58 | 39.47 | 20.60 | 24.63 | 36.84 |
 | [rinna/japanese-gpt-neox-3.6b-instruction-sft](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-sft) | 38.92 | 73.21 | 42.11 | 19.35 | 24.84 | 35.09 |
 | [matsuo-lab/weblab-10b](https://huggingface.co/matsuo-lab/weblab-10b) | 37.73 | 76.84 | 34.21 | 21.11 | 23.16 | 33.33 |
-| [tokyotech-llm/Swallow-7b-hf](https://huggingface.co/tokyotech-llm/Swallow-7b-hf) | 37.70 | 48.25 | 36.84 | 19.35 | 29.68 | 54.39 |
 | openai/text-davinci-003 | 37.68 | 53.92 | 44.74 | 17.59 | 26.53 | 45.61 |
 | [cyberagent/open-calm-7b](https://huggingface.co/cyberagent/open-calm-7b) | 37.67 | 62.89 | 34.21 | 20.35 | 25.26 | 45.61 |
 | [line-corporation/japanese-large-lm-3.6b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-3.6b-instruction-sft) | 37.00 | 59.79 | 36.84 | 21.61 | 24.63 | 42.11 |
 | [rinna/bilingual-gpt-neox-4b](https://huggingface.co/rinna/bilingual-gpt-neox-4b) | 36.80 | 60.51 | 34.21 | 19.60 | 27.58 | 42.11 |
 | [cyberagent/open-calm-3b](https://huggingface.co/cyberagent/open-calm-3b) | 36.14 | 56.06 | 36.84 | 19.60 | 26.11 | 42.11 |
 | [cyberagent/open-calm-small](https://huggingface.co/cyberagent/open-calm-small) | 36.06 | 50.28 | 34.21 | 19.10 | 27.58 | 49.12 |
-| [tokyotech-llm/Swallow-7b-instruct-hf](https://huggingface.co/tokyotech-llm/Swallow-7b-instruct-hf) | 36.04 | 55.76 | 31.58 | 19.10 | 24.63 | 49.12 |
 | [cyberagent/open-calm-medium](https://huggingface.co/cyberagent/open-calm-medium) | 35.85 | 52.40 | 39.47 | 20.35 | 23.16 | 43.86 |
 | [abeja/gpt-neox-japanese-2.7b](https://huggingface.co/abeja/gpt-neox-japanese-2.7b) | 35.63 | 49.67 | 39.47 | 20.10 | 25.05 | 43.86 |
 | [line-corporation/japanese-large-lm-1.7b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-1.7b-instruction-sft) | 35.25 | 55.22 | 39.47 | 18.34 | 24.63 | 38.60 |
