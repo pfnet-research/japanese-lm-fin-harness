@@ -21,10 +21,6 @@ openai.api_base = os.environ.get("OPENAI_API_BASE", "https://api.openai.com/v1")
 openai.api_version = os.environ.get("OPENAI_API_VERSION")
 openai.api_key = os.environ.get("OPENAI_API_SECRET_KEY")
 
-# QWenTokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-7B", trust_remote_code=True)
-# transformers.models.QWenTokenizer = QWenTokenizer
-# TOKENIZER_MAPPING_NAMES["QWenTokenizer"] = (None, "QWenTokenizer")
-
 
 def from_pretrained(pretrained_model_name_or_path, *inputs, **kwargs):
     return AutoTokenizer._from_pretrained(
