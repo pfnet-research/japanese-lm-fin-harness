@@ -108,20 +108,30 @@ poetry run python check_prompt.py
 # Model Regulation
  - Training/Tuning data of the model must not include this evaluation dataset
    - Japanese annual reports included in chabsa is allowed to be used only if chabsa's sentiment data is not used for training/tuning.
+ - No license violation or concerns is argued for the model
 
 # Citation
 If you use this repository, please cite the following paper:
 ```
-TBD
+@preprint{Hirano2023-pre-finllm,
+  title={{金融分野における言語モデル性能評価のための日本語金融ベンチマーク構築}},
+  autor={平野, 正徳},
+  doi={10.51094/jxiv.564},
+  year={2023}
+}
 ```
-
-Or cite directory this repository:
 ```
-@misc{Hirano2023-jlfh
-    title={{Japanese Language Model Financial Evaluation Harness}},
-    autors={Masanori Hirano},
-    year={2023},
-    url = {https://github.com/pfnet-research/japanese-lm-fin-harness}
+@preprint{Hirano2023-pre-finllm,
+  title={{金融分野における言語モデル性能評価のための日本語金融ベンチマーク構築}},
+  autor={平野, 正徳},
+  doi={10.51094/jxiv.564},
+  year={2023}
+}
+@preprint{Hirano2023-pre-finllm,
+  title={{Construction of a Japanese Financial Benchmark for Large Language Model Evaluation in the Financial Domain [in Japanese]}},
+  autor={Masanori HIRANO},
+  doi={10.51094/jxiv.564},
+  year={2023}
 }
 ```
 
