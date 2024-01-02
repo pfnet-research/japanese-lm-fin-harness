@@ -15,6 +15,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [tokyotech-llm/Swallow-13b-instruct-hf](https://huggingface.co/tokyotech-llm/Swallow-13b-instruct-hf) | 52.32 | 87.79 | 60.53 | 19.60 | 35.79 | 57.89 |
 | openai/gpt-35-turbo | 50.27 | 89.98 | 52.63 | 18.09 | 29.26 | 61.40 |
 | [meta-llama/Llama-2-70b-hf](https://huggingface.co/meta-llama/Llama-2-70b-hf) | 50.21 | 89.37 | 57.89 | 20.85 | 30.32 | 52.63 |
+| [lightblue/qarasu-14B-chat-plus-unleashed](https://huggingface.co/lightblue/qarasu-14B-chat-plus-unleashed) | 50.04 | 89.69 | 57.89 | 20.35 | 31.37 | 50.88 |
 | [rinna/nekomata-7b-instruction](https://huggingface.co/rinna/nekomata-7b-instruction) | 49.90 | 90.34 | 47.37 | 22.61 | 27.79 | 61.40 |
 | [Qwen/Qwen-7B-Chat](https://huggingface.co/Qwen/Qwen-7B-Chat) | 49.86 | 86.38 | 50.00 | 20.85 | 32.42 | 59.65 |
 | [meta-llama/Llama-2-70b-chat-hf](https://huggingface.co/meta-llama/Llama-2-70b-chat-hf) | 49.53 | 90.29 | 52.63 | 18.84 | 28.00 | 57.89 |
