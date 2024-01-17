@@ -120,13 +120,13 @@ If you use this repository, please cite the following paper:
 ```
 @preprint{Hirano2023-pre-finllm,
   title={{金融分野における言語モデル性能評価のための日本語金融ベンチマーク構築}},
-  autor={平野, 正徳},
+  author={平野, 正徳},
   doi={10.51094/jxiv.564},
   year={2023}
 }
 @preprint{Hirano2023-pre-finllm,
   title={{金融分野における言語モデル性能評価のための日本語金融ベンチマーク構築}},
-  autor={平野, 正徳},
+  author={平野, 正徳},
   doi={10.51094/jxiv.564},
   year={2023}
 }
@@ -136,7 +136,7 @@ Or cite directory this repository:
 ```
 @misc{Hirano2023-jlfh
     title={{Japanese Language Model Financial Evaluation Harness}},
-    autors={Masanori Hirano},
+    author={Masanori Hirano},
     year={2023},
     url = {https://github.com/pfnet-research/japanese-lm-fin-harness}
 }
