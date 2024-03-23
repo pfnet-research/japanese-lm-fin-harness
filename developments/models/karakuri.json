@@ -1,0 +1,24 @@
+[
+    {
+        "model": "karakuri-ai/karakuri-lm-70b-v0.1",
+        "model_args": [
+            "use_accelerate=true",
+            "device_map_option=auto"
+        ],
+        "memory_Gi": 256,
+        "n_gpu": 8,
+        "gpu_vram_gb": 32,
+        "require_hf_login": false
+    },
+    {
+        "model": "karakuri-ai/karakuri-lm-70b-chat-v0.1",
+        "model_args": [
+            "use_accelerate=true",
+            "device_map_option=auto"
+        ],
+        "memory_Gi": 256,
+        "n_gpu": 8,
+        "gpu_vram_gb": 32,
+        "require_hf_login": false
+    }
+]

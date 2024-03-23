@@ -48,5 +48,35 @@
         "n_gpu": 1,
         "gpu_vram_gb": 32,
         "require_hf_login": false
+    },
+    {
+        "model": "llm-jp/LLM-jp-13b-dpo-lora-hh_rlhf_ja-v1.1",
+        "model_args": [
+            "trust_remote_code=True"
+        ],
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_vram_gb": 32,
+        "require_hf_login": false
+    },
+    {
+        "model": "llm-jp/LLM-jp-13b-instruct-full-dolly_en-dolly_ja-ichikara_003_001-oasst_en-oasst_ja-v1.1",
+        "model_args": [
+            "trust_remote_code=True"
+        ],
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_vram_gb": 32,
+        "require_hf_login": false
+    },
+    {
+        "model": "llm-jp/LLM-jp-13b-instruct-lora-dolly_en-dolly_ja-ichikara_003_001-oasst_en-oasst_ja-v1.1",
+        "model_args": [
+            "trust_remote_code=True"
+        ],
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_vram_gb": 32,
+        "require_hf_login": false
     }
 ]
