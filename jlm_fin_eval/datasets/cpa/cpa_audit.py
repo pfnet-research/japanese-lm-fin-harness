@@ -5,7 +5,7 @@ _DESCRIPTION = (
     "Japanese CPA Audit dataset. This contains short-answer method test on Auditing."
 )
 _CITATION = "Tatsuki MASUDA, Kei NAKAGAWA, Takahiro HOSHINO, Can ChatGPT pass the JCPA exam?: Challenge for the short-answer method test on Auditing, JSAI Technical Report, Type 2 SIG, 2023, Volume 2023, Issue FIN-031, Pages 81-88, Released on J-STAGE October 12, 2023, Online ISSN 2436-5556, https://doi.org/10.11517/jsaisigtwo.2023.FIN-031_81"
-_LICENSE = "Unknown"
+_LICENSE = "MIT License"
 _HOMEPAGE = "https://www.jstage.jst.go.jp/article/jsaisigtwo/2023/FIN-031/2023_81/_article/-char/ja"
 
 
@@ -49,9 +49,7 @@ class CpaAudit(datasets.GeneratorBasedBuilder):
             datasets.SplitGenerator(
                 name=datasets.Split.TEST,  # type: ignore
                 gen_kwargs={
-                    "filepath": dl_manager.download(
-                        "https://drive.google.com/uc?export=download&id=1Wf3YybZ9MAPA33Z6B9-yhZiToOVnFLJH"
-                    ),
+                    "filepath": dl_manager.download("CPA_AUDIT.xlsx"),
                     "split": datasets.Split.TEST,
                 },
             )
