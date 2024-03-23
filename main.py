@@ -1,194 +1,211 @@
 import argparse
-import fnmatch
 import json
+import logging
 import os
-from typing import Iterator
-from typing import List
+import re
+import sys
+from pathlib import Path
+from typing import Union
 
-import openai
+from lm_eval import evaluator
 from lm_eval import utils
-from lm_eval.models.gpt3 import GPT3LM
-from lm_eval.models.gpt3 import get_result
-from lm_eval.models.gpt3 import oa_completion
-from tqdm import tqdm
-from transformers.models.auto.tokenization_auto import AutoTokenizer
+from lm_eval.__main__ import DEFAULT_RESULTS_FILE
+from lm_eval.__main__ import _handle_non_serializable
+from lm_eval.__main__ import parse_eval_args
+from lm_eval.__main__ import setup_parser
+from lm_eval.evaluator import request_caching_arg_to_dict
+from lm_eval.logging_utils import WandbLogger
+from lm_eval.utils import make_table
+from lm_eval.utils import simple_parse_args_string
 
-from jlm_fin_eval import evaluator
-from jlm_fin_eval import tasks
-
-openai.api_type = os.environ.get("OPENAI_API_TYPE", "open_ai")
-openai.api_base = os.environ.get("OPENAI_API_BASE", "https://api.openai.com/v1")
-openai.api_version = os.environ.get("OPENAI_API_VERSION")
-openai.api_key = os.environ.get("OPENAI_API_SECRET_KEY")
+from jlm_fin_eval.tasks import TaskManager
 
 
-def from_pretrained(pretrained_model_name_or_path, *inputs, **kwargs):
-    return AutoTokenizer._from_pretrained(
-        pretrained_model_name_or_path, *inputs, trust_remote_code=True, **kwargs
+def extended_setup_parser() -> argparse.ArgumentParser:
+    parser = setup_parser()
+    parser.add_argument(
+        "--vllm",
+        action="store_true",
+        help="Use vllm",
     )
+    return parser
 
 
-class MultiChoice:
-    def __init__(self, choices: List[str]) -> None:
-        self.choices = choices
+def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
+    if not args:
+        # we allow for args to be passed externally, else we parse them ourselves
+        parser = extended_setup_parser()
+        args = parse_eval_args(parser)
 
-    # Simple wildcard support (linux filename patterns)
-    def __contains__(self, values: str) -> bool:
-        for value in values.split(","):
-            if len(fnmatch.filter(self.choices, value)) == 0:
-                return False
+    if args.wandb_args:
+        wandb_logger = WandbLogger(**simple_parse_args_string(args.wandb_args))
 
-        return True
+    eval_logger = utils.eval_logger
+    eval_logger.setLevel(getattr(logging, f"{args.verbosity}"))
+    eval_logger.info(f"Verbosity set to {args.verbosity}")
+    os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-    def __iter__(self) -> Iterator[str]:
-        for choice in self.choices:
-            yield choice
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--model", required=True)
-    parser.add_argument("--model_args", default="")
-    parser.add_argument("--tasks", default=None, choices=MultiChoice(tasks.ALL_TASKS))
-    parser.add_argument("--provide_description", action="store_true")
-    parser.add_argument("--num_fewshot", type=str, default="0")
-    parser.add_argument("--batch_size", type=int, default=None)
-    parser.add_argument("--device", type=str, default=None)
-    parser.add_argument("--output_path", default=None)
-    parser.add_argument("--limit", type=int, default=None)
-    parser.add_argument("--no_cache", action="store_true")
-    parser.add_argument("--decontamination_ngrams_path", default=None)
-    parser.add_argument("--description_dict_path", default=None)
-    parser.add_argument("--check_integrity", action="store_true")
-
-    return parser.parse_args()
-
-
-# Returns a list containing all values of the source_list that
-# match at least one of the patterns
-def pattern_match(patterns: List[str], source_list: List[str]) -> List[str]:
-    task_names = set()
-    for pattern in patterns:
-        for matching in fnmatch.filter(source_list, pattern):
-            task_names.add(matching)
-    return sorted(list(task_names))
-
-
-def _loglikelihood_tokens(self, requests, disable_tqdm=False):
-    res = []
-
-    def _collate(x):
-        # this doesn't efficiently handle last-token differences yet, but those are kinda annoying because
-        # it's not guaranteed that the 100 or so logprobs we get to see actually contain all the continuations
-        # we care about and so we need some kind of backup for when it isn't
-        toks = x[1] + x[2]
-        return -len(toks), tuple(toks)
-
-    re_ord = utils.Reorderer(requests, _collate)
-
-    for chunk in tqdm(
-        list(utils.chunks(re_ord.get_reordered(), self.REQ_CHUNK_SIZE)),
-        disable=disable_tqdm,
-    ):
-        inps = []
-        ctxlens = []
-        for cache_key, context_enc, continuation_enc in chunk:
-            # max_length+1 because the API takes up to 2049 tokens, including the first context token
-            inp = (context_enc + continuation_enc)[-(self.max_length + 1) :]
-            # TODO: the logic is much simpler if we just look at the length of continuation tokens
-            ctxlen = len(context_enc) - max(
-                0, len(context_enc) + len(continuation_enc) - (self.max_length + 1)
-            )
-
-            inps.append(inp)
-            ctxlens.append(ctxlen)
-
-        response = oa_completion(
-            engine=self.engine,
-            prompt=[self.tok_decode(inp) for inp in inps],
-            echo=True,
-            max_tokens=0,
-            temperature=0.0,
-            logprobs=10,
+    if args.predict_only:
+        args.log_samples = True
+    if (args.log_samples or args.predict_only) and not args.output_path:
+        raise ValueError(
+            "Specify --output_path if providing --log_samples or --predict_only"
         )
 
-        for resp, ctxlen, (cache_key, context_enc, continuation_enc) in zip(
-            response.choices, ctxlens, chunk
-        ):
-            answer = get_result(resp, ctxlen)
-
-            res.append(answer)
-
-            # partial caching
-            if cache_key is not None:
-                self.cache_hook.add_partial("loglikelihood", cache_key, answer)
-
-    return re_ord.get_original(res)
-
-
-GPT3LM._loglikelihood_tokens = _loglikelihood_tokens
-
-
-def main() -> None:
-    args = parse_args()
-
-    assert not args.provide_description  # not implemented
-
-    if "trust_remote_code=True" in args.model_args:
-        AutoTokenizer._from_pretrained = AutoTokenizer.from_pretrained
-        AutoTokenizer.from_pretrained = from_pretrained
+    if args.include_path is not None:
+        eval_logger.info(f"Including path: {args.include_path}")
+    task_manager = TaskManager(args.verbosity, include_path=args.include_path)
 
     if args.limit:
-        print(
-            "WARNING: --limit SHOULD ONLY BE USED FOR TESTING. REAL METRICS SHOULD NOT BE COMPUTED USING LIMIT."
+        eval_logger.warning(
+            " --limit SHOULD ONLY BE USED FOR TESTING."
+            "REAL METRICS SHOULD NOT BE COMPUTED USING LIMIT."
         )
 
     if args.tasks is None:
-        task_names = tasks.ALL_TASKS
+        eval_logger.error("Need to specify task to evaluate.")
+        sys.exit()
+    elif args.tasks == "list":
+        eval_logger.info(
+            "Available Tasks:\n - {}".format("\n - ".join(task_manager.all_tasks))
+        )
+        sys.exit()
     else:
-        task_names = pattern_match(args.tasks.split(","), tasks.ALL_TASKS)
+        if os.path.isdir(args.tasks):
+            import glob
 
-    print(f"Selected Tasks: {task_names}")
+            task_names = []
+            yaml_path = os.path.join(args.tasks, "*.yaml")
+            for yaml_file in glob.glob(yaml_path):
+                config = utils.load_yaml_config(yaml_file)
+                task_names.append(config)
+        else:
+            task_list = args.tasks.split(",")
+            task_names = task_manager.match_tasks(task_list)
+            for task in [task for task in task_list if task not in task_names]:
+                if os.path.isfile(task):
+                    config = utils.load_yaml_config(task)
+                    task_names.append(config)
+            task_missing = [
+                task for task in task_list if task not in task_names and "*" not in task
+            ]  # we don't want errors if a wildcard ("*") task name was used
 
-    if args.num_fewshot is not None:
-        num_fewshot = [int(n) for n in args.num_fewshot.split(",")]
-        if len(args.num_fewshot) == 1:
-            num_fewshot = [num_fewshot[0] for _ in task_names]
-    else:
-        num_fewshot = [0 for _ in task_names]
+            if task_missing:
+                missing = ", ".join(task_missing)
+                eval_logger.error(
+                    f"Tasks were not found: {missing}\n"
+                    f"{utils.SPACING}Try `python main.py --tasks list` for list of available tasks",
+                )
+                raise ValueError(
+                    f"Tasks not found: {missing}. Try `python main.py --tasks list` for list of available tasks, or '--verbosity DEBUG' to troubleshoot task registration issues."
+                )
 
-    description_dict = {}
-    if args.description_dict_path:
-        with open(args.description_dict_path, "r") as f:
-            description_dict = json.load(f)
+    if args.output_path:
+        path = Path(args.output_path)
+        # check if file or 'dir/results.json' exists
+        if path.is_file():
+            raise FileExistsError(f"File already exists at {path}")
+        output_path_file = path.joinpath(DEFAULT_RESULTS_FILE)
+        if output_path_file.is_file():
+            eval_logger.warning(
+                f"File {output_path_file} already exists. Results will be overwritten."
+            )
+        # if path json then get parent dir
+        elif path.suffix in (".json", ".jsonl"):
+            output_path_file = path
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path = path.parent
+        else:
+            path.mkdir(parents=True, exist_ok=True)
+
+    # Respect user's value passed in via CLI, otherwise default to True and add to comma-separated model args
+    if args.trust_remote_code:
+        os.environ["HF_DATASETS_TRUST_REMOTE_CODE"] = str(args.trust_remote_code)
+        args.model_args = (
+            args.model_args
+            + f",trust_remote_code={os.environ['HF_DATASETS_TRUST_REMOTE_CODE']}"
+        )
+
+    eval_logger.info(f"Selected Tasks: {task_names}")
+    eval_logger.info("Loading selected tasks...")
+
+    request_caching_args = request_caching_arg_to_dict(
+        cache_requests=args.cache_requests
+    )
 
     results = evaluator.simple_evaluate(
         model=args.model,
         model_args=args.model_args,
         tasks=task_names,
-        num_fewshot=num_fewshot,
+        num_fewshot=args.num_fewshot,
         batch_size=args.batch_size,
+        max_batch_size=args.max_batch_size,
         device=args.device,
-        no_cache=args.no_cache,
+        use_cache=args.use_cache,
         limit=args.limit,
-        description_dict=description_dict,
-        decontamination_ngrams_path=args.decontamination_ngrams_path,
         check_integrity=args.check_integrity,
+        write_out=args.write_out,
+        log_samples=args.log_samples,
+        gen_kwargs=args.gen_kwargs,
+        task_manager=task_manager,
+        verbosity=args.verbosity,
+        predict_only=args.predict_only,
+        random_seed=args.seed[0],
+        numpy_random_seed=args.seed[1],
+        torch_random_seed=args.seed[2],
+        **request_caching_args,
     )
 
-    dumped = json.dumps(results, indent=2)
-    print(dumped)
+    if results is not None:
+        if args.log_samples:
+            samples = results.pop("samples")
+        dumped = json.dumps(
+            results, indent=2, default=_handle_non_serializable, ensure_ascii=False
+        )
+        if args.show_config:
+            print(dumped)
 
-    if args.output_path:
-        with open(args.output_path, "w") as f:
-            f.write(dumped)
+        batch_sizes = ",".join(map(str, results["config"]["batch_sizes"]))
 
-    print(
-        f"{args.model} ({args.model_args}), limit: {args.limit}, provide_description: {args.provide_description}, "
-        f"num_fewshot: {args.num_fewshot}, batch_size: {args.batch_size}"
-    )
-    print(evaluator.make_table(results))
+        # Add W&B logging
+        if args.wandb_args:
+            try:
+                wandb_logger.post_init(results)
+                wandb_logger.log_eval_result()
+                if args.log_samples:
+                    wandb_logger.log_eval_samples(samples)
+            except Exception as e:
+                eval_logger.info(f"Logging to Weights and Biases failed due to {e}")
+
+        if args.output_path:
+            output_path_file.open("w", encoding="utf-8").write(dumped)
+
+            if args.log_samples:
+                for task_name, config in results["configs"].items():
+                    output_name = "{}_{}".format(
+                        re.sub("/|=", "__", args.model_args), task_name
+                    )
+                    filename = path.joinpath(f"{output_name}.jsonl")
+                    samples_dumped = json.dumps(
+                        samples[task_name],
+                        indent=2,
+                        default=_handle_non_serializable,
+                        ensure_ascii=False,
+                    )
+                    filename.write_text(samples_dumped, encoding="utf-8")
+
+        print(
+            f"{args.model} ({args.model_args}), gen_kwargs: ({args.gen_kwargs}), limit: {args.limit}, num_fewshot: {args.num_fewshot}, "
+            f"batch_size: {args.batch_size}{f' ({batch_sizes})' if batch_sizes else ''}"
+        )
+        print(make_table(results))
+        if "groups" in results:
+            print(make_table(results, "groups"))
+
+        if args.wandb_args:
+            # Tear down wandb run once all the logging is done.
+            wandb_logger.run.finish()
 
 
 if __name__ == "__main__":
-    main()
+    cli_evaluate()

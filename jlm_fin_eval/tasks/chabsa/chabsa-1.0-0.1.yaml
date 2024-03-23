@@ -1,0 +1,2 @@
+task: chabsa-1.0-0.1
+class: !function task.ChabsaWithAnlpPrompt

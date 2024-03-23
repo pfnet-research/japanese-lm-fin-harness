@@ -3,19 +3,24 @@ import os
 from functools import partial
 
 import numpy as np
-from lm_eval.base import MultipleChoiceTask
-from lm_eval.base import rf
+from lm_eval.api.instance import Instance
+from lm_eval.api.registry import register_task
+from lm_eval.api.task import ConfigurableTask
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
 
 import jlm_fin_eval.datasets.chabsa.chabsa
 
 
-class Chabsa(MultipleChoiceTask):
+class Chabsa(ConfigurableTask):
     VERSION = 1.0
     DATASET_PATH = inspect.getfile(jlm_fin_eval.datasets.chabsa.chabsa)
     DATASET_NAME = "chABSA"
     DESCRIPTION = "以下のセンテンスにおける、ターゲットのセンチメントをpositiveかnegativeで答えてください。\n\n"
+    CHOICES = ["positive", "negative"]
+
+    def __init__(self):
+        super().__init__(config={"metadata": {"version": self.VERSION}})
 
     def has_training_docs(self):
         return False
@@ -55,14 +60,25 @@ class Chabsa(MultipleChoiceTask):
 
         return {"acc": acc}
 
-    def construct_requests(self, doc, ctx):
-        lls = [rf.loglikelihood(ctx, choice)[0] for choice in ["positive", "negative"]]
-
-        return lls
+    def construct_requests(self, doc, ctx, **kwargs):
+        # ToDo add neutral
+        return [
+            Instance(
+                request_type="loglikelihood",
+                doc=doc,
+                arguments=(ctx, " {}".format(choice)),
+                idx=0,
+                **kwargs,
+            )
+            for choice in self.CHOICES
+        ]
 
     def process_results(self, doc, results):
         gold = doc["polarity"]
-        pred = ["positive", "negative"][np.array(results).argmax()]
+        lls, _ = zip(*results)
+        pred = self.CHOICES[np.array(lls).argmax()]
+        completion_len = np.array([float(len(i)) for i in self.CHOICES])
+        pred_norm = self.CHOICES[np.array(lls / completion_len).argmax()]
 
         out = {
             "acc": (
@@ -73,16 +89,26 @@ class Chabsa(MultipleChoiceTask):
                 pred,
                 gold,
             ),
+            "acc_norm": (
+                pred_norm,
+                gold,
+            ),
+            "f1_norm": (
+                pred_norm,
+                gold,
+            ),
         }
         return out
 
     def higher_is_better(self):
-        return {"acc": True, "f1": True}
+        return {"acc": True, "f1": True, "acc_norm": True, "f1_norm": True}
 
     def aggregation(self):
         return {
             "acc": partial(self._chabsa_agg, "acc"),
             "f1": partial(self._chabsa_agg, "f1"),
+            "acc_norm": partial(self._chabsa_agg, "acc"),
+            "f1_norm": partial(self._chabsa_agg, "f1"),
         }
 
     def _chabsa_agg(self, key, item):
@@ -171,23 +197,3 @@ class ChabsaWithLlama2(Chabsa):
     def doc_to_text(self, doc):
         input_text = f"センテンス: {doc['sentence'].split('[SEP]')[-1].strip()}\nターゲット: {doc['target']}"
         return f"{self.INSTRUCTION}\n\n{input_text} [/INST] "
-
-
-VERSIONS = [
-    ChabsaWithAnlpPrompt,
-    ChabsaWithFintanPrompt,
-    ChabsaWithAlpacaPrompt,
-    ChabsaWithRinnaInstructionSFT,
-    ChabsaWithRinnaBilingualInstructionSFT,
-    ChabsaWithLlama2,
-]
-
-
-def construct_tasks():
-    tasks = {}
-    for version_class in VERSIONS:
-        tasks[
-            f"chabsa-{version_class.VERSION}-{version_class.PROMPT_VERSION}"
-        ] = version_class
-    tasks["chabsa"] = Chabsa
-    return tasks

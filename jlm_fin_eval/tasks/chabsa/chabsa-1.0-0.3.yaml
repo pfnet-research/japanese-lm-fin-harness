@@ -1,0 +1,2 @@
+task: chabsa-1.0-0.3
+class: !function task.ChabsaWithAlpacaPrompt

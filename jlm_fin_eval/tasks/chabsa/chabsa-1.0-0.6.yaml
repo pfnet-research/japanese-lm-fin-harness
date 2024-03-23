@@ -1,0 +1,2 @@
+task: chabsa-1.0-0.6
+class: !function task.ChabsaWithLlama2
