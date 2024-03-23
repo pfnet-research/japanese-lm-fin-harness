@@ -8,12 +8,12 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9,<3.13"
-lm-eval = {git = "https://github.com/Stability-AI/lm-evaluation-harness", rev = "jp-stable"}
+lm-eval = "^0.4.0"
 emoji = "^2.8.0"
 fugashi = "1.2.1"
 neologdn = ">=0.5.2"
 unidic-lite = "1.0.8"
-torch = "2.0.0"
+torch = "2.1.2"
 accelerate = "^0.24.0"
 bitsandbytes = "^0.41.1"
 sentencepiece = "^0.1.99"
@@ -25,6 +25,7 @@ openai = "0.28.1"
 transformers = "^4.36.2"
 tiktoken = "^0.5.2"
 transformers-stream-generator = "^0.0.4"
+vllm = "^0.3.3"
 
 
 [tool.poetry.group.dev.dependencies]
