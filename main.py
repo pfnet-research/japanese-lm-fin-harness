@@ -36,6 +36,10 @@ def process_results(self: ConfigurableTask, doc: dict, results: dict) -> dict:
             lls, is_greedy = zip(*results)
             choices = self.doc_to_choice(doc)
             completion_len = np.array([float(len(i)) for i in choices])
+
+            pred = np.argmax(lls)
+            pred_norm = np.argmax(lls / completion_len)
+
             if self.multiple_input:
                 gold = self.doc_to_text(doc)
             else:
@@ -61,14 +65,69 @@ def process_results(self: ConfigurableTask, doc: dict, results: dict) -> dict:
                     f"Sample:\n\n{doc}\n\n"
                 )
 
-            pred = np.argmax(lls)
-            pred_norm = np.argmax(lls / completion_len)
+            if self.multiple_target:
+                acc = 1.0 if pred in gold else 0.0
+                acc_norm = 1.0 if pred_norm in gold else 0.0
+                exact_match = int(any([is_greedy[i] if i != -100 else 0 for i in gold]))
+            else:
+                acc = 1.0 if pred == gold else 0.0
+                acc_norm = 1.0 if pred_norm == gold else 0.0
+                # TODO: this gets score of 0 on arc_challenge for pythia-70m. need to test that this works properly
+                exact_match = int(is_greedy[gold]) if gold != -100 else 0
+
+            if (
+                len(
+                    set(
+                        [
+                            "map",
+                            "map_2",
+                            "map_3",
+                            "map_4",
+                            "map_norm",
+                            "map_2_norm",
+                            "map_3_norm",
+                            "map_4_norm",
+                        ]
+                    )
+                    & set(use_metric)
+                )
+                != 0
+            ):
+                ranking = np.argsort(lls)[::-1].tolist()
+                ranking_norm = np.argsort(lls / completion_len)[::-1].tolist()
+                correct_answer_ranking = ranking.index(gold) + 1
+                correct_answer_ranking_norm = ranking_norm.index(gold) + 1
+                map_score = 1.0 / correct_answer_ranking
+                map_2 = 0.0 if correct_answer_ranking > 2 else map_score
+                map_3 = 0.0 if correct_answer_ranking > 3 else map_score
+                map_4 = 0.0 if correct_answer_ranking > 4 else map_score
+                map_score_norm = 1.0 / correct_answer_ranking_norm
+                map_2_norm = 0.0 if correct_answer_ranking_norm > 2 else map_score_norm
+                map_3_norm = 0.0 if correct_answer_ranking_norm > 3 else map_score_norm
+                map_4_norm = 0.0 if correct_answer_ranking_norm > 4 else map_score_norm
+
             result_dict.update(
                 {
                     **(
                         {"f1_norm": (gold, pred_norm)}
                         if "f1_norm" in use_metric
                         else {}
+                    ),
+                    **({"map": map_score} if "map" in use_metric else {}),
+                    **({"map_2": map_2} if "map_2" in use_metric else {}),
+                    **({"map_3": map_3} if "map_3" in use_metric else {}),
+                    **({"map_4": map_4} if "map_4" in use_metric else {}),
+                    **(
+                        {"map_norm": map_score_norm} if "map_norm" in use_metric else {}
+                    ),
+                    **(
+                        {"map_2_norm": map_2_norm} if "map_2_norm" in use_metric else {}
+                    ),
+                    **(
+                        {"map_3_norm": map_3_norm} if "map_3_norm" in use_metric else {}
+                    ),
+                    **(
+                        {"map_4_norm": map_4_norm} if "map_4_norm" in use_metric else {}
                     ),
                 }
             )

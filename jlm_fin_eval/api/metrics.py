@@ -31,3 +31,39 @@ def two_class_adjusted_macro_f1_score_for_chabsa(items: Tuple) -> float | np.nda
 )
 def f1_norm_fn(items):  # This is a passthrough function
     return items
+
+
+@register_metric(
+    metric="map",
+    higher_is_better=True,
+    output_type="multiple_choice",
+)
+def map_fn(items):  # This is a passthrough function
+    return items
+
+
+@register_metric(
+    metric="map_2",
+    higher_is_better=True,
+    output_type="multiple_choice",
+)
+def map_2_fn(items):  # This is a passthrough function
+    return items
+
+
+@register_metric(
+    metric="map_3",
+    higher_is_better=True,
+    output_type="multiple_choice",
+)
+def map_3_fn(items):  # This is a passthrough function
+    return items
+
+
+@register_metric(
+    metric="map_4",
+    higher_is_better=True,
+    output_type="multiple_choice",
+)
+def map_4_fn(items):  # This is a passthrough function
+    return items

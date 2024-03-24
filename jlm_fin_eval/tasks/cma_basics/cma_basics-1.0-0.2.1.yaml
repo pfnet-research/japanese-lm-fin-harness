@@ -1,0 +1,4 @@
+include: cma_basics-1.0-0.1.yaml
+task: cma_basics-1.0-0.2.1
+description: "与えられた選択肢の中から、最適な答えを選んでください。\n\n\n"
+doc_to_text: !function utils.doc_to_text_02_1
