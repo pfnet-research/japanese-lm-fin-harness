@@ -1,2 +1,4 @@
+include: chabsa.yaml
 task: chabsa-1.0-0.2
-class: !function task.ChabsaWithFintanPrompt
+description: "センテンスとターゲットを入力として受け取り、ターゲットに関するセンチメントをpositiveかnegativeから選択してください。\n\n\n"
+doc_to_text: "センテンス: {{sentence}}\nターゲット: {{target}}\n回答:"

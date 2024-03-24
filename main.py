@@ -21,20 +21,10 @@ from lm_eval.utils import simple_parse_args_string
 from jlm_fin_eval.tasks import TaskManager
 
 
-def extended_setup_parser() -> argparse.ArgumentParser:
-    parser = setup_parser()
-    parser.add_argument(
-        "--vllm",
-        action="store_true",
-        help="Use vllm",
-    )
-    return parser
-
-
 def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
     if not args:
         # we allow for args to be passed externally, else we parse them ourselves
-        parser = extended_setup_parser()
+        parser = setup_parser()
         args = parse_eval_args(parser)
 
     if args.wandb_args:

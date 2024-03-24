@@ -1,2 +1,29 @@
 task: chabsa
-class: !function task.Chabsa
+dataset_path: jlm_fin_eval/datasets/chabsa/chabsa.py
+dataset_name: chABSA
+output_type: multiple_choice
+training_split: null
+validation_split: null
+test_split: test
+description: "以下のセンテンスにおける、ターゲットのセンチメントをpositiveかnegativeで答えてください。\n\n\n"
+fewshot_delimiter: "\n\n"
+doc_to_text: "センテンス: {{sentence}}\nターゲット: {{target}}\n回答:"
+doc_to_target: "{{polarity}}"
+doc_to_choice:
+  - "positive"
+  # - "neutral"
+  - "negative"
+should_decontaminate: false
+doc_to_decontamination_query: sentence
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+  - metric: acc_norm
+    aggregation: mean
+    higher_is_better: true
+  - metric: f1
+    aggregation: 2class_adjusted_macro_f1_score_for_chabsa
+    higher_is_better: true
+metadata:
+  - version: 1.0

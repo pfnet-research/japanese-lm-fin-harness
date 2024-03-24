@@ -1,2 +1,5 @@
+include: chabsa.yaml
 task: chabsa-1.0-0.4
-class: !function task.ChabsaWithRinnaInstructionSFT
+description: "ユーザー: センテンスにおける、ターゲットのセンチメントをpositiveかnegativeで答えてください。<NL>システム: 分かりました。<NL>"
+fewshot_delimiter: "<NL>"
+doc_to_text: "センテンス: {{sentence}}<NL>ターゲット: {{target}}<NL>システム:"
