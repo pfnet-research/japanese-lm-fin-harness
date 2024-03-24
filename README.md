@@ -142,6 +142,13 @@ Or cite directory this repository:
 }
 ```
 
+# Note:
+cpa_audit data comes from an existing collection of Japanese CPA Audit exam questions and answers [1].
+In addition, this dataset was built using data from the [Institute of Certified Public Accountants and Auditing Oversight Board Web site](https://www.fsa.go.jp/cpaaob/kouninkaikeishi-shiken/index.html) and is [subject to a CC-BY 4.0 license](https://www.fsa.go.jp/cpaaob/copyright.html).
+We got special permission to include this data directly for this evaluation. Thanks to their contribution.
+
+[1] Tatsuki Masuda, Kei Nakagawa, Takahiro Hoshino, Can ChatGPT pass the JCPA exam?: Challenge for the short-answer method test on Auditing, JSAI Technical Report, Type 2 SIG, 2023, Volume 2023, Issue FIN-031, Pages 81-88, Released on J-STAGE October 12, 2023, Online ISSN 2436-5556, https://doi.org/10.11517/jsaisigtwo.2023.FIN-031_81
+
 # Contribution
 This project is owned by [Preferred Networks](https://www.preferred.jp) and maintained by [Masanori Hirano](https://mhirano.jp).
 
