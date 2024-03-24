@@ -25,5 +25,8 @@ metric_list:
   - metric: f1
     aggregation: 2class_adjusted_macro_f1_score_for_chabsa
     higher_is_better: true
+  - metric: f1_norm
+    aggregation: 2class_adjusted_macro_f1_score_for_chabsa
+    higher_is_better: true
 metadata:
   - version: 1.0

@@ -2,3 +2,4 @@ include: chabsa.yaml
 task: chabsa-1.0-0.3
 description: "以下は、タスクを説明する指示と、文脈のある入力の組み合わせです。要求を適切に満たす応答を書きなさい。\n\n### 指示:\n以下のセンテンスにおける、ターゲットのセンチメントをpositiveかnegativeで答えてください。\n\n\n"
 doc_to_text: "### 入力:\nセンテンス:{{sentence}}\nターゲット:{{target}}\n\n### 応答:\n\n"
+target_delimiter: ""

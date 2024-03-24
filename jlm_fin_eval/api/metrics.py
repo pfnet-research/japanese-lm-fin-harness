@@ -22,3 +22,12 @@ def two_class_adjusted_macro_f1_score_for_chabsa(items: Tuple) -> float | np.nda
     preds = unzipped_list[1]
     fscore = f1_score(golds, preds, average="macro") * 1.5
     return fscore
+
+
+@register_metric(
+    metric="f1_norm",
+    higher_is_better=True,
+    output_type="multiple_choice",
+)
+def f1_norm_fn(items):  # This is a passthrough function
+    return items

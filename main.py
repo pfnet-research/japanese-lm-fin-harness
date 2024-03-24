@@ -7,18 +7,78 @@ import sys
 from pathlib import Path
 from typing import Union
 
+import numpy as np
 from lm_eval import evaluator
 from lm_eval import utils
 from lm_eval.__main__ import DEFAULT_RESULTS_FILE
 from lm_eval.__main__ import _handle_non_serializable
 from lm_eval.__main__ import parse_eval_args
 from lm_eval.__main__ import setup_parser
+from lm_eval.api.task import ConfigurableTask
 from lm_eval.evaluator import request_caching_arg_to_dict
 from lm_eval.logging_utils import WandbLogger
 from lm_eval.utils import make_table
 from lm_eval.utils import simple_parse_args_string
 
 from jlm_fin_eval.tasks import TaskManager
+
+ConfigurableTask.original_process_results = ConfigurableTask.process_results
+
+eval_logger = logging.getLogger("lm-eval")
+
+
+def process_results(self: ConfigurableTask, doc: dict, results: dict) -> dict:
+    result_dict = self.original_process_results(doc, results)
+    use_metric = list(self._metric_fn_list.keys())
+    metrics = list(set(use_metric) - set(result_dict.keys()))
+    if len(metrics) > 0:
+        if self.OUTPUT_TYPE == "multiple_choice":
+            lls, is_greedy = zip(*results)
+            choices = self.doc_to_choice(doc)
+            completion_len = np.array([float(len(i)) for i in choices])
+            if self.multiple_input:
+                gold = self.doc_to_text(doc)
+            else:
+                gold = self.doc_to_target(doc)
+
+            gold_index_error = False
+            if isinstance(gold, list):
+                gold = [i if i < len(choices) else -100 for i in gold]
+                if -100 in gold:
+                    gold_index_error = True
+            else:
+                if isinstance(gold, int):
+                    gold = gold if gold < len(choices) else -100
+                elif isinstance(gold, str):
+                    gold = choices.index(gold) if gold in choices else -100
+
+                if gold == -100:
+                    gold_index_error = True
+
+            if gold_index_error:
+                eval_logger.warning(
+                    f"Label index was not in within range of available choices,"
+                    f"Sample:\n\n{doc}\n\n"
+                )
+
+            pred = np.argmax(lls)
+            pred_norm = np.argmax(lls / completion_len)
+            result_dict.update(
+                {
+                    **(
+                        {"f1_norm": (gold, pred_norm)}
+                        if "f1_norm" in use_metric
+                        else {}
+                    ),
+                }
+            )
+        else:
+            raise NotImplementedError
+
+    return result_dict
+
+
+ConfigurableTask.process_results = process_results
 
 
 def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
