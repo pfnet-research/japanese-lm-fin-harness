@@ -1,0 +1,6 @@
+include: fp2.yaml
+task: fp2-1.0-0.2
+description: "質問と回答の選択肢を入力として受け取り、選択肢から回答を選択してください。なお、回答は選択肢の番号(例:0)でするものとします。\n\n\n"
+doc_to_text: !function utils.doc_to_text_02
+doc_to_target: !function utils.doc_to_target_02
+doc_to_choice: !function utils.doc_to_choices_02

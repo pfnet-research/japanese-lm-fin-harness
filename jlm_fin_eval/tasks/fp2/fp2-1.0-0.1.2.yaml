@@ -1,0 +1,6 @@
+include: fp2.yaml
+task: fp2-1.0-0.1.2
+description: "[問題]に対する[答え]を[選択肢]の中からアルファベットで選んでください。\n\n\n"
+doc_to_text: !function utils.doc_to_text_01_2
+doc_to_target: !function utils.doc_to_target_01_2
+doc_to_choice: !function utils.doc_to_choices_01_2
