@@ -1,0 +1,4 @@
+include: fp2-1.0-0.1.yaml
+task: fp2-1.0-0.3
+description: "以下は、タスクを説明する指示と、文脈のある入力の組み合わせです。要求を適切に満たす応答を書きなさい。\n\n### 指示:\n与えられた選択肢の中から、最適な答えを選んでください。\n\n\n"
+doc_to_text: !function utils.doc_to_text_03

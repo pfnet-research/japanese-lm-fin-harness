@@ -1,0 +1,5 @@
+include: cpa_audit-1.0-0.4.yaml
+task: cpa_audit-1.0-0.5
+description: "ユーザー: 与えられた答えの組み合わせの選択肢の中から、最適な選択肢を選んでください。\nシステム: 分かりました。\n\n"
+fewshot_delimiter: "\n"
+doc_to_text: !function utils.doc_to_text_05

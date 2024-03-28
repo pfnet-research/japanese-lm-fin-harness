@@ -1,0 +1,4 @@
+include: cpa_audit-1.0-0.1.yaml
+task: cpa_audit-1.0-0.3
+description: "以下は、タスクを説明する指示と、文脈のある入力の組み合わせです。要求を適切に満たす応答を書きなさい。\n\n### 指示:\n与えられた答えの組み合わせの選択肢の中から、最適な選択肢を選んでください。\n\n\n"
+doc_to_text: !function utils.doc_to_text_03

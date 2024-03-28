@@ -1,0 +1,6 @@
+include: security_sales_1.yaml
+task: security_sales_1-1.0-0.1
+description: "[問題]に対する[答え]を[選択肢]の中から選んでください。\n\n\n"
+doc_to_text: !function utils.doc_to_text_01
+doc_to_target: !function utils.doc_to_target_01
+doc_to_choice: !function utils.doc_to_choices_01

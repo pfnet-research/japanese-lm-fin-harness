@@ -1,0 +1,4 @@
+include: cpa_audit.yaml
+task: cpa_audit-1.0-0.1.2
+description: "[問題]に対する[答え]として適切な記号の組み合わせを[選択肢]の中からアルファベットで選んでください。\n\n\n"
+doc_to_text: !function utils.doc_to_text_01_2

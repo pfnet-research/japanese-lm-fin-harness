@@ -1,0 +1,5 @@
+include: chabsa.yaml
+task: chabsa-1.0-0.5
+description: "ユーザー: センテンスにおける、ターゲットのセンチメントをpositiveかnegativeで答えてください。\nシステム: 分かりました。\n\n"
+fewshot_delimiter: "\n"
+doc_to_text: "センテンス: {{sentence}}\nターゲット: {{target}}\nシステム:"

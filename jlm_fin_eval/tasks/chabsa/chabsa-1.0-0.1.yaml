@@ -1,0 +1,4 @@
+include: chabsa.yaml
+task: chabsa-1.0-0.1
+description: "[センテンス]における、[ターゲット]のセンチメントをpositiveかnegativeで選んでください。\n\n\n"
+doc_to_text: "[センテンス]: {{sentence}}\nターゲット]: {{target}}\n[答え]:"
