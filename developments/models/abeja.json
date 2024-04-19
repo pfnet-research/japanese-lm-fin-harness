@@ -1,7 +1,8 @@
 {
     "model": "abeja/gpt-neox-japanese-2.7b",
     "model_args": [
-        "trust_remote_code=True"
+        "trust_remote_code=True",
+        "dtype=float32"
     ],
     "memory_Gi": 32,
     "n_gpu": 1,

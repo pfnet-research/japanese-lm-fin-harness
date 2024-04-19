@@ -2,7 +2,8 @@
     {
         "model": "llm-jp/llm-jp-13b-v1.0",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=float16"
         ],
         "memory_Gi": 64,
         "n_gpu": 1,
@@ -12,7 +13,8 @@
     {
         "model": "llm-jp/llm-jp-1.3b-v1.0",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=float16"
         ],
         "memory_Gi": 32,
         "n_gpu": 1,
@@ -22,7 +24,8 @@
     {
         "model": "llm-jp/llm-jp-13b-instruct-full-jaster-v1.0",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=float16"
         ],
         "memory_Gi": 64,
         "n_gpu": 1,
@@ -32,7 +35,8 @@
     {
         "model": "llm-jp/llm-jp-13b-instruct-full-jaster-dolly-oasst-v1.0",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=float16"
         ],
         "memory_Gi": 64,
         "n_gpu": 1,
@@ -42,7 +46,19 @@
     {
         "model": "llm-jp/llm-jp-13b-instruct-full-dolly-oasst-v1.0",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=float16"
+        ],
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_vram_gb": 32,
+        "require_hf_login": false
+    },
+    {
+        "model": "llm-jp/llm-jp-13b-instruct-full-dolly_en-dolly_ja-ichikara_003_001-oasst_en-oasst_ja-v1.1",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
         "memory_Gi": 64,
         "n_gpu": 1,

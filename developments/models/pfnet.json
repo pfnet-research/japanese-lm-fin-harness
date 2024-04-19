@@ -2,7 +2,8 @@
     {
         "model": "pfnet/plamo-13b",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
         "memory_Gi": 64,
         "n_gpu": 1,
@@ -12,7 +13,8 @@
     {
         "model": "pfnet/plamo-13b-instruct",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
         "memory_Gi": 64,
         "n_gpu": 1,
@@ -22,11 +24,23 @@
     {
         "model": "pfnet/plamo-13b-instruct-nc",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
         "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_vram_gb": 80,
         "require_hf_login": false
-    }
+    },
+    {
+        "model": "pfnet/nekomata-14b-pfn-qfin",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 128,
+        "n_gpu": 1,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    },
 ]

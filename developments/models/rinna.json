@@ -1,7 +1,9 @@
 [
     {
         "model": "rinna/japanese-gpt-neox-3.6b",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 32,
         "n_gpu": 1,
         "gpu_vram_gb": 16,
@@ -9,7 +11,9 @@
     },
     {
         "model": "rinna/japanese-gpt-neox-3.6b-instruction-sft",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 32,
         "n_gpu": 1,
         "gpu_vram_gb": 16,
@@ -17,7 +21,9 @@
     },
     {
         "model": "rinna/japanese-gpt-neox-3.6b-instruction-sft-v2",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 32,
         "n_gpu": 1,
         "gpu_vram_gb": 16,
@@ -25,7 +31,9 @@
     },
     {
         "model": "rinna/japanese-gpt-neox-3.6b-instruction-ppo",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 32,
         "n_gpu": 1,
         "gpu_vram_gb": 16,
@@ -33,7 +41,9 @@
     },
     {
         "model": "rinna/bilingual-gpt-neox-4b",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 32,
         "n_gpu": 1,
         "gpu_vram_gb": 16,
@@ -41,7 +51,9 @@
     },
     {
         "model": "rinna/bilingual-gpt-neox-4b-instruction-sft",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 32,
         "n_gpu": 1,
         "gpu_vram_gb": 16,
@@ -49,7 +61,9 @@
     },
     {
         "model": "rinna/bilingual-gpt-neox-4b-instruction-ppo",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 32,
         "n_gpu": 1,
         "gpu_vram_gb": 16,
@@ -57,7 +71,9 @@
     },
     {
         "model": "rinna/youri-7b",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 48,
         "n_gpu": 1,
         "gpu_vram_gb": 24,
@@ -65,7 +81,9 @@
     },
     {
         "model": "rinna/youri-7b-instruction",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 48,
         "n_gpu": 1,
         "gpu_vram_gb": 24,
@@ -73,7 +91,9 @@
     },
     {
         "model": "rinna/youri-7b-chat",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 48,
         "n_gpu": 1,
         "gpu_vram_gb": 24,
@@ -82,7 +102,8 @@
     {
         "model": "rinna/nekomata-14b",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
         "memory_Gi": 128,
         "n_gpu": 1,
@@ -92,7 +113,8 @@
     {
         "model": "rinna/nekomata-14b-instruction",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
         "memory_Gi": 128,
         "n_gpu": 1,
@@ -102,7 +124,8 @@
     {
         "model": "rinna/nekomata-7b",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
         "memory_Gi": 48,
         "n_gpu": 1,
@@ -112,7 +135,8 @@
     {
         "model": "rinna/nekomata-7b-instruction",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
         "memory_Gi": 48,
         "n_gpu": 1,

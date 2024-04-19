@@ -2,8 +2,7 @@
     {
         "model": "Xwin-LM/Xwin-LM-70B-V0.1",
         "model_args": [
-            "use_accelerate=True",
-            "device_map_option=auto"
+            "dtype=float32"
         ],
         "memory_Gi": 256,
         "n_gpu": 4,
@@ -13,8 +12,7 @@
     {
         "model": "Xwin-LM/Xwin-LM-13B-V0.2",
         "model_args": [
-            "use_accelerate=True",
-            "device_map_option=auto"
+            "dtype=float32"
         ],
         "memory_Gi": 64,
         "n_gpu": 1,
@@ -24,8 +22,7 @@
     {
         "model": "Xwin-LM/Xwin-LM-7B-V0.2",
         "model_args": [
-            "use_accelerate=True",
-            "device_map_option=auto"
+            "dtype=float32"
         ],
         "memory_Gi": 32,
         "n_gpu": 1,

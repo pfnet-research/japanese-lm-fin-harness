@@ -2,7 +2,8 @@
     {
         "model": "line-corporation/japanese-large-lm-3.6b",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=float16"
         ],
         "memory_Gi": 32,
         "n_gpu": 1,
@@ -12,7 +13,8 @@
     {
         "model": "line-corporation/japanese-large-lm-3.6b-instruction-sft",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=float16"
         ],
         "memory_Gi": 32,
         "n_gpu": 1,
@@ -22,7 +24,8 @@
     {
         "model": "line-corporation/japanese-large-lm-1.7b",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=float16"
         ],
         "memory_Gi": 32,
         "n_gpu": 1,
@@ -32,17 +35,8 @@
     {
         "model": "line-corporation/japanese-large-lm-1.7b-instruction-sft",
         "model_args": [
-            "trust_remote_code=True"
-        ],
-        "memory_Gi": 32,
-        "n_gpu": 1,
-        "gpu_vram_gb": 16,
-        "require_hf_login": false
-    },
-    {
-        "model": "line-corporation/japanese-large-lm-1.7b-instruction-sft",
-        "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=float16"
         ],
         "memory_Gi": 32,
         "n_gpu": 1,

@@ -1,0 +1,82 @@
+[
+    {
+        "model": "google/recurrentgemma-2b",
+        "model_args": [
+            "dtype=float32"
+        ],
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_vram_gb": 16,
+        "require_hf_login": false
+    },
+    {
+        "model": "google/recurrentgemma-2b-it",
+        "model_args": [
+            "dtype=float32"
+        ],
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_vram_gb": 16,
+        "require_hf_login": false
+    },
+    {
+        "model": "google/gemma-2b",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    },
+    {
+        "model": "google/gemma-2b-it",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    },
+    {
+        "model": "google/gemma-1.1-2b-it",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    },
+    {
+        "model": "google/gemma-7b",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    },
+    {
+        "model": "google/gemma-7b-it",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    },
+    {
+        "model": "google/gemma-1.1-7b-it",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    }
+]

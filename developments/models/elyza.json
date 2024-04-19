@@ -1,7 +1,9 @@
 [
     {
         "model": "elyza/ELYZA-japanese-Llama-2-7b",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 32,
         "n_gpu": 1,
         "gpu_vram_gb": 24,
@@ -9,7 +11,9 @@
     },
     {
         "model": "elyza/ELYZA-japanese-Llama-2-7b-instruct",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 32,
         "n_gpu": 1,
         "gpu_vram_gb": 24,
@@ -17,7 +21,9 @@
     },
     {
         "model": "elyza/ELYZA-japanese-Llama-2-7b-fast",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 32,
         "n_gpu": 1,
         "gpu_vram_gb": 24,
@@ -25,7 +31,9 @@
     },
     {
         "model": "elyza/ELYZA-japanese-Llama-2-7b-fast-instruct",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 32,
         "n_gpu": 1,
         "gpu_vram_gb": 24,
@@ -33,7 +41,9 @@
     },
     {
         "model": "elyza/ELYZA-japanese-Llama-2-13b",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_vram_gb": 80,
@@ -41,7 +51,9 @@
     },
     {
         "model": "elyza/ELYZA-japanese-Llama-2-13b-instruct",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_vram_gb": 80,
@@ -49,7 +61,9 @@
     },
     {
         "model": "elyza/ELYZA-japanese-Llama-2-13b-fast",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_vram_gb": 80,
@@ -57,7 +71,9 @@
     },
     {
         "model": "elyza/ELYZA-japanese-Llama-2-13b-fast-instruct",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
         "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_vram_gb": 80,

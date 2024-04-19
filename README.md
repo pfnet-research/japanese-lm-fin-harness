@@ -112,8 +112,8 @@ poetry run python check_prompt.py
 
 # Model Regulation
  - Training/Tuning data of the model must not include this evaluation dataset
-   - Japanese annual reports included in chabsa is allowed to be used only if chabsa's sentiment data is not used for training/tuning.
- - No license violation or concerns is argued for the model
+   - Japanese annual reports included in chabsa are allowed to be used only if chabsa's sentiment data is not used for training/tuning.
+ - No license violation or concerns are argued for the model (e.g. using ShareGPT or Alpaca for training corpus)
 
 # Citation
 If you use this repository, please cite the following paper:

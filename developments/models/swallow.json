@@ -1,7 +1,29 @@
 [
     {
         "model": "tokyotech-llm/Swallow-7b-hf",
-        "model_args": [],
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    },
+    {
+        "model": "tokyotech-llm/Swallow-7b-plus-hf",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    },
+    {
+        "model": "tokyotech-llm/Swallow-7b-NVE-hf",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
         "memory_Gi": 32,
         "n_gpu": 1,
         "gpu_vram_gb": 24,
@@ -9,7 +31,19 @@
     },
     {
         "model": "tokyotech-llm/Swallow-7b-instruct-hf",
-        "model_args": [],
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    },
+    {
+        "model": "tokyotech-llm/Swallow-7b-NVE-instruct-hf",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
         "memory_Gi": 32,
         "n_gpu": 1,
         "gpu_vram_gb": 24,
@@ -17,7 +51,19 @@
     },
     {
         "model": "tokyotech-llm/Swallow-13b-hf",
-        "model_args": [],
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    },
+    {
+        "model": "tokyotech-llm/Swallow-13b-NVE-hf",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
         "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_vram_gb": 80,
@@ -25,7 +71,9 @@
     },
     {
         "model": "tokyotech-llm/Swallow-13b-instruct-hf",
-        "model_args": [],
+        "model_args": [
+            "dtype=bfloat16"
+        ],
         "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_vram_gb": 80,
@@ -34,23 +82,61 @@
     {
         "model": "tokyotech-llm/Swallow-70b-hf",
         "model_args": [
-            "use_accelerate=true",
-            "device_map_option=auto"
+            "dtype=bfloat16"
         ],
         "memory_Gi": 256,
-        "n_gpu": 8,
-        "gpu_vram_gb": 32,
+        "n_gpu": 2,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    },
+    {
+        "model": "tokyotech-llm/Swallow-70b-NVE-hf",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 256,
+        "n_gpu": 2,
+        "gpu_vram_gb": 80,
         "require_hf_login": false
     },
     {
         "model": "tokyotech-llm/Swallow-70b-instruct-hf",
         "model_args": [
-            "use_accelerate=true",
-            "device_map_option=auto"
+            "dtype=bfloat16"
         ],
         "memory_Gi": 256,
-        "n_gpu": 8,
-        "gpu_vram_gb": 32,
+        "n_gpu": 2,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    },
+    {
+        "model": "tokyotech-llm/Swallow-70b-instruct-NVE-hf",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 256,
+        "n_gpu": 2,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    },
+    {
+        "model": "tokyotech-llm/Swallow-MS-7b-v0.1",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 256,
+        "n_gpu": 1,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    },
+    {
+        "model": "tokyotech-llm/Swallow-MX-8x7b-NVE-v0.1",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 256,
+        "n_gpu": 2,
+        "gpu_vram_gb": 80,
         "require_hf_login": false
     }
 ]

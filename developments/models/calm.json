@@ -2,7 +2,8 @@
     {
         "model": "cyberagent/open-calm-7b",
         "model_args": [
-            "use_fast=True"
+            "use_fast=True",
+            "dtype=float16"
         ],
         "memory_Gi": 48,
         "n_gpu": 1,
@@ -12,7 +13,8 @@
     {
         "model": "cyberagent/open-calm-3b",
         "model_args": [
-            "use_fast=True"
+            "use_fast=True",
+            "dtype=float16"
         ],
         "memory_Gi": 32,
         "n_gpu": 1,
@@ -22,7 +24,8 @@
     {
         "model": "cyberagent/open-calm-1b",
         "model_args": [
-            "use_fast=True"
+            "use_fast=True",
+            "dtype=float16"
         ],
         "memory_Gi": 24,
         "n_gpu": 1,
@@ -32,7 +35,8 @@
     {
         "model": "cyberagent/open-calm-large",
         "model_args": [
-            "use_fast=True"
+            "use_fast=True",
+            "dtype=float16"
         ],
         "memory_Gi": 24,
         "n_gpu": 1,
@@ -42,7 +46,8 @@
     {
         "model": "cyberagent/open-calm-medium",
         "model_args": [
-            "use_fast=True"
+            "use_fast=True",
+            "dtype=float16"
         ],
         "memory_Gi": 16,
         "n_gpu": 1,
@@ -52,7 +57,8 @@
     {
         "model": "cyberagent/open-calm-small",
         "model_args": [
-            "use_fast=True"
+            "use_fast=True",
+            "dtype=float16"
         ],
         "memory_Gi": 16,
         "n_gpu": 1,
@@ -62,7 +68,8 @@
     {
         "model": "cyberagent/calm2-7b",
         "model_args": [
-            "use_fast=True"
+            "use_fast=True",
+            "dtype=bfloat16"
         ],
         "memory_Gi": 48,
         "n_gpu": 1,
@@ -72,7 +79,19 @@
     {
         "model": "cyberagent/calm2-7b-chat",
         "model_args": [
-            "use_fast=True"
+            "use_fast=True",
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_vram_gb": 24,
+        "require_hf_login": false
+    },
+    {
+        "model": "cyberagent/calm2-7b-chat-dpo-experimental",
+        "model_args": [
+            "use_fast=True",
+            "dtype=bfloat16"
         ],
         "memory_Gi": 48,
         "n_gpu": 1,
