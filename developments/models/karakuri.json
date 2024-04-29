@@ -4,9 +4,14 @@
         "model_args": [
             "dtype=bfloat16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 128,
         "n_gpu": 2,
         "gpu_vram_gb": 80,
+        "a100-80gb": 0,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": true
     },
     {
@@ -14,9 +19,14 @@
         "model_args": [
             "dtype=bfloat16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 128,
         "n_gpu": 2,
         "gpu_vram_gb": 80,
+        "a100-80gb": 0,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": true
     }
 ]

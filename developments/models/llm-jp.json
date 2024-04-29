@@ -5,9 +5,14 @@
             "trust_remote_code=True",
             "dtype=float16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_vram_gb": 32,
+        "a100-80gb": 0,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
@@ -16,9 +21,14 @@
             "trust_remote_code=True",
             "dtype=float16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
         "gpu_vram_gb": 16,
+        "a100-80gb": 0,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
@@ -27,9 +37,14 @@
             "trust_remote_code=True",
             "dtype=float16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_vram_gb": 32,
+        "a100-80gb": 0,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
@@ -38,9 +53,14 @@
             "trust_remote_code=True",
             "dtype=float16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_vram_gb": 32,
+        "a100-80gb": 0,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
@@ -49,9 +69,14 @@
             "trust_remote_code=True",
             "dtype=float16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_vram_gb": 32,
+        "a100-80gb": 0,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
@@ -60,9 +85,14 @@
             "trust_remote_code=True",
             "dtype=bfloat16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_vram_gb": 32,
+        "a100-80gb": 0,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     }
 ]
