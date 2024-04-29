@@ -58,7 +58,7 @@ def main() -> None:
 
         command = (
             cast(str, run_settings["preprocess_harness"])
-            + f"ls {model_dir} | xargs -I [] poetry run bash {model_dir}/[]"
+            + f"ls {model_dir}/*.sh | xargs -I [] poetry run bash {model_dir}/[]"
             + cast(str, run_settings["postprocess_harness"])
         )
         command = (
