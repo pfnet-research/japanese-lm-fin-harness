@@ -22,11 +22,11 @@ protobuf = "^4.24.4"
 openpyxl = "^3.1.2"
 xlrd = "^2.0.1"
 openai = "0.28.1"
-transformers = {git = "https://github.com/huggingface/transformers", rev = "b109257f4fb8b1166e7c53cc5418632014ed53a5"}
-tiktoken = "^0.5.2"
+transformers = "^4.40.1"
+tiktoken = "^0.6.0"
 transformers-stream-generator = "^0.0.4"
-vllm = "^0.3.3"
-torch = {version = "2.1.2+cu121", source = "torch"}
+vllm = "^0.4.1"
+torch = {version = "^2.2.1+cu121", source = "torch"}
 
 
 [tool.poetry.group.dev.dependencies]

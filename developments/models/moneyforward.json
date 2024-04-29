@@ -1,0 +1,32 @@
+[
+    {
+        "model": "moneyforward/houou-instruction-7b-v1",
+        "model_args": [
+            "dtype=float16"
+        ],
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_vram_gb": 32,
+        "require_hf_login": false
+    },
+    {
+        "model": "moneyforward/houou-instruction-7b-v2",
+        "model_args": [
+            "dtype=float16"
+        ],
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_vram_gb": 32,
+        "require_hf_login": false
+    },
+    {
+        "model": "moneyforward/houou-instruction-7b-v3",
+        "model_args": [
+            "dtype=float16"
+        ],
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_vram_gb": 32,
+        "require_hf_login": false
+    }
+]

@@ -43,4 +43,15 @@
         "gpu_vram_gb": 80,
         "require_hf_login": false
     },
+    {
+        "model": "pfnet/nekomata-14b-pfn-qfin-inst-merge",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "memory_Gi": 128,
+        "n_gpu": 1,
+        "gpu_vram_gb": 80,
+        "require_hf_login": false
+    }
 ]
