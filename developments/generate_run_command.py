@@ -1,4 +1,5 @@
 import argparse
+import glob
 import json
 import os
 from typing import Dict
@@ -43,17 +44,21 @@ def main() -> None:
         model_name = cast(str, model_setting["model"])
         model_dir = os.path.join(work_dir, model_root_dir, model_name)
 
-        result_json = os.path.join(model_dir, "result.json")
-        harness_sh = os.path.join(model_dir, "harness.sh")
+        sh_files = glob.glob(os.path.join(model_dir, "harness*.sh"))
+        sh_file_names = [os.path.basename(f) for f in sh_files]
+        results_files = [
+            os.path.join(
+                model_dir, result.replace("harnsee", "result").replace(".sh", ".json")
+            )
+            for result in sh_file_names
+        ]
 
-        if not os.path.exists(harness_sh):
-            continue
-        if os.path.exists(result_json):
+        if sum([not os.path.exists(result_json) for result_json in results_files]) == 0:
             continue
 
         command = (
             cast(str, run_settings["preprocess_harness"])
-            + f"poetry run bash {harness_sh}"
+            + f"ls {model_dir} | xargs -I [] poetry run bash {model_dir}/[]"
             + cast(str, run_settings["postprocess_harness"])
         )
         command = (
