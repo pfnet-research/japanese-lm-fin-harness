@@ -5,7 +5,7 @@ import os
 from typing import Dict
 from typing import cast
 
-from developments.make_run_commands import get_model_settings
+from developments.generate_harness_sh import get_model_settings
 
 
 def main() -> None:

@@ -82,11 +82,11 @@
         "run_type": "vllm",
         "memory_Gi": 128,
         "n_gpu": 1,
-        "gpu_request": "gpu-any",
+        "gpu_request": "gpu-32gb",
         "a100-80gb": 1,
         "a30-24gb": 1,
         "v100-32gb": 1,
-        "v100-16gb": 1,
+        "v100-16gb": 0,
         "require_hf_login": false
     }
 ]

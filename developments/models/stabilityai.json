@@ -87,13 +87,13 @@
         "model_args": [
             "trust_remote_code=True",
             "dtype=float32",
-            "tensor_parallel_size=2"
+            "tensor_parallel_size=4"
         ],
         "run_type": "vllm",
         "memory_Gi": 256,
-        "n_gpu": 2,
+        "n_gpu": 4,
         "gpu_request": "gpu-a100",
-        "a100-80gb": 2,
+        "a100-80gb": 4,
         "a30-24gb": 0,
         "v100-32gb": 8,
         "v100-16gb": 0,
@@ -104,13 +104,13 @@
         "model_args": [
             "trust_remote_code=True",
             "dtype=float32",
-            "tensor_parallel_size=2"
+            "tensor_parallel_size=4"
         ],
         "run_type": "vllm",
         "memory_Gi": 256,
-        "n_gpu": 2,
+        "n_gpu": 4,
         "gpu_request": "gpu-a100",
-        "a100-80gb": 2,
+        "a100-80gb": 4,
         "a30-24gb": 0,
         "v100-32gb": 8,
         "v100-16gb": 0,
