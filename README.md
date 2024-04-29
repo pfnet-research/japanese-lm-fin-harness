@@ -14,6 +14,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [tokyotech-llm/Swallow-MS-7b-v0.1](https://huggingface.co/tokyotech-llm/Swallow-MS-7b-v0.1) | 41.37 | 79.22 | 23.68 | 17.09 | 25.47 | 61.40 | 1.0-0.2.1 |
 | [cyberagent/calm2-7b](https://huggingface.co/cyberagent/calm2-7b) | 39.80 | 78.27 | 31.58 | 16.58 | 26.95 | 45.61 | 1.0-0.1 |
 | [rinna/japanese-gpt-neox-3.6b-instruction-ppo](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-ppo) | 38.90 | 73.66 | 34.21 | 14.07 | 26.95 | 45.61 | default |
+| [rinna/japanese-gpt-neox-3.6b-instruction-sft](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-sft) | 37.73 | 73.00 | 23.68 | 18.84 | 24.00 | 49.12 | 1.0-0.2.1 |
 | openai/text-davinci-003 | 37.68 | 53.92 | 44.74 | 17.59 | 26.53 | 45.61 | default |
 | [tokyotech-llm/Swallow-13b-hf](https://huggingface.co/tokyotech-llm/Swallow-13b-hf) | 37.54 | 61.28 | 28.95 | 16.08 | 25.26 | 56.14 | 1.0-0.1 |
 | [llm-jp/llm-jp-1.3b-v1.0](https://huggingface.co/llm-jp/llm-jp-1.3b-v1.0) | 36.81 | 57.66 | 31.58 | 18.34 | 27.37 | 49.12 | 1.0-0.1 |
@@ -23,16 +24,21 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [stabilityai/japanese-stablelm-3b-4e1t-base](https://huggingface.co/stabilityai/japanese-stablelm-3b-4e1t-base) | 34.58 | 52.32 | 34.21 | 15.58 | 26.95 | 43.86 | 1.0-0.1 |
 | [elyza/ELYZA-japanese-Llama-2-7b-fast](https://huggingface.co/elyza/ELYZA-japanese-Llama-2-7b-fast) | 34.49 | 37.54 | 36.84 | 17.59 | 26.11 | 54.39 | 1.0-0.1 |
 | [elyza/ELYZA-japanese-Llama-2-7b-fast-instruct](https://huggingface.co/elyza/ELYZA-japanese-Llama-2-7b-fast-instruct) | 32.18 | 36.16 | 39.47 | 18.59 | 26.32 | 40.35 | 1.0-0.1.2 |
+| [line-corporation/japanese-large-lm-1.7b](https://huggingface.co/line-corporation/japanese-large-lm-1.7b) | 32.10 | 46.77 | 34.21 | 13.82 | 23.58 | 42.11 | 1.0-0.4 |
 | [cyberagent/open-calm-medium](https://huggingface.co/cyberagent/open-calm-medium) | 32.02 | 49.12 | 26.32 | 13.32 | 24.00 | 47.37 | 1.0-0.2.1 |
+| [line-corporation/japanese-large-lm-1.7b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-1.7b-instruction-sft) | 31.51 | 50.50 | 26.32 | 13.32 | 23.58 | 43.86 | 1.0-0.5 |
 | [Qwen/Qwen1.5-0.5B](https://huggingface.co/Qwen/Qwen1.5-0.5B) | 30.82 | 50.40 | 21.05 | 15.58 | 26.74 | 40.35 | 1.0-0.6 |
 | [cyberagent/open-calm-3b](https://huggingface.co/cyberagent/open-calm-3b) | 30.76 | 37.49 | 26.32 | 15.33 | 23.79 | 50.88 | 1.0-0.1 |
 | [cyberagent/open-calm-1b](https://huggingface.co/cyberagent/open-calm-1b) | 30.46 | 30.08 | 28.95 | 16.83 | 23.79 | 52.63 | 1.0-0.1 |
 | [Qwen/Qwen1.5-0.5B-Chat](https://huggingface.co/Qwen/Qwen1.5-0.5B-Chat) | 29.98 | 36.69 | 34.21 | 15.33 | 25.05 | 38.60 | 1.0-0.1 |
+| [line-corporation/japanese-large-lm-3.6b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-3.6b-instruction-sft) | 29.54 | 35.95 | 26.32 | 14.07 | 24.00 | 47.37 | 1.0-0.2.1 |
 | [line-corporation/japanese-large-lm-3.6b](https://huggingface.co/line-corporation/japanese-large-lm-3.6b) | 29.54 | 35.95 | 26.32 | 14.07 | 24.00 | 47.37 | 1.0-0.1 |
 | [cyberagent/open-calm-small](https://huggingface.co/cyberagent/open-calm-small) | 29.48 | 35.95 | 23.68 | 18.59 | 23.58 | 45.61 | 1.0-0.6 |
 | [cyberagent/open-calm-7b](https://huggingface.co/cyberagent/open-calm-7b) | 28.80 | 37.83 | 28.95 | 13.07 | 23.79 | 40.35 | 1.0-0.4 |
 <!-- lb end -->
 Note: Prompt selection is not performed only for Open AI models. For Open AI models, results are counted as wrong when the content filter is applied.
+
+Recently, we updated the evaluation policy. Please refer to the [UPDATE.md](UPDATE.md) for more details.
 
 # How to evaluate your model
  1. git clone this repository
@@ -45,17 +51,14 @@ Note: Prompt selection is not performed only for Open AI models. For Open AI mod
     ```
     MODEL_ARGS="pretrained=MODEL_PATH,other_options"
     TASK="chabsa-1.0-TEMPLATE,cma_basics-1.0-TEMPLATE,cpa_audit-1.0-TEMPLATE,security_sales_1-1.0-0.2,fp2-1.0-TEMPLATE"
-    python main.py --model hf --model_args $MODEL_ARGS --tasks $TASK --num_fewshot "0,0,0,0,0" --device "cuda" --output_path "result.json"
+    python main.py --model hf --model_args $MODEL_ARGS --tasks $TASK --num_fewshot 0 --output_path "result.json"
     ```
  5. Run the script
     ```
     poetry run bash harness.sh
     ```
 
-Note: if you want to check the actual prompt, you can chack using the following command:
-```
-poetry run python check_prompt.py
-```
+vllm is also supported. Please refer to model examples and lm_eval official pages.
 
 # Model Regulation
  - Training/Tuning data of the model must not include this evaluation dataset
@@ -71,11 +74,13 @@ If you use this repository, please cite the following paper:
   doi={10.51094/jxiv.564},
   year={2023}
 }
-@preprint{Hirano2023-pre-finllm,
-  title={{金融分野における言語モデル性能評価のための日本語金融ベンチマーク構築}},
-  author={平野, 正徳},
-  doi={10.51094/jxiv.564},
-  year={2023}
+@preprint{Hirano2023-pre-jfin-benchmark,
+  title={{Construction of a Japanese Financial Benchmark for Large Language Models}},
+  author={Masahiro Hirano},
+  doi={10.2139/ssrn.4769124},
+  archivePrefix={arXiv},
+  arxivId={2403.15062},
+  year={2024}
 }
 ```
 
