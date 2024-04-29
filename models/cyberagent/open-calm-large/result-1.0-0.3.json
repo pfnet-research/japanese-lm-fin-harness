@@ -1,0 +1,479 @@
+{
+  "results": {
+    "security_sales_1-1.0-0.3": {
+      "acc,none": 0.42105263157894735,
+      "acc_stderr,none": 0.06597717584505354,
+      "acc_norm,none": 0.40350877192982454,
+      "acc_norm_stderr,none": 0.06555933012294897,
+      "map,none": 0.6856725146198831,
+      "map_stderr,none": 0.037022835806459396,
+      "map_2,none": 0.6578947368421053,
+      "map_2_stderr,none": 0.04363979987309741,
+      "map_3,none": 0.6637426900584795,
+      "map_3_stderr,none": 0.04244085029763922,
+      "map_4,none": 0.6856725146198831,
+      "map_4_stderr,none": 0.037022835806459396,
+      "map_norm,none": 0.6578947368421053,
+      "map_norm_stderr,none": 0.03922926276315422,
+      "map_2_norm,none": 0.6052631578947368,
+      "map_2_norm_stderr,none": 0.04964921136756272,
+      "map_3_norm,none": 0.6228070175438597,
+      "map_3_norm_stderr,none": 0.04674118271067233,
+      "map_4_norm,none": 0.6578947368421053,
+      "map_4_norm_stderr,none": 0.03922926276315422,
+      "alias": "security_sales_1-1.0-0.3"
+    },
+    "fp2-1.0-0.3": {
+      "acc,none": 0.23789473684210527,
+      "acc_stderr,none": 0.019557382357921746,
+      "acc_norm,none": 0.23789473684210527,
+      "acc_norm_stderr,none": 0.019557382357921746,
+      "map,none": 0.5082456140350887,
+      "map_stderr,none": 0.01325969453461555,
+      "map_2,none": 0.3526315789473684,
+      "map_2_stderr,none": 0.018988900123449982,
+      "map_3,none": 0.44245614035087794,
+      "map_3_stderr,none": 0.016524961443004388,
+      "map_4,none": 0.5082456140350887,
+      "map_4_stderr,none": 0.01325969453461555,
+      "map_norm,none": 0.5082456140350887,
+      "map_norm_stderr,none": 0.01325969453461555,
+      "map_2_norm,none": 0.3526315789473684,
+      "map_2_norm_stderr,none": 0.018988900123449982,
+      "map_3_norm,none": 0.44245614035087794,
+      "map_3_norm_stderr,none": 0.016524961443004388,
+      "map_4_norm,none": 0.5082456140350887,
+      "map_4_norm_stderr,none": 0.01325969453461555,
+      "alias": "fp2-1.0-0.3"
+    },
+    "cpa_audit-1.0-0.3": {
+      "acc,none": 0.13819095477386933,
+      "acc_stderr,none": 0.01732008740419801,
+      "acc_norm,none": 0.12060301507537688,
+      "acc_norm_stderr,none": 0.01634467597786587,
+      "map,none": 0.3846314907872692,
+      "map_stderr,none": 0.013570582244481015,
+      "map_2,none": 0.2236180904522613,
+      "map_2_stderr,none": 0.01815823759435009,
+      "map_3,none": 0.2755443886097151,
+      "map_3_stderr,none": 0.017550831434965084,
+      "map_4,none": 0.31637353433835824,
+      "map_4_stderr,none": 0.01651869880610353,
+      "map_norm,none": 0.3745812395309879,
+      "map_norm_stderr,none": 0.012942833192323772,
+      "map_2_norm,none": 0.21105527638190955,
+      "map_2_norm_stderr,none": 0.017478653122086157,
+      "map_3_norm,none": 0.2654941373534337,
+      "map_3_norm_stderr,none": 0.016907534557449613,
+      "map_4_norm,none": 0.3063232830820768,
+      "map_4_norm_stderr,none": 0.015898668844134125,
+      "alias": "cpa_audit-1.0-0.3"
+    },
+    "cma_basics-1.0-0.3": {
+      "acc,none": 0.21052631578947367,
+      "acc_stderr,none": 0.06702258315442244,
+      "acc_norm,none": 0.2631578947368421,
+      "acc_norm_stderr,none": 0.0723926637268818,
+      "map,none": 0.506578947368421,
+      "map_stderr,none": 0.04504243241905516,
+      "map_2,none": 0.3815789473684211,
+      "map_2_stderr,none": 0.0637669190064234,
+      "map_3,none": 0.4342105263157895,
+      "map_3_stderr,none": 0.058137235141129694,
+      "map_4,none": 0.506578947368421,
+      "map_4_stderr,none": 0.04504243241905516,
+      "map_norm,none": 0.5350877192982456,
+      "map_norm_stderr,none": 0.048245614035087724,
+      "map_2_norm,none": 0.40789473684210525,
+      "map_2_norm_stderr,none": 0.06761340812294223,
+      "map_3_norm,none": 0.46929824561403505,
+      "map_3_norm_stderr,none": 0.060572339756060106,
+      "map_4_norm,none": 0.5350877192982456,
+      "map_4_norm_stderr,none": 0.048245614035087724,
+      "alias": "cma_basics-1.0-0.3"
+    },
+    "chabsa-1.0-0.3": {
+      "acc,none": 0.5592386378350382,
+      "acc_stderr,none": 0.0056498308311895735,
+      "f1,none": 0.3616424225617237,
+      "f1_stderr,none": "N/A",
+      "acc_norm,none": 0.5592386378350382,
+      "acc_norm_stderr,none": 0.0056498308311895735,
+      "f1_norm,none": 0.3616424225617237,
+      "f1_norm_stderr,none": "N/A",
+      "alias": "chabsa-1.0-0.3"
+    }
+  },
+  "group_subtasks": {
+    "chabsa-1.0-0.3": [],
+    "cma_basics-1.0-0.3": [],
+    "cpa_audit-1.0-0.3": [],
+    "fp2-1.0-0.3": [],
+    "security_sales_1-1.0-0.3": []
+  },
+  "configs": {
+    "chabsa-1.0-0.3": {
+      "task": "chabsa-1.0-0.3",
+      "dataset_path": "jlm_fin_eval/datasets/chabsa/chabsa.py",
+      "dataset_name": "chABSA",
+      "test_split": "test",
+      "doc_to_text": "### 入力:\nセンテンス:{{sentence}}\nターゲット:{{target}}\n\n### 応答:\n\n",
+      "doc_to_target": "{{polarity}}",
+      "doc_to_choice": [
+        "positive",
+        "negative"
+      ],
+      "description": "以下は、タスクを説明する指示と、文脈のある入力の組み合わせです。要求を適切に満たす応答を書きなさい。\n\n### 指示:\n以下のセンテンスにおける、ターゲットのセンチメントをpositiveかnegativeで答えてください。\n\n\n",
+      "target_delimiter": "",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "acc_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "f1",
+          "aggregation": "2class_adjusted_macro_f1_score_for_chabsa",
+          "higher_is_better": true
+        },
+        {
+          "metric": "f1_norm",
+          "aggregation": "2class_adjusted_macro_f1_score_for_chabsa",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false,
+      "doc_to_decontamination_query": "sentence",
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "cma_basics-1.0-0.3": {
+      "task": "cma_basics-1.0-0.3",
+      "dataset_path": "jlm_fin_eval/datasets/cma_basics/cma_basics.py",
+      "dataset_name": "cma_basics",
+      "test_split": "test",
+      "doc_to_text": "def doc_to_text_03(doc):\n    q_doc_text = doc[\"question\"] + \"\\n\"\n    if doc[\"context\"] and doc[\"context\"] != \"\":\n        q_doc_text += doc[\"context\"] + \"\\n\"\n    choices = \"\\n\".join([f\"- {choice}\" for choice in doc[\"choices\"][\"text\"]])\n    input_text = f\"{q_doc_text}\" + f\"出力は以下から選択してください：\\n{choices}\"\n    return f\"### 入力:\\n{input_text}\\n\\n### 応答:\\n\"\n",
+      "doc_to_target": "def doc_to_target_01(doc):\n    return [\n        choice_text\n        for choice_id, choice_text in zip(doc[\"choices\"][\"id\"], doc[\"choices\"][\"text\"])\n        if choice_id == doc[\"answer\"]\n    ][0]\n",
+      "doc_to_choice": "def doc_to_choices_01(doc):\n    choices = doc[\"choices\"][\"text\"]\n    return choices\n",
+      "description": "以下は、タスクを説明する指示と、文脈のある入力の組み合わせです。要求を適切に満たす応答を書きなさい。\n\n### 指示:\n与えられた選択肢の中から、最適な答えを選んでください。\n\n\n",
+      "target_delimiter": "",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "acc_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_2",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_3",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_4",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_2_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_3_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_4_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": true,
+      "doc_to_decontamination_query": "sentence",
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "cpa_audit-1.0-0.3": {
+      "task": "cpa_audit-1.0-0.3",
+      "dataset_path": "jlm_fin_eval/datasets/cpa/cpa_audit.py",
+      "dataset_name": "cpa_audit",
+      "test_split": "test",
+      "doc_to_text": "def doc_to_text_03(doc):\n    q_doc_text = doc[\"question\"] + \"\\n\"\n    if doc[\"context\"] and doc[\"context\"] != \"\":\n        q_doc_text += doc[\"context\"] + \"\\n\"\n    choices = \"\\n\".join([f\"- {choice}\" for choice in doc[\"choices\"][\"text\"]])\n    input_text = f\"{q_doc_text}\" + f\"出力は以下から選択してください：\\n{choices}\"\n    return f\"### 入力:\\n{input_text}\\n\\n### 応答:\\n\"\n",
+      "doc_to_target": "def doc_to_target_01(doc):\n    return [\n        choice_text\n        for choice_id, choice_text in zip(doc[\"choices\"][\"id\"], doc[\"choices\"][\"text\"])\n        if choice_id == doc[\"answer\"]\n    ][0]\n",
+      "doc_to_choice": "def doc_to_choices_01(doc):\n    choices = doc[\"choices\"][\"text\"]\n    return choices\n",
+      "description": "以下は、タスクを説明する指示と、文脈のある入力の組み合わせです。要求を適切に満たす応答を書きなさい。\n\n### 指示:\n与えられた答えの組み合わせの選択肢の中から、最適な選択肢を選んでください。\n\n\n",
+      "target_delimiter": "",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "acc_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_2",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_3",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_4",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_2_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_3_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_4_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": true,
+      "doc_to_decontamination_query": "sentence",
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "fp2-1.0-0.3": {
+      "task": "fp2-1.0-0.3",
+      "dataset_path": "jlm_fin_eval/datasets/fp2/fp2.py",
+      "dataset_name": "fp2",
+      "test_split": "test",
+      "doc_to_text": "def doc_to_text_03(doc):\n    q_doc_text = doc[\"question\"] + \"\\n\"\n    if doc[\"context\"] and doc[\"context\"] != \"\":\n        q_doc_text += doc[\"context\"] + \"\\n\"\n    input_text = f\"{q_doc_text}\"\n    return f\"### 入力:\\n{input_text}\\n### 応答:\\n\"\n",
+      "doc_to_target": "def doc_to_target_00(doc):\n    answer = doc[\"choices\"][\"text\"][doc[\"choices\"][\"id\"].index(doc[\"answer\"])]\n    return answer\n",
+      "doc_to_choice": "def doc_to_choices_00(doc):\n    choices = [choice for choice in doc[\"choices\"][\"text\"]]\n    return choices\n",
+      "description": "以下は、タスクを説明する指示と、文脈のある入力の組み合わせです。要求を適切に満たす応答を書きなさい。\n\n### 指示:\n与えられた選択肢の中から、最適な答えを選んでください。\n\n\n",
+      "target_delimiter": "",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "acc_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_2",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_3",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_4",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_2_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_3_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_4_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": true,
+      "doc_to_decontamination_query": "sentence",
+      "metadata": {
+        "version": 1.0
+      }
+    },
+    "security_sales_1-1.0-0.3": {
+      "task": "security_sales_1-1.0-0.3",
+      "dataset_path": "jlm_fin_eval/datasets/security_sales_1/security_sales_1.py",
+      "dataset_name": "security_sales_1",
+      "test_split": "test",
+      "doc_to_text": "def doc_to_text_03(doc):\n    q_doc_text = doc[\"question\"] + \"\\n\"\n    if doc[\"context\"] and doc[\"context\"] != \"\":\n        q_doc_text += doc[\"context\"] + \"\\n\"\n    choices = \"\\n\".join([f\"- {choice}\" for choice in doc[\"choices\"][\"text\"]])\n    input_text = f\"{q_doc_text}\" + f\"出力は以下から選択してください：\\n{choices}\"\n    return f\"### 入力:\\n{input_text}\\n\\n### 応答:\\n\"\n",
+      "doc_to_target": "def doc_to_target_01(doc):\n    return [\n        choice_text\n        for choice_id, choice_text in zip(doc[\"choices\"][\"id\"], doc[\"choices\"][\"text\"])\n        if choice_id == doc[\"answer\"]\n    ][0]\n",
+      "doc_to_choice": "def doc_to_choices_01(doc):\n    choices = doc[\"choices\"][\"text\"]\n    return choices\n",
+      "description": "以下は、タスクを説明する指示と、文脈のある入力の組み合わせです。要求を適切に満たす応答を書きなさい。\n\n### 指示:\n与えられた選択肢の中から、最適な答えを選んでください。\n\n\n",
+      "target_delimiter": "",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "acc_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_2",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_3",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_4",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_2_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_3_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "map_4_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": true,
+      "doc_to_decontamination_query": "sentence",
+      "metadata": {
+        "version": 1.0
+      }
+    }
+  },
+  "versions": {
+    "chabsa-1.0-0.3": 1.0,
+    "cma_basics-1.0-0.3": 1.0,
+    "cpa_audit-1.0-0.3": 1.0,
+    "fp2-1.0-0.3": 1.0,
+    "security_sales_1-1.0-0.3": 1.0
+  },
+  "n-shot": {
+    "chabsa-1.0-0.3": 0,
+    "cma_basics-1.0-0.3": 0,
+    "cpa_audit-1.0-0.3": 0,
+    "fp2-1.0-0.3": 0,
+    "security_sales_1-1.0-0.3": 0
+  },
+  "config": {
+    "model": "hf",
+    "model_args": "pretrained=cyberagent/open-calm-large,dtype=float16",
+    "batch_size": 1,
+    "batch_sizes": [],
+    "device": null,
+    "use_cache": null,
+    "limit": null,
+    "bootstrap_iters": 100000,
+    "gen_kwargs": null
+  },
+  "git_hash": "45fae5d",
+  "date": 1714404619.4401166,
+  "pretty_env_info": "'NoneType' object has no attribute 'splitlines'",
+  "transformers_version": "4.40.1",
+  "upper_git_hash": null
+}

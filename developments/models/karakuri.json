@@ -2,7 +2,8 @@
     {
         "model": "karakuri-ai/karakuri-lm-70b-v0.1",
         "model_args": [
-            "dtype=bfloat16"
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
         ],
         "run_type": "vllm",
         "memory_Gi": 128,
@@ -17,7 +18,8 @@
     {
         "model": "karakuri-ai/karakuri-lm-70b-chat-v0.1",
         "model_args": [
-            "dtype=bfloat16"
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
         ],
         "run_type": "vllm",
         "memory_Gi": 128,
