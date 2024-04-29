@@ -29,4 +29,4 @@ metric_list:
     aggregation: 2class_adjusted_macro_f1_score_for_chabsa
     higher_is_better: true
 metadata:
-  - version: 1.0
+  version: 1.0

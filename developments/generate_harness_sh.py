@@ -28,7 +28,7 @@ def get_task_set_dict() -> Dict[str, List[str]]:
     task_set_dict = dict(
         [
             (
-                postfix,
+                postfix if postfix != "" else "-default",
                 [
                     (
                         list(filter(lambda x: len(x.split("-")) == 1, _tasks))[0]
@@ -83,14 +83,14 @@ def main() -> None:
         for task_version, tasks in task_sets_dict.items():
             task = ",".join(sorted(tasks))
             harness_command = f"""MODEL_ARGS="{','.join(model_args)}"
-    TASK="{task}"
-    python main.py --model {model_setting['run_type']} --model_args $MODEL_ARGS --tasks $TASK --num_fewshot 0 --output_path "models/{model_name}/result-{task_version}.json"
-    # a100-80gb: {model_setting['a100-80gb']}
-    # a30-24gb: {model_setting['a30-24gb']}
-    # v100-32gb: {model_setting['v100-32gb']}
-    # v100-16gb: {model_setting['v100-16gb']}
-    """
-            save_path = os.path.join("models", model_name, f"harness-{task_version}.sh")
+TASK="{task}"
+python main.py --model {model_setting['run_type']} --model_args $MODEL_ARGS --tasks $TASK --num_fewshot 0 --output_path "models/{model_name}/result{task_version}.json"
+# a100-80gb: {model_setting['a100-80gb']}
+# a30-24gb: {model_setting['a30-24gb']}
+# v100-32gb: {model_setting['v100-32gb']}
+# v100-16gb: {model_setting['v100-16gb']}
+"""
+            save_path = os.path.join("models", model_name, f"harness{task_version}.sh")
             os.makedirs(os.path.dirname(save_path), exist_ok=True)
             with open(save_path, mode="w", encoding="utf-8") as f:
                 f.writelines(harness_command)
