@@ -63,7 +63,7 @@ def main() -> None:
             )
             .replace("${n_gpu}", str(model_setting["n_gpu"]))
             .replace("${memory}", str(model_setting["memory_Gi"]))
-            .replace("${gpu_vram}", str(model_setting["gpu_vram_gb"]))
+            .replace("${gpu_request}", str(model_setting["gpu_request"]))
             .replace("${env}", env_var_str)
             .replace("${work_dir}", work_dir)
             .replace("${repo}", cast(str, model_setting["model"]))

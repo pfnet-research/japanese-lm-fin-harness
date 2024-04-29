@@ -7,9 +7,9 @@
         "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
-        "a100-80gb": 0,
-        "a30-24gb": 0,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
         "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": false
@@ -22,9 +22,9 @@
         "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
-        "a100-80gb": 0,
-        "a30-24gb": 0,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
         "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": false
@@ -37,9 +37,9 @@
         "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
-        "a100-80gb": 0,
-        "a30-24gb": 0,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
         "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": false
@@ -52,9 +52,9 @@
         "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
-        "a100-80gb": 0,
-        "a30-24gb": 0,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
         "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": false
@@ -67,9 +67,9 @@
         "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
-        "a100-80gb": 0,
-        "a30-24gb": 0,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
         "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": false
@@ -82,9 +82,9 @@
         "run_type": "vllm",
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
-        "a30-24gb": 0,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 2,
         "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": false
@@ -97,9 +97,9 @@
         "run_type": "vllm",
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
-        "a30-24gb": 0,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 2,
         "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": false
@@ -112,9 +112,9 @@
         "run_type": "vllm",
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
-        "a30-24gb": 0,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 2,
         "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": false
@@ -122,13 +122,14 @@
     {
         "model": "tokyotech-llm/Swallow-70b-hf",
         "model_args": [
-            "dtype=bfloat16"
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
         ],
         "run_type": "vllm",
         "memory_Gi": 256,
         "n_gpu": 2,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
         "a30-24gb": 0,
         "v100-32gb": 0,
         "v100-16gb": 0,
@@ -137,13 +138,14 @@
     {
         "model": "tokyotech-llm/Swallow-70b-NVE-hf",
         "model_args": [
-            "dtype=bfloat16"
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
         ],
         "run_type": "vllm",
         "memory_Gi": 256,
         "n_gpu": 2,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
         "a30-24gb": 0,
         "v100-32gb": 0,
         "v100-16gb": 0,
@@ -152,13 +154,14 @@
     {
         "model": "tokyotech-llm/Swallow-70b-instruct-hf",
         "model_args": [
-            "dtype=bfloat16"
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
         ],
         "run_type": "vllm",
         "memory_Gi": 256,
         "n_gpu": 2,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
         "a30-24gb": 0,
         "v100-32gb": 0,
         "v100-16gb": 0,
@@ -167,13 +170,14 @@
     {
         "model": "tokyotech-llm/Swallow-70b-instruct-NVE-hf",
         "model_args": [
-            "dtype=bfloat16"
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
         ],
         "run_type": "vllm",
         "memory_Gi": 256,
         "n_gpu": 2,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
         "a30-24gb": 0,
         "v100-32gb": 0,
         "v100-16gb": 0,
@@ -187,9 +191,9 @@
         "run_type": "vllm",
         "memory_Gi": 256,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
-        "a30-24gb": 0,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
         "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": false
@@ -197,13 +201,14 @@
     {
         "model": "tokyotech-llm/Swallow-MX-8x7b-NVE-v0.1",
         "model_args": [
-            "dtype=bfloat16"
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
         ],
         "run_type": "vllm",
         "memory_Gi": 256,
         "n_gpu": 2,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
         "a30-24gb": 0,
         "v100-32gb": 0,
         "v100-16gb": 0,

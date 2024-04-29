@@ -4,13 +4,13 @@
         "trust_remote_code=True",
         "dtype=float32"
     ],
-    "run_type": "vllm",
+    "run_type": "hf",
     "memory_Gi": 32,
     "n_gpu": 1,
-    "gpu_vram_gb": 24,
-    "a100-80gb": 0,
-    "a30-24gb": 0,
-    "v100-32gb": 0,
-    "v100-16gb": 0,
+    "gpu_request": "any-gpu",
+    "a100-80gb": 1,
+    "a30-24gb": 1,
+    "v100-32gb": 1,
+    "v100-16gb": 1,
     "require_hf_login": false
 }

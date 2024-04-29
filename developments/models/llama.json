@@ -7,10 +7,10 @@
         "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
-        "a100-80gb": 0,
-        "a30-24gb": 0,
-        "v100-32gb": 0,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
         "v100-16gb": 0,
         "require_hf_login": true
     },
@@ -22,10 +22,10 @@
         "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
-        "a100-80gb": 0,
-        "a30-24gb": 0,
-        "v100-32gb": 0,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
         "v100-16gb": 0,
         "require_hf_login": true
     },
@@ -36,11 +36,11 @@
         ],
         "run_type": "vllm",
         "memory_Gi": 64,
-        "n_gpu": 1,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
+        "n_gpu": 4,
+        "gpu_request": "gpu-any-32gb",
+        "a100-80gb": 1,
         "a30-24gb": 0,
-        "v100-32gb": 0,
+        "v100-32gb": 4,
         "v100-16gb": 0,
         "require_hf_login": true
     },
@@ -51,24 +51,25 @@
         ],
         "run_type": "vllm",
         "memory_Gi": 64,
-        "n_gpu": 1,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
+        "n_gpu": 4,
+        "gpu_request": "gpu-any-32gb",
+        "a100-80gb": 1,
         "a30-24gb": 0,
-        "v100-32gb": 0,
+        "v100-32gb": 4,
         "v100-16gb": 0,
         "require_hf_login": true
     },
     {
         "model": "meta-llama/Llama-2-70b-hf",
         "model_args": [
-            "dtype=float16"
+            "dtype=float16",
+            "tensor_parallel_size=2"
         ],
         "run_type": "vllm",
         "memory_Gi": 128,
         "n_gpu": 2,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
         "a30-24gb": 0,
         "v100-32gb": 0,
         "v100-16gb": 0,
@@ -77,13 +78,14 @@
     {
         "model": "meta-llama/Llama-2-70b-chat-hf",
         "model_args": [
-            "dtype=float16"
+            "dtype=float16",
+            "tensor_parallel_size=2"
         ],
         "run_type": "vllm",
         "memory_Gi": 128,
         "n_gpu": 2,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
         "a30-24gb": 0,
         "v100-32gb": 0,
         "v100-16gb": 0,
@@ -97,9 +99,9 @@
         "run_type": "vllm",
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
-        "a30-24gb": 0,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
         "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": true
@@ -112,9 +114,9 @@
         "run_type": "vllm",
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
-        "a30-24gb": 0,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
         "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": true
@@ -122,13 +124,14 @@
     {
         "model": "meta-llama/Meta-Llama-3-70B",
         "model_args": [
-            "dtype=bfloat16"
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
         ],
         "run_type": "vllm",
         "memory_Gi": 128,
         "n_gpu": 2,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
         "a30-24gb": 0,
         "v100-32gb": 0,
         "v100-16gb": 0,
@@ -137,13 +140,14 @@
     {
         "model": "meta-llama/Meta-Llama-3-70B-Instruct",
         "model_args": [
-            "dtype=bfloat16"
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
         ],
         "run_type": "vllm",
         "memory_Gi": 128,
         "n_gpu": 2,
-        "gpu_vram_gb": 80,
-        "a100-80gb": 0,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
         "a30-24gb": 0,
         "v100-32gb": 0,
         "v100-16gb": 0,
