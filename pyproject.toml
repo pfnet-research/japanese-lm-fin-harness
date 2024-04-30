@@ -27,6 +27,7 @@ tiktoken = "^0.6.0"
 transformers-stream-generator = "^0.0.4"
 vllm = "^0.4.1"
 torch = {version = "^2.2.1+cu121", source = "torch"}
+anthropic = "^0.25.7"
 
 
 [tool.poetry.group.dev.dependencies]
