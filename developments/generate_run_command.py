@@ -48,7 +48,7 @@ def main() -> None:
         sh_file_names = [os.path.basename(f) for f in sh_files]
         results_files = [
             os.path.join(
-                model_dir, result.replace("harnsee", "result").replace(".sh", ".json")
+                model_dir, result.replace("harness", "result").replace(".sh", ".json")
             )
             for result in sh_file_names
         ]
