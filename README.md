@@ -82,6 +82,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [pfnet/plamo-13b-instruct](https://huggingface.co/pfnet/plamo-13b-instruct) | 35.27 | 63.10 | 26.32 | 16.08 | 25.26 | 45.61 | 1.0-0.6 |
 | [tokyotech-llm/Swallow-7b-instruct-hf](https://huggingface.co/tokyotech-llm/Swallow-7b-instruct-hf) | 34.88 | 49.40 | 31.58 | 20.60 | 25.47 | 47.37 | default |
 | [cyberagent/open-calm-large](https://huggingface.co/cyberagent/open-calm-large) | 34.81 | 53.58 | 28.95 | 16.83 | 23.79 | 50.88 | 1.0-0.1 |
+| [meta-llama/Llama-2-13b-hf](https://huggingface.co/meta-llama/Llama-2-13b-hf) | 34.75 | 56.30 | 36.84 | 13.32 | 26.95 | 40.35 | 1.0-0.2.1 |
 | [stabilityai/japanese-stablelm-3b-4e1t-base](https://huggingface.co/stabilityai/japanese-stablelm-3b-4e1t-base) | 34.58 | 52.32 | 34.21 | 15.58 | 26.95 | 43.86 | 1.0-0.1 |
 | [elyza/ELYZA-japanese-Llama-2-7b-fast](https://huggingface.co/elyza/ELYZA-japanese-Llama-2-7b-fast) | 34.49 | 37.54 | 36.84 | 17.59 | 26.11 | 54.39 | 1.0-0.1 |
 | [pfnet/plamo-13b](https://huggingface.co/pfnet/plamo-13b) | 34.26 | 59.69 | 28.95 | 12.81 | 24.21 | 45.61 | 1.0-0.6 |

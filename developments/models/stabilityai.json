@@ -121,9 +121,9 @@
         "model_args": [
             "trust_remote_code=True",
             "tokenizer=novelai/nerdstash-tokenizer-v1",
-            "dtype=float32"
+            "dtype=bfloat16"
         ],
-        "run_type": "hf",
+        "run_type": "vllm",
         "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_request": "gpu-a100",
@@ -138,9 +138,9 @@
         "model_args": [
             "trust_remote_code=True",
             "tokenizer=novelai/nerdstash-tokenizer-v1",
-            "dtype=float32"
+            "dtype=bfloat16"
         ],
-        "run_type": "hf",
+        "run_type": "vllm",
         "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_request": "gpu-a100",
