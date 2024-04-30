@@ -3,5 +3,5 @@ TASK="chabsa-1.0-0.2,cma_basics-1.0-0.2.1,cpa_audit-1.0-0.2.1,fp2-1.0-0.2.1,secu
 python main.py --model vllm --model_args $MODEL_ARGS --tasks $TASK --num_fewshot 0 --output_path "models/llm-jp/llm-jp-13b-instruct-full-dolly_en-dolly_ja-ichikara_003_001-oasst_en-oasst_ja-v1.1/result-1.0-0.2.1.json"
 # a100-80gb: 1
 # a30-24gb: 0
-# v100-32gb: 1
+# v100-32gb: 0
 # v100-16gb: 0

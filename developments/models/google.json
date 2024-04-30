@@ -37,9 +37,9 @@
         "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_request": "gpu-a30",
+        "gpu_request": "gpu-a100",
         "a100-80gb": 1,
-        "a30-24gb": 1,
+        "a30-24gb": 0,
         "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": false
@@ -52,9 +52,9 @@
         "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_request": "gpu-a30",
+        "gpu_request": "gpu-a100",
         "a100-80gb": 1,
-        "a30-24gb": 1,
+        "a30-24gb": 0,
         "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": false
@@ -67,9 +67,9 @@
         "run_type": "vllm",
         "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_request": "gpu-a30",
+        "gpu_request": "gpu-a100",
         "a100-80gb": 1,
-        "a30-24gb": 1,
+        "a30-24gb": 0,
         "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": false
@@ -92,13 +92,14 @@
     {
         "model": "google/gemma-7b-it",
         "model_args": [
-            "dtype=bfloat16"
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
         ],
         "run_type": "vllm",
         "memory_Gi": 48,
-        "n_gpu": 1,
+        "n_gpu": 2,
         "gpu_request": "gpu-a100",
-        "a100-80gb": 1,
+        "a100-80gb": 2,
         "a30-24gb": 0,
         "v100-32gb": 0,
         "v100-16gb": 0,
@@ -107,14 +108,15 @@
     {
         "model": "google/gemma-1.1-7b-it",
         "model_args": [
-            "dtype=bfloat16"
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
         ],
         "run_type": "vllm",
         "memory_Gi": 48,
-        "n_gpu": 1,
-        "gpu_request": "gpu-a30",
-        "a100-80gb": 1,
-        "a30-24gb": 1,
+        "n_gpu": 2,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
+        "a30-24gb": 0,
         "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": false

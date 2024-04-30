@@ -75,10 +75,10 @@
         "run_type": "vllm",
         "memory_Gi": 256,
         "n_gpu": 1,
-        "gpu_request": "gpu-any-32gb",
+        "gpu_request": "gpu-a100",
         "a100-80gb": 1,
         "a30-24gb": 0,
-        "v100-32gb": 1,
+        "v100-32gb": 0,
         "v100-16gb": 0,
         "require_hf_login": false
     },
@@ -123,7 +123,7 @@
             "tokenizer=novelai/nerdstash-tokenizer-v1",
             "dtype=float32"
         ],
-        "run_type": "vllm",
+        "run_type": "hf",
         "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_request": "gpu-a100",

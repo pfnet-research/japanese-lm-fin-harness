@@ -4,4 +4,4 @@ python main.py --model vllm --model_args $MODEL_ARGS --tasks $TASK --num_fewshot
 # a100-80gb: 1
 # a30-24gb: 1
 # v100-32gb: 1
-# v100-16gb: 1
+# v100-16gb: 0
