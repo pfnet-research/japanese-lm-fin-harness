@@ -1,0 +1,111 @@
+[
+    {
+        "model": "mistralai/Mistral-7B-v0.1",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a30",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": true
+    },
+    {
+        "model": "mistralai/Mistral-7B-Instruct-v0.1",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a30",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": true
+    },
+    {
+        "model": "mistralai/Mistral-7B-Instruct-v0.2",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a30",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": true
+    },
+    {
+        "model": "mistralai/Mixtral-8x7B-Instruct-v0.1",
+        "model_args": [
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 2,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": true
+    },
+    {
+        "model": "mistralai/Mixtral-8x7B-v0.1",
+        "model_args": [
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 2,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": true
+    },
+    {
+        "model": "mistralai/Mixtral-8x22B-v0.1",
+        "model_args": [
+            "dtype=bfloat16",
+            "tensor_parallel_size=4"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 512,
+        "n_gpu": 4,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 4,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": true
+    },
+    {
+        "model": "mistralai/Mixtral-8x22B-Instruct-v0.1",
+        "model_args": [
+            "dtype=bfloat16",
+            "tensor_parallel_size=4"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 512,
+        "n_gpu": 4,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 4,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": true
+    }
+]
