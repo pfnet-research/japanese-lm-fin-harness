@@ -1,44 +1,27 @@
-import argparse
-import collections
-import json
 import os
-import random
 import re
 import time
-from typing import Any
-from typing import Dict
-from typing import Iterator
-from typing import cast
-
+from typing import Any, Dict, List, Literal, Optional, Tuple
+from lm_eval.__main__ import parse_eval_args, setup_parser
 import lm_eval.evaluator
+from lm_eval.models.openai_completions import OpenaiCompletionsLM, oa_completion
 import openai
+from sympy import false
 from tqdm import tqdm
+from collections import defaultdict
+from main import cli_evaluate
+from lm_eval import utils
+import copy
 
-import jlm_fin_eval.tasks
-from main import MultiChoice
-from main import pattern_match
-
+base_url = os.environ.get("OPENAI_API_BASE", "https://api.openai.com/v1")
 openai.api_type = os.environ.get("OPENAI_API_TYPE", "open_ai")
-openai.api_base = os.environ.get("OPENAI_API_BASE", "https://api.openai.com/v1")
 openai.api_version = os.environ.get("OPENAI_API_VERSION")
-openai.api_key = os.environ.get("OPENAI_API_SECRET_KEY")
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--model", type=str)
-    parser.add_argument(
-        "--tasks",
-        default=None,
-        choices=cast(Iterator[str], MultiChoice(jlm_fin_eval.tasks.ALL_TASKS)),
-    )
-    parser.add_argument("--num_fewshot", type=int, default=0)
-    parser.add_argument("--output_path", default=None)
-
-    return parser.parse_args()
-
-
-def oa_chat_completion(**kwargs: Any) -> Dict:
+def oa_chat_completion(
+    client: openai.Client, chat: bool = False, **kwargs: Any
+) -> Optional[Dict]:
     """Query OpenAI API for completion.
 
     Retry with back-off until they respond
@@ -48,8 +31,13 @@ def oa_chat_completion(**kwargs: Any) -> Dict:
     backoff_time = 3.0
     while True:
         try:
-            return openai.ChatCompletion.create(**kwargs)  # type: ignore
-        except openai.OpenAIError:
+            if chat:
+                return client.chat.completions.create(**kwargs)
+            else:
+                return client.completions.create(**kwargs)
+        except openai.OpenAIError as e:
+            if e.code == "content_filter":
+                return None
             import traceback
 
             traceback.print_exc()
@@ -57,104 +45,93 @@ def oa_chat_completion(**kwargs: Any) -> Dict:
             backoff_time *= 1.5
 
 
-def main() -> None:
-    args = parse_args()
-
-    if args.tasks is None:
-        task_names = jlm_fin_eval.tasks.ALL_TASKS
-    else:
-        task_names = pattern_match(args.tasks.split(","), jlm_fin_eval.tasks.ALL_TASKS)
-    print(f"Selected model: {args.model}")
-    print(f"Selected Tasks: {task_names}")
-
-    tasks = task_names
-    num_fewshot = args.num_fewshot
-    engine = args.model
-    output_path = args.output_path
-
-    task_dict = jlm_fin_eval.tasks.get_task_dict(tasks)  # type: ignore
-
-    task_dict_items = [
-        (name, task)
-        for name, task in task_dict.items()
-        if (task.has_validation_docs() or task.has_test_docs())
-    ]
-    versions: Dict[str, str] = {}
-
-    vals = collections.defaultdict(list)
-    # holds detailed responses for error analysis
-    details = collections.defaultdict(list)
-    docs = {}
-    for task_name, task in task_dict_items:
-        versions[task_name] = task.VERSION
-        if task.has_test_docs():
-            task_doc_func = task.test_docs
-        elif task.has_validation_docs():
-            task_doc_func = task.validation_docs
-        else:
-            raise RuntimeError("Task has neither test_docs nor validation_docs")
-        task_docs = list(task_doc_func())
-        rnd = random.Random()
-        rnd.seed(42)
-
-        for doc_id, doc in enumerate(task_docs):
-            ctx = task.fewshot_context(
-                doc=doc, num_fewshot=num_fewshot, rnd=rnd, description=""
-            )
-            docs[(task_name, doc_id)] = (doc, ctx)
-
-    for (task_name, doc_id), (doc, ctx) in tqdm(docs.items()):
-        task = task_dict[task_name]
-        resp = oa_chat_completion(
-            engine=engine,
-            messages=[{"role": "user", "content": ctx}],
-            temperature=0.0,
+class AzureOpenaiCompletionsLM(OpenaiCompletionsLM):
+    def __init__(
+        self,
+        model: str,
+        base_url: str,
+        tokenizer: Optional[str] = None,
+        tokenizer_backend: Literal["tiktoken", "huggingface"] = "tiktoken",
+        truncate: bool = False,
+        max_gen_toks: int = 256,
+        batch_size: int = 1,
+        seed: int = 1234,
+        max_length: Optional[int] = None,
+    ) -> None:
+        super().__init__(
+            model=model,
+            base_url=base_url,
+            tokenizer=tokenizer,
+            tokenizer_backend=tokenizer_backend,
+            truncate=truncate,
+            max_gen_toks=max_gen_toks,
+            batch_size=batch_size,
+            seed=seed,
+            max_length=max_length,
         )
-        # Azure content filter
-        if "content" in resp["choices"][0]["message"]:
-            resp_txt = resp["choices"][0]["message"]["content"]
-        else:
-            resp_txt = ""
-        choice_found = [
-            re.search(req.args[1], resp_txt)
-            for req in task.construct_requests(doc, ctx)
-        ]
-        # Note: if the task employs likelihood, -1.0 is multiplied. But, others are dependent on the task.
-        result = [
-            -1.0 * (m.start() if m is not None else float("inf")) for m in choice_found
-        ]
-        metrics = task.process_results(doc, result)
-        if "details" in metrics:
-            details[task_name].append(metrics["details"])
-            del metrics["details"]
-        for metric, value in metrics.items():
-            vals[(task_name, metric)].append(value)
+        self.client = openai.AzureOpenAI(
+            azure_endpoint=self.base_url,
+            api_key=os.environ.get("OPENAI_API_KEY"),
+            api_version=os.environ.get("OPENAI_API_VERSION"),
+        )
 
-    results: Dict[str, Dict[str, float]] = collections.defaultdict(dict)
-    # aggregate results
-    for (task_name, metric), items in vals.items():
-        task = task_dict[task_name]
-        real_metric = metric  # key when looking up the metric with task.aggregation
-        results[task_name][metric] = task.aggregation()[real_metric](items)
+    def _loglikelihood_tokens(
+        self,
+        requests: List[Tuple[Tuple[str, str], List[int], List[int]]],
+        disable_tqdm: bool = False,
+        override_bs: int = None,
+    ) -> List[Tuple[float, bool]]:
+        res = defaultdict(list)
+        re_ords = {}
 
-    final_results = {
-        "results": dict(results),
-        "versions": dict(versions),
-        "config": {
-            "model": engine,
-            "num_fewshot": num_fewshot,
-        },
-    }
-    dumped = json.dumps(final_results, indent=2, ensure_ascii=False)
-    print(dumped)
+        # we group requests by their generation_kwargs,
+        # so that we don't try to execute e.g. greedy sampling and temp=0.8 sampling
+        # in the same batch.
+        grouper = lm_eval.models.utils.Grouper(requests, lambda x: str(x[0][0]))
 
-    if output_path:
-        os.makedirs(os.path.dirname(output_path), exist_ok=True)
-        with open(output_path, "w") as f:
-            f.write(dumped)
-    print(f"{engine}, " f"num_fewshot: {num_fewshot},")
-    print(lm_eval.evaluator.make_table(final_results))
+        pbar = tqdm(total=len(requests), disable=(disable_tqdm or (self.rank != 0)))
+        for key, re_ord in grouper.get_grouped().items():
+            inps = [{"role": "user", "content": key}]
+
+            response = oa_chat_completion(
+                client=self.client,
+                chat=True,
+                messages=inps,
+                model=self.model,
+                temperature=0.0,
+                max_tokens=self.max_gen_toks,
+            )
+
+            # Azure content filter
+            if response is not None and response.choices[0].message.content:
+                resp_txt = response.choices[0].message.content
+            else:
+                resp_txt = ""
+            choices = list(map(lambda x: x[0][1], re_ord))
+            choice_found = [re.search(choice, resp_txt) for choice in choices]
+            # Note: if the task employs likelihood, -1.0 is multiplied. But, others are dependent on the task.
+            result = [
+                -1.0 * (m.start() if m is not None else float("inf"))
+                for m in choice_found
+            ]
+
+            for choice, ll, found, ord in zip(choices, result, choice_found, re_ord):
+                answer = (ll, found is not None)
+                res[key].append(answer)
+                self.cache_hook.add_partial("loglikelihood", ord[0], answer)
+                pbar.update(1)
+        # reorder this group of results back to original unsorted form
+        # res[key] = re_ord.get_original(res[key])
+
+        pbar.close()
+
+        return grouper.get_original(res)
 
 
 if __name__ == "__main__":
-    main()
+    parser = setup_parser()
+    args = parse_eval_args(parser)
+    args.model = AzureOpenaiCompletionsLM.create_from_arg_string(
+        args.model_args, {"base_url": base_url}
+    )
+    cli_evaluate(args=args)
