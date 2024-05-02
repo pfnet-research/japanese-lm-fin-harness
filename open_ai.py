@@ -1,17 +1,22 @@
 import os
 import re
 import time
-from typing import Any, Dict, List, Literal, Optional, Tuple
-from lm_eval.__main__ import parse_eval_args, setup_parser
-import lm_eval.evaluator
-from lm_eval.models.openai_completions import OpenaiCompletionsLM, oa_completion
-import openai
-from sympy import false
-from tqdm import tqdm
 from collections import defaultdict
+from typing import Any
+from typing import Dict
+from typing import List
+from typing import Literal
+from typing import Optional
+from typing import Tuple
+
+import lm_eval.evaluator
+import openai
+from lm_eval.__main__ import parse_eval_args
+from lm_eval.__main__ import setup_parser
+from lm_eval.models.openai_completions import OpenaiCompletionsLM
+from tqdm import tqdm
+
 from main import cli_evaluate
-from lm_eval import utils
-import copy
 
 base_url = os.environ.get("OPENAI_API_BASE", "https://api.openai.com/v1")
 openai.api_type = os.environ.get("OPENAI_API_TYPE", "open_ai")
