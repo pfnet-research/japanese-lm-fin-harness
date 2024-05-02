@@ -87,11 +87,7 @@ class AzureOpenaiCompletionsLM(OpenaiCompletionsLM):
         override_bs: int = None,
     ) -> List[Tuple[float, bool]]:
         res = defaultdict(list)
-        re_ords = {}
 
-        # we group requests by their generation_kwargs,
-        # so that we don't try to execute e.g. greedy sampling and temp=0.8 sampling
-        # in the same batch.
         grouper = lm_eval.models.utils.Grouper(requests, lambda x: str(x[0][0]))
 
         pbar = tqdm(total=len(requests), disable=(disable_tqdm or (self.rank != 0)))
@@ -120,7 +116,7 @@ class AzureOpenaiCompletionsLM(OpenaiCompletionsLM):
                 for m in choice_found
             ]
 
-            for choice, ll, found, ord in zip(choices, result, choice_found, re_ord):
+            for ll, found, ord in zip(result, choice_found, re_ord):
                 answer = (ll, found is not None)
                 res[key].append(answer)
                 self.cache_hook.add_partial("loglikelihood", ord[0], answer)
