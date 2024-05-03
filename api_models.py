@@ -8,6 +8,7 @@ from typing import List
 from typing import Literal
 from typing import Optional
 from typing import Tuple
+import unicodedata
 import anthropic
 import vertexai
 import vertexai.preview.generative_models
@@ -142,7 +143,12 @@ class AzureOpenaiCompletionsLM(OpenaiCompletionsLM):
                 resp_txt = response.choices[0].message.content
             else:
                 resp_txt = ""
-            choices = list(map(lambda x: x[0][1], re_ord))
+            choices = list(
+                map(
+                    lambda x: x[1:] if x[0] == " " else x,
+                    map(lambda x: x[0][1], re_ord),
+                )
+            )
             choice_found = [re.search(choice, resp_txt) for choice in choices]
             # Note: if the task employs likelihood, -1.0 is multiplied. But, others are dependent on the task.
             result = [
@@ -150,8 +156,8 @@ class AzureOpenaiCompletionsLM(OpenaiCompletionsLM):
                 for m in choice_found
             ]
 
-            for ll, found, ord in zip(result, choice_found, re_ord):
-                answer = (ll, found is not None)
+            for ll, ord in zip(result, re_ord):
+                answer = (ll, ll == max(result))
                 res[key].append(answer)
                 self.cache_hook.add_partial("loglikelihood", ord[0], answer)
                 pbar.update(1)
@@ -231,16 +237,29 @@ class GcpVertexAiCompletionsLM(OpenaiCompletionsLM):
                 resp_txt = response.candidates[0].content.parts[0].text
             else:
                 resp_txt = ""
-            choices = list(map(lambda x: x[0][1], re_ord))
+            choices = list(
+                map(
+                    lambda x: x[1:] if x[0] == " " else x,
+                    map(lambda x: x[0][1], re_ord),
+                )
+            )
             choice_found = [re.search(choice, resp_txt) for choice in choices]
+            # workaround for gemini
+            choice_found2 = [
+                re.search(unicodedata.normalize("NFKC", choice), resp_txt)
+                for choice in choices
+            ]
             # Note: if the task employs likelihood, -1.0 is multiplied. But, others are dependent on the task.
             result = [
-                -1.0 * (m.start() if m is not None else float("inf"))
-                for m in choice_found
+                max(
+                    -1.0 * (m.start() if m is not None else float("inf")),
+                    -1.0 * (m2.start() if m2 is not None else float("inf")),
+                )
+                for m, m2 in zip(choice_found, choice_found2)
             ]
 
-            for ll, found, ord in zip(result, choice_found, re_ord):
-                answer = (ll, found is not None)
+            for ll, ord in zip(result, re_ord):
+                answer = (ll, ll == max(result))
                 res[key].append(answer)
                 self.cache_hook.add_partial("loglikelihood", ord[0], answer)
                 pbar.update(1)
@@ -272,16 +291,29 @@ class CustomizedAnthropicLM(AnthropicLM):
                 resp_txt = response.content[0].text
             else:
                 resp_txt = ""
-            choices = list(map(lambda x: x.args[1], re_ord))
+            choices = list(
+                map(
+                    lambda x: x[1:] if x[0] == " " else x,
+                    map(lambda x: x.args[1], re_ord),
+                )
+            )
             choice_found = [re.search(choice, resp_txt) for choice in choices]
+            # workaround for gemini
+            choice_found2 = [
+                re.search(unicodedata.normalize("NFKC", choice), resp_txt)
+                for choice in choices
+            ]
             # Note: if the task employs likelihood, -1.0 is multiplied. But, others are dependent on the task.
             result = [
-                -1.0 * (m.start() if m is not None else float("inf"))
-                for m in choice_found
+                max(
+                    -1.0 * (m.start() if m is not None else float("inf")),
+                    -1.0 * (m2.start() if m2 is not None else float("inf")),
+                )
+                for m, m2 in zip(choice_found, choice_found2)
             ]
 
-            for ll, found, ord in zip(result, choice_found, re_ord):
-                answer = (ll, found is not None)
+            for ll, ord in zip(result, re_ord):
+                answer = (ll, ll == max(result))
                 res[key].append(answer)
                 self.cache_hook.add_partial("loglikelihood", ord.args, answer)
                 pbar.update(1)
