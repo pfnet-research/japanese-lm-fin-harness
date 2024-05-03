@@ -17,7 +17,6 @@ from lm_eval.__main__ import parse_eval_args
 from lm_eval.__main__ import setup_parser
 from lm_eval.models.openai_completions import OpenaiCompletionsLM
 from lm_eval.models.anthropic_llms import AnthropicLM
-from lm_eval.api.model import TemplateLM
 from tqdm import tqdm
 
 from main import cli_evaluate
@@ -156,8 +155,8 @@ class AzureOpenaiCompletionsLM(OpenaiCompletionsLM):
                 res[key].append(answer)
                 self.cache_hook.add_partial("loglikelihood", ord[0], answer)
                 pbar.update(1)
-        # reorder this group of results back to original unsorted form
-        # res[key] = re_ord.get_original(res[key])
+            # reorder this group of results back to original unsorted form
+            res[key] = re_ord.get_original(res[key])
 
         pbar.close()
 
@@ -247,8 +246,8 @@ class GcpVertexAiCompletionsLM(OpenaiCompletionsLM):
                 res[key].append(answer)
                 self.cache_hook.add_partial("loglikelihood", ord[0], answer)
                 pbar.update(1)
-        # reorder this group of results back to original unsorted form
-        # res[key] = re_ord.get_original(res[key])
+            # reorder this group of results back to original unsorted form
+            res[key] = re_ord.get_original(res[key])
 
         pbar.close()
 
@@ -290,8 +289,8 @@ class CustomizedAnthropicLM(AnthropicLM):
                 res[key].append(answer)
                 self.cache_hook.add_partial("loglikelihood", ord.args, answer)
                 pbar.update(1)
-        # reorder this group of results back to original unsorted form
-        # res[key] = re_ord.get_original(res[key])
+            # reorder this group of results back to original unsorted form
+            res[key] = re_ord.get_original(res[key])
 
         pbar.close()
 
