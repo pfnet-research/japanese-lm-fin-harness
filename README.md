@@ -40,6 +40,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [Xwin-LM/Xwin-LM-70B-V0.1](https://huggingface.co/Xwin-LM/Xwin-LM-70B-V0.1) | 45.65 | 87.58 | 39.47 | 16.58 | 32.00 | 52.63 | 1.0-0.5 |
 | [Qwen/Qwen-7B-Chat](https://huggingface.co/Qwen/Qwen-7B-Chat) | 45.33 | 85.40 | 47.37 | 19.85 | 28.42 | 45.61 | 1.0-0.1.2 |
 | [meta-llama/Meta-Llama-3-8B-Instruct](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) | 44.70 | 86.77 | 39.47 | 16.83 | 33.05 | 47.37 | 1.0-0.2.1 |
+| [gemini/gemini-1.0-pro](https://huggingface.co/gemini/gemini-1.0-pro) | 44.66 | 63.00 | 55.26 | 23.12 | 24.00 | 57.89 | default |
 | [karakuri-ai/karakuri-lm-70b-chat-v0.1](https://huggingface.co/karakuri-ai/karakuri-lm-70b-chat-v0.1) | 44.59 | 88.59 | 36.84 | 18.09 | 30.32 | 49.12 | 1.0-0.2.1 |
 | [mistralai/Mixtral-8x7B-v0.1](https://huggingface.co/mistralai/Mixtral-8x7B-v0.1) | 44.29 | 89.39 | 42.11 | 15.58 | 25.26 | 49.12 | default |
 | [meta-llama/Llama-2-70b-chat-hf](https://huggingface.co/meta-llama/Llama-2-70b-chat-hf) | 44.23 | 85.67 | 44.74 | 17.09 | 26.32 | 47.37 | 1.0-0.1 |
