@@ -59,17 +59,21 @@ for company_model, results in sorted_results:
         "| "
         + (
             "["
-            if not company_model.startswith("openai/")
-            or company_model.startswith("gemini/")
-            or company_model.startswith("anthropic/")
+            if not (
+                company_model.startswith("openai/")
+                or company_model.startswith("gemini/")
+                or company_model.startswith("anthropic/")
+            )
             else ""
         )
         + company_model
         + (
             ("](https://huggingface.co/" + company_model.replace("/", "/") + ")")
-            if not company_model.startswith("openai/")
-            or company_model.startswith("gemini/")
-            or company_model.startswith("anthropic/")
+            if not (
+                company_model.startswith("openai/")
+                or company_model.startswith("gemini/")
+                or company_model.startswith("anthropic/")
+            )
             else ""
         )
         + " | "
