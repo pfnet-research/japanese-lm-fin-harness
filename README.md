@@ -14,6 +14,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [Qwen/Qwen1.5-72B](https://huggingface.co/Qwen/Qwen1.5-72B) | 58.82 | 90.77 | 71.05 | 26.38 | 37.47 | 68.42 | 1.0-0.1 |
 | [meta-llama/Meta-Llama-3-70B-Instruct](https://huggingface.co/meta-llama/Meta-Llama-3-70B-Instruct) | 58.48 | 90.61 | 76.32 | 29.90 | 42.95 | 52.63 | 1.0-0.2.1 |
 | [tokyotech-llm/Swallow-70b-NVE-instruct-hf](https://huggingface.co/tokyotech-llm/Swallow-70b-NVE-instruct-hf) | 58.32 | 90.72 | 63.16 | 21.11 | 53.47 | 63.16 | default |
+| gemini/gemini-1.5-pro | 57.94 | 59.95 | 68.42 | 39.70 | 49.68 | 71.93 | default |
 | [Qwen/Qwen-72B-Chat](https://huggingface.co/Qwen/Qwen-72B-Chat) | 57.33 | 92.10 | 71.05 | 25.38 | 40.21 | 57.89 | 1.0-0.1.2 |
 | [meta-llama/Meta-Llama-3-70B](https://huggingface.co/meta-llama/Meta-Llama-3-70B) | 56.87 | 90.19 | 73.68 | 24.87 | 37.68 | 57.89 | 1.0-0.1.2 |
 | [tokyotech-llm/Swallow-70b-NVE-hf](https://huggingface.co/tokyotech-llm/Swallow-70b-NVE-hf) | 56.26 | 86.42 | 60.53 | 20.10 | 52.84 | 61.40 | default |
