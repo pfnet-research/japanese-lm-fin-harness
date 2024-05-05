@@ -1,6 +1,7 @@
 import os
 import re
 import time
+import unicodedata
 from collections import defaultdict
 from typing import Any
 from typing import Dict
@@ -8,16 +9,16 @@ from typing import List
 from typing import Literal
 from typing import Optional
 from typing import Tuple
-import unicodedata
+
 import anthropic
-import vertexai
-import vertexai.preview.generative_models
 import lm_eval.evaluator
 import openai
+import vertexai
+import vertexai.preview.generative_models
 from lm_eval.__main__ import parse_eval_args
 from lm_eval.__main__ import setup_parser
-from lm_eval.models.openai_completions import OpenaiCompletionsLM
 from lm_eval.models.anthropic_llms import AnthropicLM
+from lm_eval.models.openai_completions import OpenaiCompletionsLM
 from tqdm import tqdm
 
 from main import cli_evaluate
