@@ -7,6 +7,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | openai/gpt-4-32k | 66.27 | 93.16 | 81.58 | 37.44 | 50.74 | 68.42 | default |
 | openai/gpt-4 | 66.07 | 93.20 | 78.95 | 37.69 | 50.32 | 70.18 | default |
+| anthropic/claude-3-opus | 65.81 | 93.04 | 71.05 | 42.71 | 55.58 | 66.67 | default |
 | openai/gpt-4-turbo | 64.59 | 92.86 | 76.32 | 36.18 | 50.95 | 66.67 | default |
 | anthropic/claude-3-sonnet | 61.59 | 89.70 | 71.05 | 38.44 | 42.11 | 66.67 | default |
 | [Qwen/Qwen1.5-72B-Chat](https://huggingface.co/Qwen/Qwen1.5-72B-Chat) | 59.62 | 92.15 | 71.05 | 31.41 | 36.84 | 66.67 | default |
