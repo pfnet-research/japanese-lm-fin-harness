@@ -1,0 +1,34 @@
+[
+    {
+        "model": "karakuri-ai/karakuri-lm-70b-v0.1",
+        "model_args": [
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 128,
+        "n_gpu": 2,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": true
+    },
+    {
+        "model": "karakuri-ai/karakuri-lm-70b-chat-v0.1",
+        "model_args": [
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 128,
+        "n_gpu": 2,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": true
+    }
+]

@@ -1,122 +1,216 @@
 [
     {
         "model": "rinna/japanese-gpt-neox-3.6b",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 16,
+        "gpu_request": "gpu-any",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 1,
         "require_hf_login": false
     },
     {
         "model": "rinna/japanese-gpt-neox-3.6b-instruction-sft",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 16,
+        "gpu_request": "gpu-any",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 1,
         "require_hf_login": false
     },
     {
         "model": "rinna/japanese-gpt-neox-3.6b-instruction-sft-v2",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 16,
+        "gpu_request": "gpu-any",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 1,
         "require_hf_login": false
     },
     {
         "model": "rinna/japanese-gpt-neox-3.6b-instruction-ppo",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 16,
+        "gpu_request": "gpu-any",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 1,
         "require_hf_login": false
     },
     {
         "model": "rinna/bilingual-gpt-neox-4b",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 16,
+        "gpu_request": "gpu-any",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 1,
         "require_hf_login": false
     },
     {
         "model": "rinna/bilingual-gpt-neox-4b-instruction-sft",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 16,
+        "gpu_request": "gpu-any",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 1,
         "require_hf_login": false
     },
     {
         "model": "rinna/bilingual-gpt-neox-4b-instruction-ppo",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 16,
+        "gpu_request": "gpu-any",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 1,
         "require_hf_login": false
     },
     {
         "model": "rinna/youri-7b",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
         "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "rinna/youri-7b-instruction",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
         "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "rinna/youri-7b-chat",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
         "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "rinna/nekomata-14b",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 128,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "rinna/nekomata-14b-instruction",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 128,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "rinna/nekomata-7b",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "rinna/nekomata-7b-instruction",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     }
 ]

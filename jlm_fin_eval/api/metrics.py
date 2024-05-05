@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Tuple, Union
 
 import numpy as np
 from lm_eval.api.registry import register_aggregation
@@ -7,7 +7,7 @@ from sklearn.metrics import f1_score
 
 
 @register_aggregation("macro_f1_score")
-def macro_f1_score(items: Tuple) -> float | np.ndarray:
+def macro_f1_score(items: Tuple) -> Union[float | np.ndarray]:
     unzipped_list = list(zip(*items))
     golds = unzipped_list[0]
     preds = unzipped_list[1]
@@ -16,7 +16,9 @@ def macro_f1_score(items: Tuple) -> float | np.ndarray:
 
 
 @register_aggregation("2class_adjusted_macro_f1_score_for_chabsa")
-def two_class_adjusted_macro_f1_score_for_chabsa(items: Tuple) -> float | np.ndarray:
+def two_class_adjusted_macro_f1_score_for_chabsa(
+    items: Tuple,
+) -> Union[float | np.ndarray]:
     unzipped_list = list(zip(*items))
     golds = unzipped_list[0]
     preds = unzipped_list[1]

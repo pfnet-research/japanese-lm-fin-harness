@@ -1,0 +1,47 @@
+[
+    {
+        "model": "moneyforward/houou-instruction-7b-v1",
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "moneyforward/houou-instruction-7b-v2",
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "moneyforward/houou-instruction-7b-v3",
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_request": "gpu-any-24gb",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    }
+]

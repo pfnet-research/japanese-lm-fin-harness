@@ -1,29 +1,92 @@
 [
     {
+        "model": "lmsys/vicuna-7b-v1.3",
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_request": "gpu-any",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 1,
+        "require_hf_login": false
+    },
+    {
+        "model": "lmsys/vicuna-13b-v1.3",
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 128,
+        "n_gpu": 1,
+        "gpu_request": "gpu-any-32gb",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 1,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
         "model": "lmsys/vicuna-33b-v1.3",
         "model_args": [
-            "use_accelerate=True",
-            "device_map_option=auto"
+            "dtype=float16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 128,
-        "n_gpu": 2,
-        "gpu_vram_gb": 80,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "lmsys/vicuna-13b-v1.5-16k",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
         "memory_Gi": 128,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "lmsys/vicuna-7b-v1.5-16k",
-        "model_args": [],
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
         "memory_Gi": 128,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
+        "gpu_request": "gpu-any-32gb",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 1,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "lmsys/longchat-7b-v1.5-32k",
+        "model_args": [
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 128,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     }
 ]

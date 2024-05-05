@@ -3,57 +3,213 @@
         "model": "stabilityai/japanese-stablelm-base-alpha-7b",
         "model_args": [
             "trust_remote_code=True",
-            "tokenizer=novelai/nerdstash-tokenizer-v1"
+            "tokenizer=novelai/nerdstash-tokenizer-v1",
+            "dtype=float32"
         ],
+        "run_type": "hf",
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 32,
-        "require_hf_login": true
+        "gpu_request": "gpu-any-32gb",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 1,
+        "v100-16gb": 0,
+        "require_hf_login": false
     },
     {
         "model": "stabilityai/japanese-stablelm-instruct-alpha-7b",
         "model_args": [
             "trust_remote_code=True",
-            "tokenizer=novelai/nerdstash-tokenizer-v1"
+            "tokenizer=novelai/nerdstash-tokenizer-v1",
+            "dtype=float32"
         ],
+        "run_type": "hf",
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 32,
-        "require_hf_login": true
+        "gpu_request": "gpu-any-32gb",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 1,
+        "v100-16gb": 0,
+        "require_hf_login": false
     },
     {
         "model": "stabilityai/japanese-stablelm-instruct-alpha-7b-v2",
         "model_args": [
             "trust_remote_code=True",
-            "tokenizer=novelai/nerdstash-tokenizer-v1"
+            "tokenizer=novelai/nerdstash-tokenizer-v1",
+            "dtype=float32"
         ],
+        "run_type": "hf",
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 32,
+        "gpu_request": "gpu-any-32gb",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 1,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "stabilityai/japanese-stablelm-base-beta-7b",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=float32"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "stabilityai/japanese-stablelm-instruct-beta-7b",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=float32"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "stabilityai/japanese-stablelm-base-beta-70b",
         "model_args": [
             "trust_remote_code=True",
-            "use_accelerate=True",
-            "device_map_option=auto"
+            "dtype=float32",
+            "tensor_parallel_size=4"
         ],
+        "run_type": "vllm",
         "memory_Gi": 256,
-        "n_gpu": 8,
-        "gpu_vram_gb": 32,
+        "n_gpu": 4,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 4,
+        "a30-24gb": 0,
+        "v100-32gb": 8,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "stabilityai/japanese-stablelm-instruct-beta-70b",
         "model_args": [
             "trust_remote_code=True",
-            "use_accelerate=True",
-            "device_map_option=auto"
+            "dtype=float32",
+            "tensor_parallel_size=4"
         ],
+        "run_type": "vllm",
         "memory_Gi": 256,
-        "n_gpu": 8,
-        "gpu_vram_gb": 32,
+        "n_gpu": 4,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 4,
+        "a30-24gb": 0,
+        "v100-32gb": 8,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "stabilityai/japanese-stablelm-base-gamma-7b",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "stabilityai/japanese-stablelm-instruct-gamma-7b",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "stabilityai/japanese-stablelm-3b-4e1t-base",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a30",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "stabilityai/japanese-stablelm-3b-4e1t-instruct",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a30",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "stabilityai/japanese-stablelm-instruct-ja_vocab-beta-7b",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_request": "gpu-any-32gb",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 1,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "stabilityai/japanese-stablelm-base-ja_vocab-beta-7b",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=float16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_request": "gpu-any-32gb",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 1,
+        "v100-16gb": 0,
         "require_hf_login": false
     }
 ]
