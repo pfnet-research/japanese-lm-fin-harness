@@ -1,0 +1,4 @@
+include: security_sales_1.yaml
+task: security_sales_1-1.0-0.1.2
+description: "[問題]に対する[答え]を[選択肢]の中からアルファベットで選んでください。\n\n\n"
+doc_to_text: !function utils.doc_to_text_01_2

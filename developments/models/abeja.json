@@ -1,10 +1,16 @@
 {
     "model": "abeja/gpt-neox-japanese-2.7b",
     "model_args": [
-        "trust_remote_code=True"
+        "trust_remote_code=True",
+        "dtype=float32"
     ],
+    "run_type": "hf",
     "memory_Gi": 32,
     "n_gpu": 1,
-    "gpu_vram_gb": 24,
+    "gpu_request": "gpu-any",
+    "a100-80gb": 1,
+    "a30-24gb": 1,
+    "v100-32gb": 1,
+    "v100-16gb": 1,
     "require_hf_login": false
 }

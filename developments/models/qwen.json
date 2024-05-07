@@ -2,65 +2,359 @@
     {
         "model": "Qwen/Qwen-14B",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 128,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "Qwen/Qwen-14B-Chat",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 128,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "Qwen/Qwen-7B",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "Qwen/Qwen-7B-Chat",
         "model_args": [
-            "trust_remote_code=True"
+            "trust_remote_code=True",
+            "dtype=bfloat16"
         ],
+        "run_type": "vllm",
         "memory_Gi": 48,
         "n_gpu": 1,
-        "gpu_vram_gb": 24,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "Qwen/Qwen-72B",
         "model_args": [
             "trust_remote_code=True",
-            "use_accelerate=True",
-            "device_map_option=auto"
+            "dtype=bfloat16",
+            "tensor_parallel_size=4"
         ],
+        "run_type": "vllm",
         "memory_Gi": 256,
-        "n_gpu": 8,
-        "gpu_vram_gb": 32,
+        "n_gpu": 4,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 4,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "Qwen/Qwen-72B-Chat",
         "model_args": [
             "trust_remote_code=True",
-            "use_accelerate=True",
-            "device_map_option=auto"
+            "dtype=bfloat16",
+            "tensor_parallel_size=4"
         ],
+        "run_type": "vllm",
         "memory_Gi": 256,
-        "n_gpu": 8,
-        "gpu_vram_gb": 32,
+        "n_gpu": 4,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 4,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-32B",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 2,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-32B-Chat",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 2,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-0.5B",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a30",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-1.8B",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a30",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-MoE-A2.7B",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "hf",
+        "memory_Gi": 256,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-4B",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-7B",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-14B",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-72B",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16",
+            "tensor_parallel_size=4"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 4,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 4,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-0.5B-Chat",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a30",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-1.8B-Chat",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a30",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-MoE-A2.7B-Chat",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "hf",
+        "memory_Gi": 256,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-4B-Chat",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-7B-Chat",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-14B-Chat",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Qwen/Qwen1.5-72B-Chat",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16",
+            "tensor_parallel_size=4"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 256,
+        "n_gpu": 4,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 4,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     }
 ]

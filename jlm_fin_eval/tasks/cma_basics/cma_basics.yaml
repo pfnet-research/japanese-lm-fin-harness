@@ -1,0 +1,48 @@
+task: cma_basics
+dataset_path: jlm_fin_eval/datasets/cma_basics/cma_basics.py
+dataset_name: cma_basics
+output_type: multiple_choice
+training_split: null
+validation_split: null
+test_split: test
+description: "以下の問題の適切な答えを選択肢から選んでアルファベットで答えなさい。\n\n\n"
+target_delimiter: ""
+fewshot_delimiter: "\n\n"
+doc_to_text: !function utils.doc_to_text_00
+doc_to_target: !function utils.doc_to_target_alphabet
+doc_to_choice: !function utils.doc_to_choices_alphabet
+should_decontaminate: true
+doc_to_decontamination_query: sentence
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+  - metric: acc_norm
+    aggregation: mean
+    higher_is_better: true
+  - metric: map
+    aggregation: mean
+    higher_is_better: true
+  - metric: map_2
+    aggregation: mean
+    higher_is_better: true
+  - metric: map_3
+    aggregation: mean
+    higher_is_better: true
+  - metric: map_4
+    aggregation: mean
+    higher_is_better: true
+  - metric: map_norm
+    aggregation: mean
+    higher_is_better: true
+  - metric: map_2_norm
+    aggregation: mean
+    higher_is_better: true
+  - metric: map_3_norm
+    aggregation: mean
+    higher_is_better: true
+  - metric: map_4_norm
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 1.0

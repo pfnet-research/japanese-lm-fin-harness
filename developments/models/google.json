@@ -1,0 +1,124 @@
+[
+    {
+        "model": "google/recurrentgemma-2b",
+        "model_args": [
+            "dtype=float32"
+        ],
+        "run_type": "hf",
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_request": "gpu-any",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 1,
+        "require_hf_login": false
+    },
+    {
+        "model": "google/recurrentgemma-2b-it",
+        "model_args": [
+            "dtype=float32"
+        ],
+        "run_type": "hf",
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_request": "gpu-any",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 1,
+        "v100-16gb": 1,
+        "require_hf_login": false
+    },
+    {
+        "model": "google/gemma-2b",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "google/gemma-2b-it",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "google/gemma-1.1-2b-it",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "google/gemma-7b",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "google/gemma-7b-it",
+        "model_args": [
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 48,
+        "n_gpu": 2,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "google/gemma-1.1-7b-it",
+        "model_args": [
+            "dtype=bfloat16",
+            "tensor_parallel_size=2"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 48,
+        "n_gpu": 2,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 2,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    }
+]

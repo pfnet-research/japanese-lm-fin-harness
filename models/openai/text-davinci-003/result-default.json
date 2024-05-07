@@ -1,0 +1,80 @@
+{
+  "results": {
+    "security_sales_1": {
+      "acc,none": 0.45614035087719296,
+      "acc_stderr,none": 0.06655775300696491,
+      "map,none": 0.7032163742690059,
+      "map_stderr,none": 0.03588897342471772,
+      "map_2,none": 0.6842105263157895,
+      "map_2_stderr,none": 0.040808670395824,
+      "map_3,none": 0.6900584795321638,
+      "map_3_stderr,none": 0.03945434100153884,
+      "map_4,none": 0.7032163742690059,
+      "map_4_stderr,none": 0.03588897342471772
+    },
+    "cma_basics": {
+      "acc,none": 0.4473684210526316,
+      "acc_stderr,none": 0.08174282626554187,
+      "map,none": 0.6513157894736843,
+      "map_stderr,none": 0.050371551292432905,
+      "map_2,none": 0.5526315789473685,
+      "map_2_stderr,none": 0.07002710734081143,
+      "map_3,none": 0.6315789473684211,
+      "map_3_stderr,none": 0.055572190200903454,
+      "map_4,none": 0.6513157894736843,
+      "map_4_stderr,none": 0.050371551292432905
+    },
+    "chabsa": {
+      "acc,none": 0.5611808882558591,
+      "f1,none": 0.5391888529484946
+    },
+    "fp2": {
+      "acc,none": 0.26526315789473687,
+      "acc_stderr,none": 0.02027753714262581,
+      "map,none": 0.5382456140350886,
+      "map_stderr,none": 0.013478406892792883,
+      "map_2,none": 0.4052631578947368,
+      "map_2_stderr,none": 0.019053420478046156,
+      "map_3,none": 0.48035087719298314,
+      "map_3_stderr,none": 0.01659953128435026,
+      "map_4,none": 0.5382456140350886,
+      "map_4_stderr,none": 0.013478406892792883
+    },
+    "cpa_audit": {
+      "acc,none": 0.17587939698492464,
+      "acc_stderr,none": 0.019107664906766568,
+      "map,none": 0.4193048576214402,
+      "map_stderr,none": 0.01459403929755439,
+      "map_2,none": 0.2701005025125628,
+      "map_2_stderr,none": 0.01944025714106798,
+      "map_3,none": 0.31783919597989924,
+      "map_3_stderr,none": 0.018636188967147846,
+      "map_4,none": 0.3586683417085427,
+      "map_4_stderr,none": 0.017419635889056075
+    }
+  },
+  "versions": {
+    "security_sales_1": 1.0,
+    "cma_basics": 1.0,
+    "chabsa": 1.0,
+    "fp2": 1.0,
+    "cpa_audit": 1.0
+  },
+  "config": {
+    "model": "gpt3",
+    "model_args": "engine=text-davinci-003",
+    "num_fewshot": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "batch_size": null,
+    "device": null,
+    "no_cache": false,
+    "limit": null,
+    "bootstrap_iters": 100000,
+    "description_dict": {}
+  }
+}

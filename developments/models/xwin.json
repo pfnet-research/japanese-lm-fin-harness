@@ -2,34 +2,47 @@
     {
         "model": "Xwin-LM/Xwin-LM-70B-V0.1",
         "model_args": [
-            "use_accelerate=True",
-            "device_map_option=auto"
+            "dtype=float32",
+            "tensor_parallel_size=4"
         ],
+        "run_type": "vllm",
         "memory_Gi": 256,
         "n_gpu": 4,
-        "gpu_vram_gb": 80,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 4,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "Xwin-LM/Xwin-LM-13B-V0.2",
         "model_args": [
-            "use_accelerate=True",
-            "device_map_option=auto"
+            "dtype=float32"
         ],
+        "run_type": "vllm",
         "memory_Gi": 64,
         "n_gpu": 1,
-        "gpu_vram_gb": 80,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     },
     {
         "model": "Xwin-LM/Xwin-LM-7B-V0.2",
         "model_args": [
-            "use_accelerate=True",
-            "device_map_option=auto"
+            "dtype=float32"
         ],
+        "run_type": "vllm",
         "memory_Gi": 32,
         "n_gpu": 1,
-        "gpu_vram_gb": 32,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
         "require_hf_login": false
     }
 ]

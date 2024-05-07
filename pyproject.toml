@@ -8,12 +8,12 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9,<3.13"
-lm-eval = {git = "https://github.com/Stability-AI/lm-evaluation-harness", rev = "jp-stable"}
+lm-eval = {git = "https://github.com/EleutherAI/lm-evaluation-harness.git", rev = "cffc1bd3fd69453eaa75da891256682123226f0f"}
 emoji = "^2.8.0"
 fugashi = "1.2.1"
 neologdn = ">=0.5.2"
 unidic-lite = "1.0.8"
-torch = "2.0.0"
+datasets = "^2.15.0"
 accelerate = "^0.24.0"
 bitsandbytes = "^0.41.1"
 sentencepiece = "^0.1.99"
@@ -21,10 +21,15 @@ einops = "^0.7.0"
 protobuf = "^4.24.4"
 openpyxl = "^3.1.2"
 xlrd = "^2.0.1"
-openai = "0.28.1"
-transformers = "^4.36.2"
-tiktoken = "^0.5.2"
+transformers = "^4.40.1"
+tiktoken = "^0.6.0"
 transformers-stream-generator = "^0.0.4"
+vllm = "^0.4.1"
+torch = {version = "^2.2.1+cu121", source = "torch"}
+anthropic = "^0.25.7"
+openai = "^1.24.0"
+vertexai = "^1.49.0"
+google-cloud-aiplatform = "^1.49.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -35,6 +40,12 @@ flake8 = "^6.1.0"
 pyproject-flake8 = "^6.1.0"
 matplotlib = "^3.8.2"
 scipy = "^1.11.4"
+
+
+[[tool.poetry.source]]
+name = "torch"
+url = "https://download.pytorch.org/whl/cu121"
+priority = "explicit"
 
 [build-system]
 requires = ["poetry-core"]
