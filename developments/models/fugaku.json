@@ -1,0 +1,32 @@
+[
+    {
+        "model": "Fugaku-LLM/Fugaku-LLM-13B",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "run_type": "hf",
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "Fugaku-LLM/Fugaku-LLM-13B-instruct",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "run_type": "hf",
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    }
+]

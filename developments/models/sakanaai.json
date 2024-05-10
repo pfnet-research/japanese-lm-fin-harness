@@ -1,0 +1,34 @@
+[
+    {
+        "model": "SakanaAI/EvoLLM-JP-A-v1-7B",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "SakanaAI/EvoLLM-JP-v1-7B",
+        "model_args": [
+            "trust_remote_code=True",
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 48,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    }
+]
