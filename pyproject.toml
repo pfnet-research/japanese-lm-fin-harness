@@ -30,6 +30,7 @@ anthropic = "^0.25.7"
 openai = "^1.24.0"
 vertexai = "^1.49.0"
 google-cloud-aiplatform = "^1.49.0"
+peft = "^0.10.0"
 
 
 [tool.poetry.group.dev.dependencies]

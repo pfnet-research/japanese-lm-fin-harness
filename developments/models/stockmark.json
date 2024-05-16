@@ -1,0 +1,81 @@
+[
+    {
+        "model": "stockmark/gpt-neox-japanese-1.4b",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 32,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a30",
+        "a100-80gb": 1,
+        "a30-24gb": 1,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "stockmark/stockmark-13b",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "stockmark/stockmark-13b-instruct",
+        "model_args": [
+            "dtype=bfloat16"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 64,
+        "n_gpu": 1,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 1,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "stockmark/stockmark-100b",
+        "model_args": [
+            "dtype=bfloat16",
+            "tensor_parallel_size=4"
+        ],
+        "run_type": "vllm",
+        "memory_Gi": 200,
+        "n_gpu": 4,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 4,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    },
+    {
+        "model": "stockmark/stockmark-100b-instruct-v0.1",
+        "model_args": [
+            "pretrained=stockmark/stockmark-100b",
+            "dtype=bfloat16",
+            "parallelize=True",
+            "peft=stockmark/stockmark-100b-instruct-v0.1"
+        ],
+        "run_type": "hf",
+        "memory_Gi": 200,
+        "n_gpu": 4,
+        "gpu_request": "gpu-a100",
+        "a100-80gb": 4,
+        "a30-24gb": 0,
+        "v100-32gb": 0,
+        "v100-16gb": 0,
+        "require_hf_login": false
+    }
+]
