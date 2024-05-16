@@ -118,6 +118,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [rinna/bilingual-gpt-neox-4b-instruction-ppo](https://huggingface.co/rinna/bilingual-gpt-neox-4b-instruction-ppo) | 36.23 | 74.15 | 23.68 | 15.33 | 25.89 | 42.11 | 1.0-0.1 |
 | [google/gemma-2b-it](https://huggingface.co/google/gemma-2b-it) | 36.17 | 66.75 | 28.95 | 15.33 | 24.21 | 45.61 | 1.0-0.1 |
 | [moneyforward/houou-instruction-7b-v2](https://huggingface.co/moneyforward/houou-instruction-7b-v2) | 36.15 | 72.26 | 28.95 | 14.82 | 26.11 | 38.60 | 1.0-0.1 |
+| [stockmark/stockmark-100b-instruct-v0.1](https://huggingface.co/stockmark/stockmark-100b-instruct-v0.1) | 36.09 | 73.46 | 26.32 | 14.07 | 22.74 | 43.86 | default |
 | [rinna/japanese-gpt-neox-3.6b-instruction-sft-v2](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-sft-v2) | 36.06 | 68.52 | 21.05 | 17.59 | 24.00 | 49.12 | 1.0-0.2.1 |
 | [stabilityai/japanese-stablelm-base-ja_vocab-beta-7b](https://huggingface.co/stabilityai/japanese-stablelm-base-ja_vocab-beta-7b) | 36.02 | 63.14 | 36.84 | 13.82 | 24.21 | 42.11 | default |
 | [Qwen/Qwen1.5-1.8B-Chat](https://huggingface.co/Qwen/Qwen1.5-1.8B-Chat) | 35.98 | 65.54 | 26.32 | 16.83 | 27.37 | 43.86 | 1.0-0.2 |
