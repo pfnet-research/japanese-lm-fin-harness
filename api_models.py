@@ -324,6 +324,169 @@ class CustomizedAnthropicLM(AnthropicLM):
         return grouper.get_original(res)
 
 
+class SelfHostedCompletionsLM1(OpenaiCompletionsLM):
+    def __init__(
+        self,
+        model: str,
+        base_url: str,
+        tokenizer: Optional[str] = None,
+        tokenizer_backend: Literal["tiktoken", "huggingface"] = "tiktoken",
+        truncate: bool = False,
+        max_gen_toks: int = 256,
+        batch_size: int = 1,
+        seed: int = 1234,
+        max_length: Optional[int] = None,
+    ) -> None:
+        super().__init__(
+            model="gpt-35-turbo",
+            base_url=base_url,
+            tokenizer=tokenizer,
+            tokenizer_backend=tokenizer_backend,
+            truncate=truncate,
+            max_gen_toks=max_gen_toks,
+            batch_size=batch_size,
+            seed=seed,
+            max_length=max_length,
+        )
+        self.model = model
+        self.client = openai.OpenAI(
+            base_url=self.base_url,
+            api_key=os.environ.get("OPENAI_API_KEY"),
+        )
+
+    def _loglikelihood_tokens(
+        self,
+        requests: List[Tuple[Tuple[str, str], List[int], List[int]]],
+        disable_tqdm: bool = False,
+        override_bs: int = None,
+    ) -> List[Tuple[float, bool]]:
+        res = defaultdict(list)
+
+        grouper = lm_eval.models.utils.Grouper(requests, lambda x: str(x[0][0]))
+
+        pbar = tqdm(total=len(requests), disable=(disable_tqdm or (self.rank != 0)))
+        for key, re_ord in grouper.get_grouped().items():
+            response = oa_chat_completion(
+                client=self.client,
+                chat=False,
+                prompt=key,
+                model=self.model,
+                temperature=0.0,
+                max_tokens=self.max_gen_toks,
+            )
+
+            # Azure content filter
+            if response is not None and response.choices[0].text:
+                resp_txt = response.choices[0].text
+            else:
+                resp_txt = ""
+            choices = list(
+                map(
+                    lambda x: x[1:] if x[0] == " " else x,
+                    map(lambda x: x[0][1], re_ord),
+                )
+            )
+            choice_found = [re.search(choice, resp_txt) for choice in choices]
+            # Note: if the task employs likelihood, -1.0 is multiplied. But, others are dependent on the task.
+            result = [
+                -1.0 * (m.start() if m is not None else float("inf"))
+                for m in choice_found
+            ]
+
+            for ll, ord in zip(result, re_ord):
+                answer = (ll, ll == max(result))
+                res[key].append(answer)
+                self.cache_hook.add_partial("loglikelihood", ord[0], answer)
+                pbar.update(1)
+
+        pbar.close()
+
+        return grouper.get_original(res)
+    
+
+class SelfHostedChatCompletionsLM1(OpenaiCompletionsLM):
+    def __init__(
+        self,
+        model: str,
+        base_url: str,
+        tokenizer: Optional[str] = None,
+        tokenizer_backend: Literal["tiktoken", "huggingface"] = "tiktoken",
+        truncate: bool = False,
+        max_gen_toks: int = 256,
+        batch_size: int = 1,
+        seed: int = 1234,
+        max_length: Optional[int] = None,
+    ) -> None:
+        super().__init__(
+            model="gpt-35-turbo",
+            base_url=base_url,
+            tokenizer=tokenizer,
+            tokenizer_backend=tokenizer_backend,
+            truncate=truncate,
+            max_gen_toks=max_gen_toks,
+            batch_size=batch_size,
+            seed=seed,
+            max_length=max_length,
+        )
+        self.model = model
+        self.client = openai.OpenAI(
+            base_url=self.base_url,
+            api_key=os.environ.get("OPENAI_API_KEY"),
+        )
+
+    def _loglikelihood_tokens(
+        self,
+        requests: List[Tuple[Tuple[str, str], List[int], List[int]]],
+        disable_tqdm: bool = False,
+        override_bs: int = None,
+    ) -> List[Tuple[float, bool]]:
+        res = defaultdict(list)
+
+        grouper = lm_eval.models.utils.Grouper(requests, lambda x: str(x[0][0]))
+
+        pbar = tqdm(total=len(requests), disable=(disable_tqdm or (self.rank != 0)))
+        for key, re_ord in grouper.get_grouped().items():
+            inps = [{"role": "user", "content": key}]
+
+            response = oa_chat_completion(
+                client=self.client,
+                chat=True,
+                messages=inps,
+                model=self.model,
+                temperature=0.0,
+                max_tokens=self.max_gen_toks,
+            )
+
+            # Azure content filter
+            if response is not None and response.choices[0].message.content:
+                resp_txt = response.choices[0].message.content
+            else:
+                resp_txt = ""
+            choices = list(
+                map(
+                    lambda x: x[1:] if x[0] == " " else x,
+                    map(lambda x: x[0][1], re_ord),
+                )
+            )
+            choice_found = [re.search(choice, resp_txt) for choice in choices]
+            # Note: if the task employs likelihood, -1.0 is multiplied. But, others are dependent on the task.
+            result = [
+                -1.0 * (m.start() if m is not None else float("inf"))
+                for m in choice_found
+            ]
+
+            for ll, ord in zip(result, re_ord):
+                answer = (ll, ll == max(result))
+                res[key].append(answer)
+                self.cache_hook.add_partial("loglikelihood", ord[0], answer)
+                pbar.update(1)
+
+        pbar.close()
+
+        return grouper.get_original(res)
+
+
+
 if __name__ == "__main__":
     parser = setup_parser()
     args = parse_eval_args(parser)
@@ -335,6 +498,10 @@ if __name__ == "__main__":
         args.model = GcpVertexAiCompletionsLM.create_from_arg_string(args.model_args)
     elif args.model == "anthropic":
         args.model = CustomizedAnthropicLM.create_from_arg_string(args.model_args)
+    elif args.model == "self-hosted-1":
+        args.model = SelfHostedCompletionsLM1.create_from_arg_string(args.model_args, {"base_url": base_url})
+    elif args.model == "self-hosted-chat-1":
+        args.model = SelfHostedChatCompletionsLM1.create_from_arg_string(args.model_args, {"base_url": base_url})
     else:
         raise NotImplementedError("openai, vertexai, and anthropic are supported")
     cli_evaluate(args=args)
