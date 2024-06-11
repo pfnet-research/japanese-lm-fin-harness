@@ -1,4 +1,4 @@
-MODEL_ARGS="pretrained=Qwen/Qwen2-72B,dtype=bfloat16,tensor_parallel_size=4"
+MODEL_ARGS="pretrained=Qwen/Qwen2-72B,dtype=bfloat16,parallelize=True"
 TASK="chabsa,cma_basics,cpa_audit,fp2,security_sales_1"
 python main.py --model hf --model_args $MODEL_ARGS --tasks $TASK --num_fewshot 0 --output_path "models/Qwen/Qwen2-72B/result-default.json"
 # a100-80gb: 4

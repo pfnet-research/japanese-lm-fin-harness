@@ -1,6 +1,6 @@
-MODEL_ARGS="pretrained=sbintuitions/sarashina1-65b,dtype=float16,tensor_parallel_size=4"
+MODEL_ARGS="pretrained=sbintuitions/sarashina1-65b,dtype=float16,parallelize=True"
 TASK="chabsa-1.0-0.2,cma_basics-1.0-0.2.1,cpa_audit-1.0-0.2.1,fp2-1.0-0.2.1,security_sales_1-1.0-0.2.1"
-python main.py --model vllm --model_args $MODEL_ARGS --tasks $TASK --num_fewshot 0 --output_path "models/sbintuitions/sarashina1-65b/result-1.0-0.2.1.json"
+python main.py --model hf --model_args $MODEL_ARGS --tasks $TASK --num_fewshot 0 --output_path "models/sbintuitions/sarashina1-65b/result-1.0-0.2.1.json"
 # a100-80gb: 4
 # a30-24gb: 0
 # v100-32gb: 8

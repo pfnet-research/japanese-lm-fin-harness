@@ -5,6 +5,8 @@ This is a harness for Japanese language model evaluation in the financial domain
 <!-- lb start -->
 | Model | Ave. | chabsa | cma_basics | cpa_audit | fp2 | security_sales_1 | prompt | 
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Qwen/Qwen2-72B](https://huggingface.co/Qwen/Qwen2-72B) | 69.35 | 92.64 | 84.21 | 49.50 | 52.00 | 68.42 | default |
+| [Qwen/Qwen2-72B-Instruct](https://huggingface.co/Qwen/Qwen2-72B-Instruct) | 67.71 | 92.18 | 84.21 | 43.72 | 51.79 | 66.67 | default |
 | openai/gpt-4-32k | 66.27 | 93.16 | 81.58 | 37.44 | 50.74 | 68.42 | default |
 | openai/gpt-4 | 66.07 | 93.20 | 78.95 | 37.69 | 50.32 | 70.18 | default |
 | anthropic/claude-3-opus | 65.81 | 93.04 | 71.05 | 42.71 | 55.58 | 66.67 | default |
@@ -126,6 +128,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [rinna/bilingual-gpt-neox-4b-instruction-ppo](https://huggingface.co/rinna/bilingual-gpt-neox-4b-instruction-ppo) | 36.23 | 74.15 | 23.68 | 15.33 | 25.89 | 42.11 | 1.0-0.1 |
 | [google/gemma-2b-it](https://huggingface.co/google/gemma-2b-it) | 36.17 | 66.75 | 28.95 | 15.33 | 24.21 | 45.61 | 1.0-0.1 |
 | [moneyforward/houou-instruction-7b-v2](https://huggingface.co/moneyforward/houou-instruction-7b-v2) | 36.15 | 72.26 | 28.95 | 14.82 | 26.11 | 38.60 | 1.0-0.1 |
+| [sbintuitions/sarashina1-7b](https://huggingface.co/sbintuitions/sarashina1-7b) | 36.11 | 58.91 | 39.47 | 13.82 | 22.74 | 45.61 | 1.0-0.1 |
 | [stockmark/stockmark-100b-instruct-v0.1](https://huggingface.co/stockmark/stockmark-100b-instruct-v0.1) | 36.09 | 73.46 | 26.32 | 14.07 | 22.74 | 43.86 | default |
 | [rinna/japanese-gpt-neox-3.6b-instruction-sft-v2](https://huggingface.co/rinna/japanese-gpt-neox-3.6b-instruction-sft-v2) | 36.06 | 68.52 | 21.05 | 17.59 | 24.00 | 49.12 | 1.0-0.2.1 |
 | [stabilityai/japanese-stablelm-base-ja_vocab-beta-7b](https://huggingface.co/stabilityai/japanese-stablelm-base-ja_vocab-beta-7b) | 36.02 | 63.14 | 36.84 | 13.82 | 24.21 | 42.11 | default |

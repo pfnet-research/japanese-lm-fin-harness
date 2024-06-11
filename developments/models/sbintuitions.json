@@ -93,9 +93,9 @@
         "model": "sbintuitions/sarashina1-65b",
         "model_args": [
             "dtype=float16",
-            "tensor_parallel_size=4"
+            "parallelize=True"
         ],
-        "run_type": "vllm",
+        "run_type": "hf",
         "memory_Gi": 256,
         "n_gpu": 4,
         "gpu_request": "gpu-a100",

@@ -361,7 +361,7 @@
         "model": "Qwen/Qwen2-72B-Instruct",
         "model_args": [
             "dtype=bfloat16",
-            "tensor_parallel_size=4"
+            "parallelize=True"
         ],
         "run_type": "hf",
         "memory_Gi": 256,
@@ -377,7 +377,7 @@
         "model": "Qwen/Qwen2-72B",
         "model_args": [
             "dtype=bfloat16",
-            "tensor_parallel_size=4"
+            "parallelize=True"
         ],
         "run_type": "hf",
         "memory_Gi": 256,
@@ -504,7 +504,7 @@
             "dtype=bfloat16"
         ],
         "run_type": "vllm",
-        "memory_Gi": 256,
+        "memory_Gi": 378,
         "n_gpu": 1,
         "gpu_request": "gpu-a30",
         "a100-80gb": 1,
