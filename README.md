@@ -15,6 +15,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | gemini/gemini-1.5-flash | 63.10 | 92.36 | 71.05 | 35.93 | 49.47 | 66.67 | default |
 | anthropic/claude-3-sonnet | 61.59 | 89.70 | 71.05 | 38.44 | 42.11 | 66.67 | default |
 | [Qwen/Qwen1.5-72B-Chat](https://huggingface.co/Qwen/Qwen1.5-72B-Chat) | 59.62 | 92.15 | 71.05 | 31.41 | 36.84 | 66.67 | default |
+| [Qwen/Qwen2-57B-A14B](https://huggingface.co/Qwen/Qwen2-57B-A14B) | 59.45 | 90.52 | 78.95 | 24.62 | 40.00 | 63.16 | default |
 | [Qwen/Qwen2-57B-A14B-Instruct](https://huggingface.co/Qwen/Qwen2-57B-A14B-Instruct) | 59.40 | 91.03 | 73.68 | 27.39 | 40.00 | 64.91 | 1.0-0.1.2 |
 | [Qwen/Qwen-72B](https://huggingface.co/Qwen/Qwen-72B) | 59.08 | 89.46 | 76.32 | 28.64 | 39.58 | 61.40 | 1.0-0.1.2 |
 | [Qwen/Qwen1.5-72B](https://huggingface.co/Qwen/Qwen1.5-72B) | 58.82 | 90.77 | 71.05 | 26.38 | 37.47 | 68.42 | 1.0-0.1 |
