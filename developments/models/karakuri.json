@@ -37,7 +37,7 @@
             "dtype=bfloat16"
         ],
         "run_type": "vllm",
-        "memory_Gi": 32,
+        "memory_Gi": 64,
         "n_gpu": 1,
         "gpu_request": "gpu-a100",
         "a100-80gb": 1,

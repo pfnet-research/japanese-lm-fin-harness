@@ -176,6 +176,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | [line-corporation/japanese-large-lm-1.7b-instruction-sft](https://huggingface.co/line-corporation/japanese-large-lm-1.7b-instruction-sft) | 31.51 | 50.50 | 26.32 | 13.32 | 23.58 | 43.86 | 1.0-0.5 |
 | [google/gemma-1.1-7b-it](https://huggingface.co/google/gemma-1.1-7b-it) | 31.36 | 36.68 | 28.95 | 17.09 | 26.74 | 47.37 | 1.0-0.2 |
 | [sbintuitions/tiny-lm-chat](https://huggingface.co/sbintuitions/tiny-lm-chat) | 31.20 | 46.74 | 26.32 | 13.82 | 25.26 | 43.86 | default |
+| [karakuri-ai/karakuri-lm-7b-apm-v0.2](https://huggingface.co/karakuri-ai/karakuri-lm-7b-apm-v0.2) | 31.10 | 35.95 | 36.84 | 18.84 | 25.26 | 38.60 | 1.0-0.2 |
 | [stockmark/gpt-neox-japanese-1.4b](https://huggingface.co/stockmark/gpt-neox-japanese-1.4b) | 31.07 | 51.10 | 26.32 | 15.83 | 25.26 | 36.84 | 1.0-0.6 |
 | [llm-jp/llm-jp-13b-instruct-full-dolly_en-dolly_ja-ichikara_003_001-oasst_en-oasst_ja-v1.1](https://huggingface.co/llm-jp/llm-jp-13b-instruct-full-dolly_en-dolly_ja-ichikara_003_001-oasst_en-oasst_ja-v1.1) | 30.87 | 42.11 | 23.68 | 18.09 | 24.84 | 45.61 | 1.0-0.4 |
 | [Qwen/Qwen1.5-0.5B](https://huggingface.co/Qwen/Qwen1.5-0.5B) | 30.82 | 50.40 | 21.05 | 15.58 | 26.74 | 40.35 | 1.0-0.6 |
