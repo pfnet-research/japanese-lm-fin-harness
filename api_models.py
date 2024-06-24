@@ -13,6 +13,7 @@ from typing import Tuple
 import anthropic
 import lm_eval.evaluator
 import openai
+from ray import client
 import vertexai
 import vertexai.preview.generative_models
 from lm_eval.__main__ import parse_eval_args
@@ -402,7 +403,7 @@ class SelfHostedCompletionsLM1(OpenaiCompletionsLM):
         pbar.close()
 
         return grouper.get_original(res)
-    
+
 
 class SelfHostedChatCompletionsLM1(OpenaiCompletionsLM):
     def __init__(
@@ -433,6 +434,9 @@ class SelfHostedChatCompletionsLM1(OpenaiCompletionsLM):
             base_url=self.base_url,
             api_key=os.environ.get("OPENAI_API_KEY"),
         )
+        self.temperature = 0.0
+        if model == "nvidia/nemotron-4-340b-instruct":
+            self.temperature = 0.000001
 
     def _loglikelihood_tokens(
         self,
@@ -486,7 +490,6 @@ class SelfHostedChatCompletionsLM1(OpenaiCompletionsLM):
         return grouper.get_original(res)
 
 
-
 if __name__ == "__main__":
     parser = setup_parser()
     args = parse_eval_args(parser)
@@ -499,9 +502,13 @@ if __name__ == "__main__":
     elif args.model == "anthropic":
         args.model = CustomizedAnthropicLM.create_from_arg_string(args.model_args)
     elif args.model == "self-hosted-1":
-        args.model = SelfHostedCompletionsLM1.create_from_arg_string(args.model_args, {"base_url": base_url})
+        args.model = SelfHostedCompletionsLM1.create_from_arg_string(
+            args.model_args, {"base_url": base_url}
+        )
     elif args.model == "self-hosted-chat-1":
-        args.model = SelfHostedChatCompletionsLM1.create_from_arg_string(args.model_args, {"base_url": base_url})
+        args.model = SelfHostedChatCompletionsLM1.create_from_arg_string(
+            args.model_args, {"base_url": base_url}
+        )
     else:
         raise NotImplementedError("openai, vertexai, and anthropic are supported")
     cli_evaluate(args=args)

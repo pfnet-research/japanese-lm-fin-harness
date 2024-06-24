@@ -6,6 +6,7 @@ This is a harness for Japanese language model evaluation in the financial domain
 | Model | Ave. | chabsa | cma_basics | cpa_audit | fp2 | security_sales_1 | prompt | 
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | anthropic/claude-3-5-sonnet | 77.02 | 93.43 | 81.58 | 61.81 | 72.84 | 75.44 | default |
+| [nvidia/nemotron-4-340b-instruct](https://huggingface.co/nvidia/nemotron-4-340b-instruct) | 70.31 | 91.93 | 86.84 | 40.70 | 56.63 | 75.44 | default |
 | [Qwen/Qwen2-72B](https://huggingface.co/Qwen/Qwen2-72B) | 69.35 | 92.64 | 84.21 | 49.50 | 52.00 | 68.42 | default |
 | [Qwen/Qwen2-72B-Instruct](https://huggingface.co/Qwen/Qwen2-72B-Instruct) | 67.71 | 92.18 | 84.21 | 43.72 | 51.79 | 66.67 | default |
 | openai/gpt-4-32k | 66.27 | 93.16 | 81.58 | 37.44 | 50.74 | 68.42 | default |
