@@ -232,10 +232,13 @@ If you use this repository, please cite the following paper:
   doi={10.51094/jxiv.564},
   year={2023}
 }
-@preprint{Hirano2023-pre-jfin-benchmark,
+@inproceedings{Hirano2023-finnlpkdf,
   title={{Construction of a Japanese Financial Benchmark for Large Language Models}},
-  author={Masahiro Hirano},
+  author={Masanori Hirano},
+  booktitle={Joint Workshop of the 7th Financial Technology and Natural Language Processing (FinNLP), the 5th Knowledge Discovery from Unstructured Data in Financial Services (KDF), and The 4th Workshop on Economics and Natural Language Processing (ECONLP)},
+  pages={1-9},
   doi={10.2139/ssrn.4769124},
+  url={https://aclanthology.org/2024.finnlp-1.1},
   archivePrefix={arXiv},
   arxivId={2403.15062},
   year={2024}
