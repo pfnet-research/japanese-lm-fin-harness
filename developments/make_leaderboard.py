@@ -74,6 +74,7 @@ for company_model, results in sorted_results:
                 company_model.startswith("openai/")
                 or company_model.startswith("gemini/")
                 or company_model.startswith("anthropic/")
+                or company_model.startswith("pfnet/plamo-1.0")
             )
             else ""
         )
