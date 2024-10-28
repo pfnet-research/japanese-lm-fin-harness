@@ -8,13 +8,13 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9,<3.13"
-lm-eval = {git = "https://github.com/EleutherAI/lm-evaluation-harness.git", rev = "cffc1bd3fd69453eaa75da891256682123226f0f"}
+lm-eval = "0.4.5"
 emoji = "^2.8.0"
 fugashi = "1.2.1"
 neologdn = ">=0.5.2"
 unidic-lite = "1.0.8"
 datasets = "^2.15.0"
-accelerate = "^0.24.0"
+accelerate = "^0.26.0"
 bitsandbytes = "^0.41.1"
 sentencepiece = "^0.1.99"
 einops = "^0.7.0"
