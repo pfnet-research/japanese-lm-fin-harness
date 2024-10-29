@@ -2,21 +2,19 @@ import argparse
 import json
 import logging
 import os
-import re
 import sys
-from pathlib import Path
 from typing import Union
 
 import numpy as np
 from lm_eval import evaluator
 from lm_eval import utils
-from lm_eval.__main__ import DEFAULT_RESULTS_FILE
-from lm_eval.__main__ import _handle_non_serializable
 from lm_eval.__main__ import parse_eval_args
 from lm_eval.__main__ import setup_parser
 from lm_eval.api.task import ConfigurableTask
 from lm_eval.evaluator import request_caching_arg_to_dict
-from lm_eval.logging_utils import WandbLogger
+from lm_eval.loggers import EvaluationTracker
+from lm_eval.loggers import WandbLogger
+from lm_eval.utils import handle_non_serializable
 from lm_eval.utils import make_table
 from lm_eval.utils import simple_parse_args_string
 
@@ -154,6 +152,14 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
     eval_logger.info(f"Verbosity set to {args.verbosity}")
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
+    # update the evaluation tracker args with the output path and the HF token
+    if args.output_path:
+        args.hf_hub_log_args += f",output_path={args.output_path}"
+    if os.environ.get("HF_TOKEN", None):
+        args.hf_hub_log_args += f",token={os.environ.get('HF_TOKEN')}"
+    evaluation_tracker_args = simple_parse_args_string(args.hf_hub_log_args)
+    evaluation_tracker = EvaluationTracker(**evaluation_tracker_args)
+
     if args.predict_only:
         args.log_samples = True
     if (args.log_samples or args.predict_only) and not args.output_path:
@@ -161,9 +167,19 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
             "Specify --output_path if providing --log_samples or --predict_only"
         )
 
+    if args.fewshot_as_multiturn and args.apply_chat_template is False:
+        raise ValueError(
+            "When `fewshot_as_multiturn` is selected, `apply_chat_template` must be set (either to `True` or to the chosen template name)."
+        )
+
     if args.include_path is not None:
         eval_logger.info(f"Including path: {args.include_path}")
     task_manager = TaskManager(args.verbosity, include_path=args.include_path)
+
+    if "push_samples_to_hub" in evaluation_tracker_args and not args.log_samples:
+        eval_logger.warning(
+            "Pushing samples to the Hub requires --log_samples to be set. Samples will not be pushed to the Hub."
+        )
 
     if args.limit:
         eval_logger.warning(
@@ -175,9 +191,16 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
         eval_logger.error("Need to specify task to evaluate.")
         sys.exit()
     elif args.tasks == "list":
-        eval_logger.info(
-            "Available Tasks:\n - {}".format("\n - ".join(task_manager.all_tasks))
-        )
+        print(task_manager.list_all_tasks())
+        sys.exit()
+    elif args.tasks == "list_groups":
+        print(task_manager.list_all_tasks(list_subtasks=False, list_tags=False))
+        sys.exit()
+    elif args.tasks == "list_tags":
+        print(task_manager.list_all_tasks(list_groups=False, list_subtasks=False))
+        sys.exit()
+    elif args.tasks == "list_subtasks":
+        print(task_manager.list_all_tasks(list_groups=False, list_tags=False))
         sys.exit()
     else:
         if os.path.isdir(args.tasks):
@@ -203,40 +226,17 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
                 missing = ", ".join(task_missing)
                 eval_logger.error(
                     f"Tasks were not found: {missing}\n"
-                    f"{utils.SPACING}Try `python main.py --tasks list` for list of available tasks",
+                    f"{utils.SPACING}Try `lm-eval --tasks list` for list of available tasks",
                 )
                 raise ValueError(
-                    f"Tasks not found: {missing}. Try `python main.py --tasks list` for list of available tasks, or '--verbosity DEBUG' to troubleshoot task registration issues."
+                    f"Tasks not found: {missing}. Try `lm-eval --tasks {{list_groups,list_subtasks,list_tags,list}}` to list out all available names for task groupings; only (sub)tasks; tags; or all of the above, or pass '--verbosity DEBUG' to troubleshoot task registration issues."
                 )
 
-    if args.output_path:
-        path = Path(args.output_path)
-        # check if file or 'dir/results.json' exists
-        if path.is_file():
-            raise FileExistsError(f"File already exists at {path}")
-        output_path_file = path.joinpath(DEFAULT_RESULTS_FILE)
-        if output_path_file.is_file():
-            eval_logger.warning(
-                f"File {output_path_file} already exists. Results will be overwritten."
-            )
-        # if path json then get parent dir
-        elif path.suffix in (".json", ".jsonl"):
-            output_path_file = path
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path = path.parent
-        else:
-            path.mkdir(parents=True, exist_ok=True)
+    import datasets
 
-    # Respect user's value passed in via CLI, otherwise default to True and add to comma-separated model args
-    if args.trust_remote_code:
-        os.environ["HF_DATASETS_TRUST_REMOTE_CODE"] = str(args.trust_remote_code)
-        args.model_args = (
-            args.model_args
-            + f",trust_remote_code={os.environ['HF_DATASETS_TRUST_REMOTE_CODE']}"
-        )
+    datasets.config.HF_DATASETS_TRUST_REMOTE_CODE = True
 
     eval_logger.info(f"Selected Tasks: {task_names}")
-    eval_logger.info("Loading selected tasks...")
 
     request_caching_args = request_caching_arg_to_dict(
         cache_requests=args.cache_requests
@@ -255,6 +255,10 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
         check_integrity=args.check_integrity,
         write_out=args.write_out,
         log_samples=args.log_samples,
+        evaluation_tracker=evaluation_tracker,
+        system_instruction=args.system_instruction,
+        apply_chat_template=args.apply_chat_template,
+        fewshot_as_multiturn=args.fewshot_as_multiturn,
         gen_kwargs=args.gen_kwargs,
         task_manager=task_manager,
         verbosity=args.verbosity,
@@ -262,6 +266,7 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
         random_seed=args.seed[0],
         numpy_random_seed=args.seed[1],
         torch_random_seed=args.seed[2],
+        fewshot_random_seed=args.seed[3],
         **request_caching_args,
     )
 
@@ -269,7 +274,7 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
         if args.log_samples:
             samples = results.pop("samples")
         dumped = json.dumps(
-            results, indent=2, default=_handle_non_serializable, ensure_ascii=False
+            results, indent=2, default=handle_non_serializable, ensure_ascii=False
         )
         if args.show_config:
             print(dumped)
@@ -286,22 +291,21 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
             except Exception as e:
                 eval_logger.info(f"Logging to Weights and Biases failed due to {e}")
 
-        if args.output_path:
-            output_path_file.open("w", encoding="utf-8").write(dumped)
+        evaluation_tracker.save_results_aggregated(
+            results=results, samples=samples if args.log_samples else None
+        )
 
-            if args.log_samples:
-                for task_name, config in results["configs"].items():
-                    output_name = "{}_{}".format(
-                        re.sub("/|=", "__", args.model_args), task_name
-                    )
-                    filename = path.joinpath(f"{output_name}.jsonl")
-                    samples_dumped = json.dumps(
-                        samples[task_name],
-                        indent=2,
-                        default=_handle_non_serializable,
-                        ensure_ascii=False,
-                    )
-                    filename.write_text(samples_dumped, encoding="utf-8")
+        if args.log_samples:
+            for task_name, config in results["configs"].items():
+                evaluation_tracker.save_results_samples(
+                    task_name=task_name, samples=samples[task_name]
+                )
+
+        if (
+            evaluation_tracker.push_results_to_hub
+            or evaluation_tracker.push_samples_to_hub
+        ):
+            evaluation_tracker.recreate_metadata_card()
 
         print(
             f"{args.model} ({args.model_args}), gen_kwargs: ({args.gen_kwargs}), limit: {args.limit}, num_fewshot: {args.num_fewshot}, "
