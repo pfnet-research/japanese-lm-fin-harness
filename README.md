@@ -203,7 +203,7 @@ Recently, we updated the evaluation policy. Please refer to the [UPDATE.md](UPDA
  1. git clone this repository
  2. Install the requirements
     ```
-    poetry install
+    uv sync
     ```
  3. Choose your prompt template based on docs/prompt_templates.md and num_fewshots (In this official leaderboard, we use prompt template peforming the best score.)
  4. Replace `TEMPLATE` to the version and change `MODEL_PATH` . And, save the script as harness.sh
@@ -214,7 +214,7 @@ Recently, we updated the evaluation policy. Please refer to the [UPDATE.md](UPDA
     ```
  5. Run the script
     ```
-    poetry run bash harness.sh
+    uv run bash harness.sh
     ```
 
 vllm is also supported. Please refer to model examples and lm_eval official pages.

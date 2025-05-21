@@ -1,0 +1,85 @@
+[tool.poetry]
+name = "jlm-fin-eval"
+version = "0.2.2"
+description = ""
+authors = ["Masanori HIRANO <masa.hirano.1996@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9,<3.13"
+lm-eval = "0.4.5"
+emoji = "^2.8.0"
+fugashi = "1.4.0"
+neologdn = ">=0.5.2"
+unidic-lite = "1.0.8"
+datasets = "^2.15.0"
+accelerate = "^0.26.0"
+bitsandbytes = "^0.41.1"
+sentencepiece = ">=0.1.99"
+einops = "^0.7.0"
+protobuf = "<3.21"
+openpyxl = "^3.1.2"
+xlrd = "^2.0.1"
+transformers = "^4.40.1"
+tiktoken = "^0.7.0"
+transformers-stream-generator = "^0.0.4"
+vllm = "^0.6.3.post1"
+torch = {version = "^2.2.1+cu121", source = "torch"}
+anthropic = "^0.25.7"
+openai = "^1.24.0"
+vertexai = "^1.49.0"
+google-cloud-aiplatform = "^1.49.0"
+peft = "^0.10.0"
+numpy = "^1.26.4"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.9.1"
+isort = "^5.12.0"
+mypy = "^1.5.1"
+flake8 = "^6.1.0"
+pyproject-flake8 = "^6.1.0"
+matplotlib = "^3.8.2"
+scipy = "^1.11.4"
+
+
+[[tool.poetry.source]]
+name = "torch"
+url = "https://download.pytorch.org/whl/cu121"
+priority = "explicit"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = 'black'
+force_single_line = true
+skip = [
+    ".git",
+    "__pycache__",
+    "docs",
+    "build",
+    "dist",
+    "examples",
+    ".venv",
+    "tests/examples"
+]
+[tool.mypy]
+disallow_untyped_defs = true
+ignore_missing_imports = true
+[tool.flake8]
+ignore = "E203,E231,E501,W503"
+max-line-length = 88
+exclude = [
+    ".git",
+    "__pycache__",
+    "docs",
+    "build",
+    "dist",
+    "examples",
+    ".venv",
+    "__init__.py"
+    ]
+select = "B,B950,C,E,F,W"

@@ -171,3 +171,5 @@ run
 run2
 .venv*
 cache
+.python-version
+uv.lock
