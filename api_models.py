@@ -19,7 +19,7 @@ import vertexai.preview.generative_models
 from lm_eval.__main__ import parse_eval_args
 from lm_eval.__main__ import setup_parser
 from lm_eval.models.anthropic_llms import AnthropicLM
-from lm_eval.models.openai_completions import OpenaiCompletionsLM
+from lm_eval.models.openai_completions import LocalCompletionsAPI
 from tqdm import tqdm
 
 from main import cli_evaluate
@@ -60,7 +60,7 @@ def oa_chat_completion(
 
 
 def vertexai_chat_completion(
-    client: vertexai.preview.VertexModel, **kwargs: Any
+    client: vertexai.generative_models.GenerativeModel, **kwargs: Any
 ) -> Optional[Dict]:
     backoff_time = 3.0
     while True:
@@ -87,7 +87,9 @@ def anthropic_completion(client: anthropic.Anthropic, **kwargs: Any) -> Optional
             backoff_time *= 1.5
 
 
-class AzureOpenaiCompletionsLM(OpenaiCompletionsLM):
+class AzureOpenaiCompletionsLM(LocalCompletionsAPI):
+    MULTIMODAL = False
+
     def __init__(
         self,
         model: str,
@@ -98,7 +100,7 @@ class AzureOpenaiCompletionsLM(OpenaiCompletionsLM):
         max_gen_toks: int = 256,
         batch_size: int = 1,
         seed: int = 1234,
-        max_length: Optional[int] = None,
+        max_length: Optional[int] = 2048,
     ) -> None:
         super().__init__(
             model=model,
@@ -169,7 +171,7 @@ class AzureOpenaiCompletionsLM(OpenaiCompletionsLM):
         return grouper.get_original(res)
 
 
-class GcpVertexAiCompletionsLM(OpenaiCompletionsLM):
+class GcpVertexAiCompletionsLM(LocalCompletionsAPI):
     """GCP VertexAI completions model.
 
     ```
@@ -177,6 +179,8 @@ class GcpVertexAiCompletionsLM(OpenaiCompletionsLM):
     ```
     is necessary to authenticate the GCP account.
     """
+
+    MULTIMODAL = False
 
     def __init__(
         self,
@@ -188,7 +192,7 @@ class GcpVertexAiCompletionsLM(OpenaiCompletionsLM):
         max_gen_toks: int = 256,
         batch_size: int = 1,
         seed: int = 1234,
-        max_length: Optional[int] = None,
+        max_length: Optional[int] = 2048,
     ) -> None:
         os.environ["OPENAI_API_KEY"] = "DUMMY_KEY"
         super().__init__(
@@ -272,6 +276,8 @@ class GcpVertexAiCompletionsLM(OpenaiCompletionsLM):
 
 
 class CustomizedAnthropicLM(AnthropicLM):
+    MULTIMODAL = False
+
     def loglikelihood(self, requests: List) -> List[Tuple[float, bool]]:
         res = defaultdict(list)
 
@@ -325,7 +331,9 @@ class CustomizedAnthropicLM(AnthropicLM):
         return grouper.get_original(res)
 
 
-class SelfHostedCompletionsLM1(OpenaiCompletionsLM):
+class SelfHostedCompletionsLM1(LocalCompletionsAPI):
+    MULTIMODAL = False
+
     def __init__(
         self,
         model: str,
@@ -336,7 +344,7 @@ class SelfHostedCompletionsLM1(OpenaiCompletionsLM):
         max_gen_toks: int = 256,
         batch_size: int = 1,
         seed: int = 1234,
-        max_length: Optional[int] = None,
+        max_length: Optional[int] = 2048,
     ) -> None:
         super().__init__(
             model="gpt-35-turbo",
@@ -405,7 +413,9 @@ class SelfHostedCompletionsLM1(OpenaiCompletionsLM):
         return grouper.get_original(res)
 
 
-class SelfHostedChatCompletionsLM1(OpenaiCompletionsLM):
+class SelfHostedChatCompletionsLM1(LocalCompletionsAPI):
+    MULTIMODAL = False
+
     def __init__(
         self,
         model: str,
@@ -416,7 +426,7 @@ class SelfHostedChatCompletionsLM1(OpenaiCompletionsLM):
         max_gen_toks: int = 256,
         batch_size: int = 1,
         seed: int = 1234,
-        max_length: Optional[int] = None,
+        max_length: Optional[int] = 2048,
     ) -> None:
         super().__init__(
             model="gpt-35-turbo",
@@ -458,7 +468,7 @@ class SelfHostedChatCompletionsLM1(OpenaiCompletionsLM):
                 messages=inps,
                 model=self.model,
                 temperature=0.0,
-                max_tokens=self.max_gen_toks,
+                max_tokens=self._max_gen_toks,
             )
 
             # Azure content filter

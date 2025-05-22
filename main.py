@@ -2,6 +2,7 @@ import argparse
 import json
 import logging
 import os
+from pathlib import Path
 import sys
 from typing import Union
 
@@ -145,11 +146,12 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
         args = parse_eval_args(parser)
 
     if args.wandb_args:
-        wandb_logger = WandbLogger(**simple_parse_args_string(args.wandb_args))
+        wandb_args_dict = simple_parse_args_string(args.wandb_args)
+        wandb_config_args_dict = simple_parse_args_string(args.wandb_config_args)
+        wandb_logger = WandbLogger(wandb_args_dict, wandb_config_args_dict)
 
-    eval_logger = utils.eval_logger
-    eval_logger.setLevel(getattr(logging, f"{args.verbosity}"))
-    eval_logger.info(f"Verbosity set to {args.verbosity}")
+    utils.setup_logging(args.verbosity)
+    eval_logger = logging.getLogger(__name__)
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
     # update the evaluation tracker args with the output path and the HF token
@@ -174,7 +176,17 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
 
     if args.include_path is not None:
         eval_logger.info(f"Including path: {args.include_path}")
-    task_manager = TaskManager(args.verbosity, include_path=args.include_path)
+    metadata = (
+        simple_parse_args_string(args.model_args)
+        if isinstance(args.model_args, str)
+        else args.model_args if isinstance(args.model_args, dict) else {}
+    ) | (
+        args.metadata
+        if isinstance(args.metadata, dict)
+        else simple_parse_args_string(args.metadata)
+    )
+
+    task_manager = TaskManager(include_path=args.include_path, metadata=metadata)
 
     if "push_samples_to_hub" in evaluation_tracker_args and not args.log_samples:
         eval_logger.warning(
@@ -186,6 +198,14 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
             " --limit SHOULD ONLY BE USED FOR TESTING."
             "REAL METRICS SHOULD NOT BE COMPUTED USING LIMIT."
         )
+    if args.samples:
+        assert (
+            args.limit is None
+        ), "If --samples is not None, then --limit must be None."
+        if (samples := Path(args.samples)).is_file():
+            args.samples = json.loads(samples.read_text())
+        else:
+            args.samples = json.loads(args.samples)
 
     if args.tasks is None:
         eval_logger.error("Need to specify task to evaluate.")
@@ -232,11 +252,24 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
                     f"Tasks not found: {missing}. Try `lm-eval --tasks {{list_groups,list_subtasks,list_tags,list}}` to list out all available names for task groupings; only (sub)tasks; tags; or all of the above, or pass '--verbosity DEBUG' to troubleshoot task registration issues."
                 )
 
-    import datasets
+    # Respect user's value passed in via CLI, otherwise default to True and add to comma-separated model args
+    if args.trust_remote_code:
+        eval_logger.info(
+            "Passed `--trust_remote_code`, setting environment variable `HF_DATASETS_TRUST_REMOTE_CODE=true`"
+        )
+        # HACK: import datasets and override its HF_DATASETS_TRUST_REMOTE_CODE value internally,
+        # because it's already been determined based on the prior env var before launching our
+        # script--`datasets` gets imported by lm_eval internally before these lines can update the env.
+        import datasets
 
-    datasets.config.HF_DATASETS_TRUST_REMOTE_CODE = True
+        datasets.config.HF_DATASETS_TRUST_REMOTE_CODE = True
 
-    eval_logger.info(f"Selected Tasks: {task_names}")
+        args.model_args = args.model_args + ",trust_remote_code=True"
+    (
+        eval_logger.info(f"Selected Tasks: {task_names}")
+        if eval_logger.getEffectiveLevel() >= logging.INFO
+        else print(f"Selected Tasks: {task_names}")
+    )
 
     request_caching_args = request_caching_arg_to_dict(
         cache_requests=args.cache_requests
@@ -252,6 +285,7 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
         device=args.device,
         use_cache=args.use_cache,
         limit=args.limit,
+        samples=args.samples,
         check_integrity=args.check_integrity,
         write_out=args.write_out,
         log_samples=args.log_samples,
@@ -261,14 +295,20 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
         fewshot_as_multiturn=args.fewshot_as_multiturn,
         gen_kwargs=args.gen_kwargs,
         task_manager=task_manager,
-        verbosity=args.verbosity,
         predict_only=args.predict_only,
         random_seed=args.seed[0],
         numpy_random_seed=args.seed[1],
         torch_random_seed=args.seed[2],
         fewshot_random_seed=args.seed[3],
+        confirm_run_unsafe_code=args.confirm_run_unsafe_code,
+        metadata=metadata,
         **request_caching_args,
     )
+
+    if not isinstance(evaluation_tracker.general_config_tracker.model_source, str):
+        evaluation_tracker.general_config_tracker.model_source = (
+            evaluation_tracker.general_config_tracker.model_source.__class__.__name__
+        )
 
     if results is not None:
         if args.log_samples:
