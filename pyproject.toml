@@ -1,6 +1,6 @@
 [project]
 name = "japanese-lm-fin-harness-020"
-version = "0.2.2"
+version = "0.2.3"
 description = ""
 authors = ["Masanori HIRANO <masa.hirano.1996@gmail.com>"]
 license = "MIT"
@@ -10,7 +10,7 @@ dependencies = [
     "accelerate>=0.26.0",
     "anthropic>=0.25.7",
     "bitsandbytes>=0.41.1",
-    "datasets>=2.15.0",
+    "datasets>=2.15.0,<4.0.0",
     "einops>=0.7.0",
     "emoji>=2.8.0",
     "fugashi==1.4.0",
