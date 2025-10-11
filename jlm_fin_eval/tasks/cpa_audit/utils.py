@@ -106,9 +106,7 @@ def doc_to_text_05(doc):
 
 
 def doc_to_text_06(doc):
-    INSTRUCTION = (
-        "与えられた答えの組み合わせの選択肢の中から、最適な選択肢を選んでください。"
-    )
+    INSTRUCTION = "与えられた答えの組み合わせの選択肢の中から、最適な選択肢を選んでください。"
     q_doc_text = doc["question"]
     if doc["context"] and doc["context"] != "":
         q_doc_text += "\n" + doc["context"]
