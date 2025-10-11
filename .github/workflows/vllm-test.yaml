@@ -32,6 +32,7 @@ jobs:
         uv sync --dev
     - name: Run VLLM test
       run: |
-        export MODEL_ARGS="pretrained=kanhatakeyama/0405_100m_clean_ja,trust_remote_code=True,dtype=float32"
-        export TASK="cma_basics,cpa_audit,fp2,security_sales_1"
-        uv run python main.py --model vllm --device cpu  --model_args $MODEL_ARGS --tasks $TASK --num_fewshot 0 --limit 3 --output_path "models/kanhatakeyama/0405_100m_clean_ja/result-default.json"
+        uv run python main.py --model vllm --device cpu \
+          --model_args "pretrained=kanhatakeyama/0405_100m_clean_ja,trust_remote_code=True,dtype=float32" \
+          --tasks "cma_basics,cpa_audit,fp2,security_sales_1" --num_fewshot 0 --limit 3 \
+          --output_path "models/kanhatakeyama/0405_100m_clean_ja/result-default.json"
