@@ -30,7 +30,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install uv
         uv sync --dev
-    - name: Run VLLM test
+    - name: Run HF test
       run: |
         yes | uv run python main.py --model hf --device cpu \
           --model_args "pretrained=kanhatakeyama/0405_100m_clean_ja,trust_remote_code=True,dtype=float32" \
