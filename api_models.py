@@ -552,9 +552,7 @@ if __name__ == "__main__":
     elif args.model == "anthropic":
         args.model = CustomizedAnthropicLM.create_from_arg_string(args.model_args)
     elif args.model == "self-hosted-1":
-        args.model = SelfHostedCompletionsLM1.create_from_arg_string(
-            args.model_args
-        )
+        args.model = SelfHostedCompletionsLM1.create_from_arg_string(args.model_args)
     elif args.model == "self-hosted-chat-1":
         args.model = SelfHostedChatCompletionsLM1.create_from_arg_string(
             args.model_args
