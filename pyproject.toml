@@ -1,8 +1,7 @@
 [project]
-name = "japanese-lm-fin-harness-020"
+name = "japanese-lm-fin-harness"
 version = "0.2.4"
 description = ""
-authors = ["Masanori HIRANO <masa.hirano.1996@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -32,6 +31,9 @@ dependencies = [
     "vllm>=0.6.3.post1",
     "xlrd>=2.0.1",
 ]
+
+[tool.setuptools]
+py-modules = ["jlm_fin_eval"]
 
 [dependency-groups]
 dev = [
