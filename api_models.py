@@ -95,7 +95,8 @@ class AzureOpenaiCompletionsLM(LocalCompletionsAPI):
         seed: int = 1234,
         max_length: Optional[int] = 2048,
     ) -> None:
-        base_url = os.environ.get("AZURE_OPENAI_API_BASE")
+        if base_url is None:
+            base_url = os.environ.get("AZURE_OPENAI_API_BASE")
         super().__init__(
             model=model,
             base_url=base_url,
@@ -180,7 +181,8 @@ class OpenaiCompletionsLM(AzureOpenaiCompletionsLM):
         seed: int = 1234,
         max_length: Optional[int] = 2048,
     ) -> None:
-        base_url = os.environ.get("OPENAI_API_BASE", "https://api.openai.com/v1")
+        if base_url is None:
+            base_url = os.environ.get("OPENAI_API_BASE", "https://api.openai.com/v1")
         super().__init__(
             model=model,
             base_url=base_url,
@@ -367,7 +369,7 @@ class SelfHostedCompletionsLM1(LocalCompletionsAPI):
     def __init__(
         self,
         model: str,
-        base_url: str,
+        base_url: str = None,
         tokenizer: Optional[str] = None,
         tokenizer_backend: Literal["tiktoken", "huggingface"] = "tiktoken",
         truncate: bool = False,
@@ -376,6 +378,10 @@ class SelfHostedCompletionsLM1(LocalCompletionsAPI):
         seed: int = 1234,
         max_length: Optional[int] = 2048,
     ) -> None:
+        if base_url is None:
+            base_url = os.environ.get(
+                "SELFHOSTED_API_BASE", "https://api.openai.com/v1"
+            )
         super().__init__(
             model="gpt-35-turbo",
             base_url=base_url,
@@ -390,7 +396,7 @@ class SelfHostedCompletionsLM1(LocalCompletionsAPI):
         self.model = model
         self.client = openai.OpenAI(
             base_url=self.base_url,
-            api_key=os.environ.get("OPENAI_API_KEY"),
+            api_key=os.environ.get("SELFHOSTED_API_KEY"),
         )
 
     def _loglikelihood_tokens(
@@ -449,7 +455,7 @@ class SelfHostedChatCompletionsLM1(LocalCompletionsAPI):
     def __init__(
         self,
         model: str,
-        base_url: str,
+        base_url: str = None,
         tokenizer: Optional[str] = None,
         tokenizer_backend: Literal["tiktoken", "huggingface"] = "tiktoken",
         truncate: bool = False,
@@ -458,6 +464,10 @@ class SelfHostedChatCompletionsLM1(LocalCompletionsAPI):
         seed: int = 1234,
         max_length: Optional[int] = 2048,
     ) -> None:
+        if base_url is None:
+            base_url = os.environ.get(
+                "SELFHOSTED_API_BASE", "https://api.openai.com/v1"
+            )
         super().__init__(
             model="gpt-35-turbo",
             base_url=base_url,
@@ -472,7 +482,7 @@ class SelfHostedChatCompletionsLM1(LocalCompletionsAPI):
         self.model = model
         self.client = openai.OpenAI(
             base_url=self.base_url,
-            api_key=os.environ.get("OPENAI_API_KEY"),
+            api_key=os.environ.get("SELFHOSTED_API_KEY"),
         )
         self.temperature = 0.0
         if model == "nvidia/nemotron-4-340b-instruct":
@@ -533,9 +543,6 @@ class SelfHostedChatCompletionsLM1(LocalCompletionsAPI):
 if __name__ == "__main__":
     parser = setup_parser()
     args = parse_eval_args(parser)
-    selfhosted_base_url = os.environ.get(
-        "SELFHOSTED_API_BASE", "https://api.openai.com/v1"
-    )
     if args.model is None or args.model == "openai":
         args.model = OpenaiCompletionsLM.create_from_arg_string(args.model_args)
     elif args.model == "azure-openai":
@@ -546,11 +553,11 @@ if __name__ == "__main__":
         args.model = CustomizedAnthropicLM.create_from_arg_string(args.model_args)
     elif args.model == "self-hosted-1":
         args.model = SelfHostedCompletionsLM1.create_from_arg_string(
-            args.model_args, {"base_url": selfhosted_base_url}
+            args.model_args
         )
     elif args.model == "self-hosted-chat-1":
         args.model = SelfHostedChatCompletionsLM1.create_from_arg_string(
-            args.model_args, {"base_url": selfhosted_base_url}
+            args.model_args
         )
     else:
         raise NotImplementedError("openai, vertexai, and anthropic are supported")
