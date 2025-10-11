@@ -30,6 +30,7 @@ dependencies = [
     "vertexai>=1.49.0",
     "vllm>=0.6.3.post1",
     "xlrd>=2.0.1",
+    "python-dotenv>=1.1.1",
 ]
 
 [tool.setuptools]
