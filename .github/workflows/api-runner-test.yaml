@@ -33,7 +33,7 @@ jobs:
     - name: Run API test
       run: |
         cat << EOF > .env
-        SELFHOSTED_API_BASE="https://api.platform.preferredai.jp/"
+        SELFHOSTED_API_BASE="https://api.platform.preferredai.jp/v1/"
         SELFHOSTED_API_KEY=$(echo ${{ secrets.PLAMO_API_KEY }})
         EOF
         export TASK="cma_basics,cpa_audit,security_sales_1,fp2"
