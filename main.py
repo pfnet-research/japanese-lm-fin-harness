@@ -2,8 +2,8 @@ import argparse
 import json
 import logging
 import os
-from pathlib import Path
 import sys
+from pathlib import Path
 from typing import Union
 
 import numpy as np

@@ -1,4 +1,4 @@
-RUN := poetry run
+RUN := uv run
 .PHONY: check
 check: lint mypy
 .PHONY: lint

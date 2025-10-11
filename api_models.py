@@ -13,13 +13,13 @@ from typing import Tuple
 import anthropic
 import lm_eval.evaluator
 import openai
-from ray import client
 import vertexai
 import vertexai.preview.generative_models
 from lm_eval.__main__ import parse_eval_args
 from lm_eval.__main__ import setup_parser
 from lm_eval.models.anthropic_llms import AnthropicLM
 from lm_eval.models.openai_completions import LocalCompletionsAPI
+from ray import client
 from tqdm import tqdm
 
 from main import cli_evaluate
