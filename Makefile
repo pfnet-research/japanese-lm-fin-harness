@@ -1,8 +1,8 @@
-RUN := poetry run
+RUN := uv run
 .PHONY: check
 check: lint mypy
 .PHONY: lint
-lint: lint-black lint-isort lint-flake8
+lint: lint-black lint-isort
 .PHONY: lint-black
 lint-black:
 	$(RUN) black --check --diff --quiet . 

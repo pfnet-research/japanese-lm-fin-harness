@@ -1,5 +1,7 @@
 import os
-from typing import List, Optional, Union
+from typing import List
+from typing import Optional
+from typing import Union
 
 from lm_eval.tasks import TaskManager as OriginalTaskManager
 
@@ -9,6 +11,7 @@ class TaskManager(OriginalTaskManager):
     and an optional directory if provided.
 
     """
+
     def initialize_tasks(
         self,
         include_path: Optional[Union[str, List]] = None,

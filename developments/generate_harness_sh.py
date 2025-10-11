@@ -78,7 +78,16 @@ def main() -> None:
         model_name = cast(str, model_setting["model"])
         model_args = [f"pretrained={model_setting['model']}"]
         if "model_args" in model_setting:
-            if len([x for x in model_setting["model_args"] if x.startswith("pretrained=")]) > 0:
+            if (
+                len(
+                    [
+                        x
+                        for x in model_setting["model_args"]
+                        if x.startswith("pretrained=")
+                    ]
+                )
+                > 0
+            ):
                 model_args = []
             model_args.extend(cast(List[str], model_setting["model_args"]))
 

@@ -2,8 +2,8 @@ import argparse
 import json
 import logging
 import os
-from pathlib import Path
 import sys
+from pathlib import Path
 from typing import Union
 
 import numpy as np
@@ -179,7 +179,9 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
     metadata = (
         simple_parse_args_string(args.model_args)
         if isinstance(args.model_args, str)
-        else args.model_args if isinstance(args.model_args, dict) else {}
+        else args.model_args
+        if isinstance(args.model_args, dict)
+        else {}
     ) | (
         args.metadata
         if isinstance(args.metadata, dict)
