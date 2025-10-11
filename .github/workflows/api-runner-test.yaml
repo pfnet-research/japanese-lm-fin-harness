@@ -37,4 +37,5 @@ jobs:
         SELFHOSTED_API_KEY=$(echo ${{ secrets.PLAMO_API_KEY }})
         EOF
         export TASK="cma_basics,cpa_audit,security_sales_1,fp2"
-        yes | uv run python api_models.py --model self-hosted-chat-1 --model_args model=plamo-2.1-prime --tasks $TASK --num_fewshot 0 --output_path "models/plamo/plamo-2.1-prime/result-default.json"
+        yes | uv run python api_models.py --model self-hosted-chat-1 --model_args model=plamo-2.1-prime --tasks $TASK --num_fewshot 0 --limit 10 --output_path "models/plamo/plamo-2.1-prime/result-default.json"
+      timeout-minutes: 10
