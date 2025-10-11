@@ -193,7 +193,7 @@ class OpenaiCompletionsLM(AzureOpenaiCompletionsLM):
             max_length=max_length,
         )
         self.client = openai.OpenAI(
-            azure_endpoint=base_url,
+            base_url=base_url,
             api_key=os.environ.get("OPENAI_API_KEY"),
         )
 
