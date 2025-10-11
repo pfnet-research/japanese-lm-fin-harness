@@ -1,0 +1,37 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Test VLLM runner
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install uv
+        uv sync --dev
+    - name: Run VLLM test
+      run: |
+        export MODEL_ARGS="pretrained=kanhatakeyama/0405_100m_clean_ja,trust_remote_code=True,dtype=float32"
+        export TASK="cma_basics,cpa_audit,fp2,security_sales_1"
+        uv run python main.py --model vllm --device cpu  --model_args $MODEL_ARGS --tasks $TASK --num_fewshot 0 --limit 3 --output_path "models/kanhatakeyama/0405_100m_clean_ja/result-default.json"
