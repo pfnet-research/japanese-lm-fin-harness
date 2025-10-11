@@ -14,7 +14,7 @@ dependencies = [
     "emoji>=2.8.0",
     "fugashi==1.4.0",
     "google-cloud-aiplatform>=1.49.0",
-    "lm-eval==0.4.5",
+    "lm-eval==0.4.9.1",
     "neologdn>=0.5.2",
     "numpy>=1.26.4",
     "openai>=1.24.0",
