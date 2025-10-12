@@ -34,5 +34,5 @@ jobs:
       run: |
         yes | uv run python main.py --model hf --device cpu \
           --model_args "pretrained=kanhatakeyama/0405_100m_clean_ja,trust_remote_code=True,dtype=float32" \
-          --tasks "cma_basics,cpa_audit,fp2,security_sales_1" --num_fewshot 0 --limit 100 \
+          --tasks "chabsa,cma_basics,cpa_audit,fp2,security_sales_1" --num_fewshot 0 --limit 100 \
           --output_path "models/kanhatakeyama/0405_100m_clean_ja/result-default.json"
