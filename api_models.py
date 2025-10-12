@@ -324,7 +324,7 @@ class CustomizedAnthropicLM(AnthropicLM):
                 model=self.model,
                 messages=inps,
                 temperature=0.0,
-                max_tokens=self.max_gen_toks,
+                max_tokens=self._max_gen_toks,
             )
 
             if response is not None and response.content[0].text:
@@ -417,7 +417,7 @@ class SelfHostedCompletionsLM1(LocalCompletionsAPI):
                 prompt=key,
                 model=self.model,
                 temperature=0.0,
-                max_tokens=self.max_gen_toks,
+                max_tokens=self._max_gen_toks,
             )
 
             # Azure content filter
