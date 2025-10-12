@@ -45,7 +45,7 @@ class Chabsa(datasets.GeneratorBasedBuilder):
                 name=datasets.Split.TEST,  # type: ignore
                 gen_kwargs={
                     "filepath": dl_manager.download_and_extract(
-                        "https://s3-ap-northeast-1.amazonaws.com/dev.tech-sketch.jp/chakki/public/chABSA-dataset.zip"
+                        "https://www.kaggle.com/api/v1/datasets/download/takahirokubo0/chabsa"
                     ),
                     "split": datasets.Split.TEST,
                 },
