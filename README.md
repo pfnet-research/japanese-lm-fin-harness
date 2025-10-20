@@ -14,7 +14,6 @@ This is a harness for Japanese language model evaluation in the financial domain
 | openai/gpt-4 | 66.07 | 93.20 | 78.95 | 37.69 | 50.32 | 70.18 | default |
 | anthropic/claude-3-opus | 65.81 | 93.04 | 71.05 | 42.71 | 55.58 | 66.67 | default |
 | openai/gpt-4o-2024-05-13 | 65.26 | 90.93 | 76.32 | 53.02 | 39.37 | 66.67 | default |
-| openai/gpt-5-chat-2025-10-03 | 65.19 | 92.58 | 73.68 | 24.37 | 68.63 | 66.67 | default |
 | openai/gpt-4-turbo | 64.59 | 92.86 | 76.32 | 36.18 | 50.95 | 66.67 | default |
 | gemini/gemini-1.5-flash | 63.10 | 92.36 | 71.05 | 35.93 | 49.47 | 66.67 | default |
 | anthropic/claude-3-sonnet | 61.59 | 89.70 | 71.05 | 38.44 | 42.11 | 66.67 | default |
