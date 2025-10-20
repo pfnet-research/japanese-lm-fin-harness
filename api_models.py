@@ -15,6 +15,7 @@ import lm_eval.evaluator
 import openai
 import vertexai
 import vertexai.preview.generative_models
+from dotenv import load_dotenv
 from lm_eval.__main__ import parse_eval_args
 from lm_eval.__main__ import setup_parser
 from lm_eval.models.anthropic_llms import AnthropicLM
@@ -24,15 +25,7 @@ from tqdm import tqdm
 
 from main import cli_evaluate
 
-base_url = os.environ.get("OPENAI_API_BASE", "https://api.openai.com/v1")
-openai.api_type = os.environ.get("OPENAI_API_TYPE", "openai")
-openai.api_version = os.environ.get("OPENAI_API_VERSION")
-openai.api_key = os.environ.get("OPENAI_API_KEY")
-
-GCP_PROJECT_ID = os.environ.get("GCP_PROJECT_ID")
-GCP_REGION = os.environ.get("GCP_REGION")
-
-ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
 
 def oa_chat_completion(
@@ -93,7 +86,7 @@ class AzureOpenaiCompletionsLM(LocalCompletionsAPI):
     def __init__(
         self,
         model: str,
-        base_url: str,
+        base_url: str = None,
         tokenizer: Optional[str] = None,
         tokenizer_backend: Literal["tiktoken", "huggingface"] = "tiktoken",
         truncate: bool = False,
@@ -102,6 +95,8 @@ class AzureOpenaiCompletionsLM(LocalCompletionsAPI):
         seed: int = 1234,
         max_length: Optional[int] = 2048,
     ) -> None:
+        if base_url is None:
+            base_url = os.environ.get("AZURE_OPENAI_API_BASE")
         super().__init__(
             model=model,
             base_url=base_url,
@@ -114,9 +109,9 @@ class AzureOpenaiCompletionsLM(LocalCompletionsAPI):
             max_length=max_length,
         )
         self.client = openai.AzureOpenAI(
-            azure_endpoint=self.base_url,
-            api_key=os.environ.get("OPENAI_API_KEY"),
-            api_version=os.environ.get("OPENAI_API_VERSION"),
+            azure_endpoint=base_url,
+            api_key=os.environ.get("AZURE_OPENAI_API_KEY"),
+            api_version=os.environ.get("AZURE_OPENAI_API_VERSION"),
         )
 
     def _loglikelihood_tokens(
@@ -139,7 +134,7 @@ class AzureOpenaiCompletionsLM(LocalCompletionsAPI):
                 messages=inps,
                 model=self.model,
                 temperature=0.0,
-                max_tokens=self.max_gen_toks,
+                max_tokens=self._max_gen_toks,
             )
 
             # Azure content filter
@@ -169,6 +164,40 @@ class AzureOpenaiCompletionsLM(LocalCompletionsAPI):
         pbar.close()
 
         return grouper.get_original(res)
+
+
+class OpenaiCompletionsLM(AzureOpenaiCompletionsLM):
+    MULTIMODAL = False
+
+    def __init__(
+        self,
+        model: str,
+        base_url: str = None,
+        tokenizer: Optional[str] = None,
+        tokenizer_backend: Literal["tiktoken", "huggingface"] = "tiktoken",
+        truncate: bool = False,
+        max_gen_toks: int = 256,
+        batch_size: int = 1,
+        seed: int = 1234,
+        max_length: Optional[int] = 2048,
+    ) -> None:
+        if base_url is None:
+            base_url = os.environ.get("OPENAI_API_BASE", "https://api.openai.com/v1")
+        super().__init__(
+            model=model,
+            base_url=base_url,
+            tokenizer=tokenizer,
+            tokenizer_backend=tokenizer_backend,
+            truncate=truncate,
+            max_gen_toks=max_gen_toks,
+            batch_size=batch_size,
+            seed=seed,
+            max_length=max_length,
+        )
+        self.client = openai.OpenAI(
+            base_url=base_url,
+            api_key=os.environ.get("OPENAI_API_KEY"),
+        )
 
 
 class GcpVertexAiCompletionsLM(LocalCompletionsAPI):
@@ -207,7 +236,10 @@ class GcpVertexAiCompletionsLM(LocalCompletionsAPI):
             max_length=max_length,
         )
         self.model = model
-        vertexai.init(project=GCP_PROJECT_ID, location=GCP_REGION)
+        vertexai.init(
+            project=os.environ.get("GCP_PROJECT_ID"),
+            location=os.environ.get("GCP_REGION"),
+        )
         self.client = vertexai.preview.generative_models.GenerativeModel(
             model_name=self.model,
             generation_config=vertexai.preview.generative_models.GenerationConfig(
@@ -292,7 +324,7 @@ class CustomizedAnthropicLM(AnthropicLM):
                 model=self.model,
                 messages=inps,
                 temperature=0.0,
-                max_tokens=self.max_gen_toks,
+                max_tokens=self._max_gen_toks,
             )
 
             if response is not None and response.content[0].text:
@@ -337,7 +369,7 @@ class SelfHostedCompletionsLM1(LocalCompletionsAPI):
     def __init__(
         self,
         model: str,
-        base_url: str,
+        base_url: str = None,
         tokenizer: Optional[str] = None,
         tokenizer_backend: Literal["tiktoken", "huggingface"] = "tiktoken",
         truncate: bool = False,
@@ -346,6 +378,10 @@ class SelfHostedCompletionsLM1(LocalCompletionsAPI):
         seed: int = 1234,
         max_length: Optional[int] = 2048,
     ) -> None:
+        if base_url is None:
+            base_url = os.environ.get(
+                "SELFHOSTED_API_BASE", "https://api.openai.com/v1"
+            )
         super().__init__(
             model="gpt-35-turbo",
             base_url=base_url,
@@ -360,7 +396,7 @@ class SelfHostedCompletionsLM1(LocalCompletionsAPI):
         self.model = model
         self.client = openai.OpenAI(
             base_url=self.base_url,
-            api_key=os.environ.get("OPENAI_API_KEY"),
+            api_key=os.environ.get("SELFHOSTED_API_KEY"),
         )
 
     def _loglikelihood_tokens(
@@ -381,7 +417,7 @@ class SelfHostedCompletionsLM1(LocalCompletionsAPI):
                 prompt=key,
                 model=self.model,
                 temperature=0.0,
-                max_tokens=self.max_gen_toks,
+                max_tokens=self._max_gen_toks,
             )
 
             # Azure content filter
@@ -419,7 +455,7 @@ class SelfHostedChatCompletionsLM1(LocalCompletionsAPI):
     def __init__(
         self,
         model: str,
-        base_url: str,
+        base_url: str = None,
         tokenizer: Optional[str] = None,
         tokenizer_backend: Literal["tiktoken", "huggingface"] = "tiktoken",
         truncate: bool = False,
@@ -428,6 +464,10 @@ class SelfHostedChatCompletionsLM1(LocalCompletionsAPI):
         seed: int = 1234,
         max_length: Optional[int] = 2048,
     ) -> None:
+        if base_url is None:
+            base_url = os.environ.get(
+                "SELFHOSTED_API_BASE", "https://api.openai.com/v1"
+            )
         super().__init__(
             model="gpt-35-turbo",
             base_url=base_url,
@@ -442,7 +482,7 @@ class SelfHostedChatCompletionsLM1(LocalCompletionsAPI):
         self.model = model
         self.client = openai.OpenAI(
             base_url=self.base_url,
-            api_key=os.environ.get("OPENAI_API_KEY"),
+            api_key=os.environ.get("SELFHOSTED_API_KEY"),
         )
         self.temperature = 0.0
         if model == "nvidia/nemotron-4-340b-instruct":
@@ -504,20 +544,18 @@ if __name__ == "__main__":
     parser = setup_parser()
     args = parse_eval_args(parser)
     if args.model is None or args.model == "openai":
-        args.model = AzureOpenaiCompletionsLM.create_from_arg_string(
-            args.model_args, {"base_url": base_url}
-        )
+        args.model = OpenaiCompletionsLM.create_from_arg_string(args.model_args)
+    elif args.model == "azure-openai":
+        args.model = AzureOpenaiCompletionsLM.create_from_arg_string(args.model_args)
     elif args.model == "vertexai":
         args.model = GcpVertexAiCompletionsLM.create_from_arg_string(args.model_args)
     elif args.model == "anthropic":
         args.model = CustomizedAnthropicLM.create_from_arg_string(args.model_args)
     elif args.model == "self-hosted-1":
-        args.model = SelfHostedCompletionsLM1.create_from_arg_string(
-            args.model_args, {"base_url": base_url}
-        )
+        args.model = SelfHostedCompletionsLM1.create_from_arg_string(args.model_args)
     elif args.model == "self-hosted-chat-1":
         args.model = SelfHostedChatCompletionsLM1.create_from_arg_string(
-            args.model_args, {"base_url": base_url}
+            args.model_args
         )
     else:
         raise NotImplementedError("openai, vertexai, and anthropic are supported")
