@@ -57,13 +57,13 @@ class CpaAudit(datasets.GeneratorBasedBuilder):
 
     def _generate_examples(self, filepath, split):
         df = pd.read_excel(filepath, index_col=0)
-        df["question"] = df["question"].fillna('').astype(str)
-        df["ア"] = df["ア"].fillna('').astype(str)
-        df["イ"] = df["イ"].fillna('').astype(str)
-        df["ウ"] = df["ウ"].fillna('').astype(str)
-        df["エ"] = df["エ"].fillna('').astype(str)
-        df["オ"] = df["オ"].fillna('').astype(str)
-        df["カ"] = df["カ"].fillna('').astype(str)
+        df["question"] = df["question"].fillna("").astype(str)
+        df["ア"] = df["ア"].fillna("").astype(str)
+        df["イ"] = df["イ"].fillna("").astype(str)
+        df["ウ"] = df["ウ"].fillna("").astype(str)
+        df["エ"] = df["エ"].fillna("").astype(str)
+        df["オ"] = df["オ"].fillna("").astype(str)
+        df["カ"] = df["カ"].fillna("").astype(str)
         i_count = 0
         for row in df.to_dict(orient="records"):
             if row["question"] == "":
