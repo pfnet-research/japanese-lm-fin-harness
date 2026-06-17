@@ -57,16 +57,16 @@ class CpaAudit(datasets.GeneratorBasedBuilder):
 
     def _generate_examples(self, filepath, split):
         df = pd.read_excel(filepath, index_col=0)
-        df["question"] = df["question"].astype(str)
-        df["ア"] = df["ア"].astype(str)
-        df["イ"] = df["イ"].astype(str)
-        df["ウ"] = df["ウ"].astype(str)
-        df["エ"] = df["エ"].astype(str)
-        df["オ"] = df["オ"].astype(str)
-        df["カ"] = df["カ"].astype(str)
+        df["question"] = df["question"].fillna("").astype(str)
+        df["ア"] = df["ア"].fillna("").astype(str)
+        df["イ"] = df["イ"].fillna("").astype(str)
+        df["ウ"] = df["ウ"].fillna("").astype(str)
+        df["エ"] = df["エ"].fillna("").astype(str)
+        df["オ"] = df["オ"].fillna("").astype(str)
+        df["カ"] = df["カ"].fillna("").astype(str)
         i_count = 0
         for row in df.to_dict(orient="records"):
-            if row["question"] == "" or row["question"] == "nan":
+            if row["question"] == "":
                 continue
             if row["abnormal_flg"] == 1:
                 continue
@@ -74,17 +74,17 @@ class CpaAudit(datasets.GeneratorBasedBuilder):
             i_count += 1
             question = row["question"]
             contexts = []
-            if "ア" in row and row["ア"] != "" and row["ア"] != "nan":
+            if "ア" in row and row["ア"] != "":
                 contexts.append("ア: " + row["ア"])
-            if "イ" in row and row["イ"] != "" and row["イ"] != "nan":
+            if "イ" in row and row["イ"] != "":
                 contexts.append("イ: " + row["イ"])
-            if "ウ" in row and row["ウ"] != "" and row["ウ"] != "nan":
+            if "ウ" in row and row["ウ"] != "":
                 contexts.append("ウ: " + row["ウ"])
-            if "エ" in row and row["エ"] != "" and row["エ"] != "nan":
+            if "エ" in row and row["エ"] != "":
                 contexts.append("エ: " + row["エ"])
-            if "オ" in row and row["オ"] != "" and row["オ"] != "nan":
+            if "オ" in row and row["オ"] != "":
                 contexts.append("オ: " + row["オ"])
-            if "カ" in row and row["カ"] != "" and row["カ"] != "nan":
+            if "カ" in row and row["カ"] != "":
                 contexts.append("カ: " + row["カ"])
             context = "\n".join(contexts)
             choices = [{"id": i, "text": row[i + 1]} for i in range(6)]
