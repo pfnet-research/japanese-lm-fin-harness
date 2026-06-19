@@ -9,8 +9,7 @@ from typing import Union
 import numpy as np
 from lm_eval import evaluator
 from lm_eval import utils
-from lm_eval.__main__ import parse_eval_args
-from lm_eval.__main__ import setup_parser
+from lm_eval._cli import HarnessCLI
 from lm_eval.api.task import ConfigurableTask
 from lm_eval.evaluator import request_caching_arg_to_dict
 from lm_eval.loggers import EvaluationTracker
@@ -18,6 +17,7 @@ from lm_eval.loggers import WandbLogger
 from lm_eval.utils import handle_non_serializable
 from lm_eval.utils import make_table
 from lm_eval.utils import simple_parse_args_string
+from lm_eval.config.evaluate_config import EvaluatorConfig
 
 from jlm_fin_eval.tasks import TaskManager
 
@@ -142,25 +142,24 @@ ConfigurableTask.process_results = process_results
 def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
     if not args:
         # we allow for args to be passed externally, else we parse them ourselves
-        parser = setup_parser()
-        args = parse_eval_args(parser)
+        parser = HarnessCLI()
+        args = EvaluatorConfig.from_cli(parser.parse_args())
 
     if args.wandb_args:
         wandb_args_dict = simple_parse_args_string(args.wandb_args)
         wandb_config_args_dict = simple_parse_args_string(args.wandb_config_args)
         wandb_logger = WandbLogger(wandb_args_dict, wandb_config_args_dict)
 
-    utils.setup_logging(args.verbosity)
-    eval_logger = logging.getLogger(__name__)
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
     # update the evaluation tracker args with the output path and the HF token
+    if args.hf_hub_log_args is None:
+        args.hf_hub_log_args = {}
     if args.output_path:
-        args.hf_hub_log_args += f",output_path={args.output_path}"
+        args.hf_hub_log_args["output_path"] = args.output_path
     if os.environ.get("HF_TOKEN", None):
-        args.hf_hub_log_args += f",token={os.environ.get('HF_TOKEN')}"
-    evaluation_tracker_args = simple_parse_args_string(args.hf_hub_log_args)
-    evaluation_tracker = EvaluationTracker(**evaluation_tracker_args)
+        args.hf_hub_log_args["token"] = os.environ.get('HF_TOKEN')
+    evaluation_tracker = EvaluationTracker(**args.hf_hub_log_args)
 
     if args.predict_only:
         args.log_samples = True
@@ -190,7 +189,7 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
 
     task_manager = TaskManager(include_path=args.include_path, metadata=metadata)
 
-    if "push_samples_to_hub" in evaluation_tracker_args and not args.log_samples:
+    if "push_samples_to_hub" in args.hf_hub_log_args and not args.log_samples:
         eval_logger.warning(
             "Pushing samples to the Hub requires --log_samples to be set. Samples will not be pushed to the Hub."
         )
@@ -225,34 +224,24 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
         print(task_manager.list_all_tasks(list_groups=False, list_tags=False))
         sys.exit()
     else:
-        if os.path.isdir(args.tasks):
-            import glob
-
-            task_names = []
-            yaml_path = os.path.join(args.tasks, "*.yaml")
-            for yaml_file in glob.glob(yaml_path):
-                config = utils.load_yaml_config(yaml_file)
+        task_names = task_manager.match_tasks(args.tasks)
+        for task in [task for task in args.tasks if task not in task_names]:
+            if os.path.isfile(task):
+                config = utils.load_yaml_config(task)
                 task_names.append(config)
-        else:
-            task_list = args.tasks.split(",")
-            task_names = task_manager.match_tasks(task_list)
-            for task in [task for task in task_list if task not in task_names]:
-                if os.path.isfile(task):
-                    config = utils.load_yaml_config(task)
-                    task_names.append(config)
-            task_missing = [
-                task for task in task_list if task not in task_names and "*" not in task
-            ]  # we don't want errors if a wildcard ("*") task name was used
+        task_missing = [
+            task for task in args.tasks if task not in task_names and "*" not in task
+        ]  # we don't want errors if a wildcard ("*") task name was used
 
-            if task_missing:
-                missing = ", ".join(task_missing)
-                eval_logger.error(
-                    f"Tasks were not found: {missing}\n"
-                    f"{utils.SPACING}Try `lm-eval --tasks list` for list of available tasks",
-                )
-                raise ValueError(
-                    f"Tasks not found: {missing}. Try `lm-eval --tasks {{list_groups,list_subtasks,list_tags,list}}` to list out all available names for task groupings; only (sub)tasks; tags; or all of the above, or pass '--verbosity DEBUG' to troubleshoot task registration issues."
-                )
+        if task_missing:
+            missing = ", ".join(task_missing)
+            eval_logger.error(
+                f"Tasks were not found: {missing}\n"
+                f"{utils.SPACING}Try `lm-eval --tasks list` for list of available tasks",
+            )
+            raise ValueError(
+                f"Tasks not found: {missing}. Try `lm-eval --tasks {{list_groups,list_subtasks,list_tags,list}}` to list out all available names for task groupings; only (sub)tasks; tags; or all of the above, or pass '--verbosity DEBUG' to troubleshoot task registration issues."
+            )
 
     # Respect user's value passed in via CLI, otherwise default to True and add to comma-separated model args
     if args.trust_remote_code:
@@ -271,10 +260,6 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
         eval_logger.info(f"Selected Tasks: {task_names}")
         if eval_logger.getEffectiveLevel() >= logging.INFO
         else print(f"Selected Tasks: {task_names}")
-    )
-
-    request_caching_args = request_caching_arg_to_dict(
-        cache_requests=args.cache_requests
     )
 
     results = evaluator.simple_evaluate(
@@ -304,7 +289,14 @@ def cli_evaluate(args: Union[argparse.Namespace, None] = None) -> None:
         fewshot_random_seed=args.seed[3],
         confirm_run_unsafe_code=args.confirm_run_unsafe_code,
         metadata=metadata,
-        **request_caching_args,
+        cache_requests=args.cache_requests.get("cache_requests", False),
+        rewrite_requests_cache=args.cache_requests.get(
+            "rewrite_requests_cache", False
+        ),
+        delete_requests_cache=args.cache_requests.get(
+            "delete_requests_cache", False
+        ),
+
     )
 
     if not isinstance(evaluation_tracker.general_config_tracker.model_source, str):

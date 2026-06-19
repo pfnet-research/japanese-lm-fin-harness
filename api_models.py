@@ -16,8 +16,7 @@ import openai
 import vertexai
 import vertexai.preview.generative_models
 from dotenv import load_dotenv
-from lm_eval.__main__ import parse_eval_args
-from lm_eval.__main__ import setup_parser
+from lm_eval._cli import HarnessCLI
 from lm_eval.models.anthropic_llms import AnthropicLM
 from lm_eval.models.openai_completions import LocalCompletionsAPI
 from ray import client
@@ -541,8 +540,8 @@ class SelfHostedChatCompletionsLM1(LocalCompletionsAPI):
 
 
 if __name__ == "__main__":
-    parser = setup_parser()
-    args = parse_eval_args(parser)
+    parser = HarnessCLI()
+    args = parser.parse_args()
     if args.model is None or args.model == "openai":
         args.model = OpenaiCompletionsLM.create_from_arg_string(args.model_args)
     elif args.model == "azure-openai":
